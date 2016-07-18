@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Copyright (C) 2014 The Android Open Source Project
+
+  Licensed under the Apache License, Version 2.0 (the "License");
+  you may not use this file except in compliance with the License.
+  You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+  -->
+<resources>
+
+    <string name="app_name">Resiliencia</string>
+    <string name="favorite">Favorito</string>
+    <string name="error_no_metadata">No se puede obtener información.</string>
+    <string name="browse_genres">Géneros</string>
+    <string name="browse_genre_subtitle">Canciones por género</string>
+    <string name="browse_musics_by_genre_subtitle">%1$s canciones</string>
+    <string name="random_queue_title">Random</string>
+    <string name="error_no_connection">No se pudo conectar al servidor. Por favor, verifique su conexión de internet.</string>
+    <string name="error_loading_media">Error cargando canción</string>
+    <string name="casting_to_device">Transmitiendo a %1$s</string>
+    <string name="currently_playing_song">Canción actual</string>
+    <string name="currently_playing_artist">Artista de canción actual</string>
+    <string name="currently_playing_extra_info">Información extra de canción actual</string>
+    <string name="play_item">Play</string>
+    <string name="play_pause">Play o pausa</string>
+    <string name="skip_next">Siguiente</string>
+    <string name="skip_prev">Anterior</string>
+
+    <string name="home_title">Home</string>
+    <string name="action_listen">Escuchar</string>
+    <string name="drawer_allmusic_title">Toda la musica</string>
+    <string name="drawer_playlists_title">Playlists</string>
+    <string name="now_playing">Ahora suena</string>
+    <string name="background_image_str">Background image for album art</string>
+    <string name="loading">Cargando…</string>
+    <string name="media_route_menu_title">Reproducir en…</string>
+    <string name="downloading">Descargando canción</string>
+    <string name="download_msg">Comenzó la descarga de %1$s</string>
+    <string name="no_permissions">Debe dar permisos a la app</string>
+
+    <!-- Use the default receiver. To customize a styled media receiver, you can use
+         the css and images under <project-root>/docs/cast_styled_receiver -->
+    <string name="cast_application_id">CC1AD845</string>
+
+</resources>
