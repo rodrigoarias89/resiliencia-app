@@ -131,7 +131,7 @@
             <de.hdodenhof.circleimageview.CircleImageView
                 android:layout_width="@dimen/image_width"
                 android:layout_height="@dimen/image_width"
-                android:src="@drawable/quila"
+                android:src="@drawable/potoca_shield"
                 android:layout_gravity="center_horizontal"
                 app:border_color="@android:color/white"
                 app:border_width="2dp"
