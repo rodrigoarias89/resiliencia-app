@@ -41,7 +41,7 @@
         android:layout_marginStart="@dimen/media_item_text_margin_start"
         android:layout_centerVertical="true"
         android:orientation="vertical"
-        android:layout_toLeftOf="@+id/download_btn">
+        android:layout_toLeftOf="@+id/song_menu_btn">
 
         <TextView
             android:id="@+id/title"
@@ -68,11 +68,11 @@
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/download_btn"
-        android:src="@android:drawable/stat_sys_download"
+        android:id="@+id/song_menu_btn"
+        android:src="@drawable/abc_ic_menu_moreoverflow_mtrl_alpha"
         android:layout_alignParentEnd="true"
         android:layout_alignTop="@+id/play_eq"
         android:layout_alignBottom="@+id/play_eq"
-        android:tint="@color/bt_accent" />
+        android:tint="@color/media_item_icon_not_playing" />
 
 </RelativeLayout>

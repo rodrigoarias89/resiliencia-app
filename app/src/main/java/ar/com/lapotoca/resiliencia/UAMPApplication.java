@@ -18,8 +18,6 @@ public class UAMPApplication extends Application {
     public void onCreate() {
         super.onCreate();
         FacebookSdk.sdkInitialize(getApplicationContext());
-        String s = FacebookSdk.getApplicationSignature(getApplicationContext());
-
         String applicationId = getResources().getString(R.string.cast_application_id);
         VideoCastManager.initialize(
                 getApplicationContext(),

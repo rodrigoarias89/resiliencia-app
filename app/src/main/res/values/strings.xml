@@ -45,6 +45,9 @@
     <string name="downloading">Descargando canción</string>
     <string name="download_msg">Comenzó la descarga de %1$s</string>
     <string name="no_permissions">Debe dar permisos a la app</string>
+    <string name="download_all_item">Descargar todas</string>
+    <string name="download_item">Descargar</string>
+    <string name="share_item">Compartir</string>
 
     <!-- Use the default receiver. To customize a styled media receiver, you can use
          the css and images under <project-root>/docs/cast_styled_receiver -->

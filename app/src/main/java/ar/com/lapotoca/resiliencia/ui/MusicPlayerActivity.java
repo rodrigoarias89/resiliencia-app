@@ -3,15 +3,21 @@ package ar.com.lapotoca.resiliencia.ui;
 import android.app.FragmentTransaction;
 import android.app.SearchManager;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.design.widget.AppBarLayout;
 import android.support.v4.media.MediaBrowserCompat;
+import android.support.v7.widget.PopupMenu;
 import android.text.TextUtils;
+import android.view.MenuInflater;
 import android.view.View;
 import android.view.animation.AlphaAnimation;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import com.facebook.share.model.ShareLinkContent;
+import com.facebook.share.widget.ShareDialog;
 
 import ar.com.lapotoca.resiliencia.DownloadMusicManager;
 import ar.com.lapotoca.resiliencia.R;
@@ -45,15 +51,15 @@ public class MusicPlayerActivity extends BaseActivity
     private Bundle mVoiceSearchParams;
 
     //layout specials
-    private static final float PERCENTAGE_TO_SHOW_TITLE_AT_TOOLBAR  = 0.9f;
-    private static final float PERCENTAGE_TO_HIDE_TITLE_DETAILS     = 0.3f;
-    private static final int ALPHA_ANIMATIONS_DURATION              = 200;
+    private static final float PERCENTAGE_TO_SHOW_TITLE_AT_TOOLBAR = 0.9f;
+    private static final float PERCENTAGE_TO_HIDE_TITLE_DETAILS = 0.3f;
+    private static final int ALPHA_ANIMATIONS_DURATION = 200;
 
     private LinearLayout mTitleContainer;
     private TextView mTitle;
     private AppBarLayout mAppBarLayout;
 
-    private boolean mIsTheTitleVisible          = false;
+    private boolean mIsTheTitleVisible = false;
     private boolean mIsTheTitleContainerVisible = true;
 
     @Override
@@ -77,12 +83,12 @@ public class MusicPlayerActivity extends BaseActivity
     }
 
     private void bindActivity() {
-        mTitle          = (TextView) findViewById(R.id.main_textview_title);
-        if(mTitle != null) {
+        mTitle = (TextView) findViewById(R.id.main_textview_title);
+        if (mTitle != null) {
             mTitle.setVisibility(View.INVISIBLE);
         }
         mTitleContainer = (LinearLayout) findViewById(R.id.main_linearlayout_title);
-        mAppBarLayout   = (AppBarLayout) findViewById(R.id.main_appbar);
+        mAppBarLayout = (AppBarLayout) findViewById(R.id.main_appbar);
     }
 
     @Override
@@ -217,7 +223,7 @@ public class MusicPlayerActivity extends BaseActivity
     private void handleToolbarTitleVisibility(float percentage) {
         if (percentage >= PERCENTAGE_TO_SHOW_TITLE_AT_TOOLBAR) {
 
-            if(!mIsTheTitleVisible) {
+            if (!mIsTheTitleVisible) {
                 startAlphaAnimation(mTitle, ALPHA_ANIMATIONS_DURATION, View.VISIBLE);
                 mIsTheTitleVisible = true;
             }
@@ -233,7 +239,7 @@ public class MusicPlayerActivity extends BaseActivity
 
     private void handleAlphaOnTitle(float percentage) {
         if (percentage >= PERCENTAGE_TO_HIDE_TITLE_DETAILS) {
-            if(mIsTheTitleContainerVisible) {
+            if (mIsTheTitleContainerVisible) {
                 startAlphaAnimation(mTitleContainer, ALPHA_ANIMATIONS_DURATION, View.INVISIBLE);
                 mIsTheTitleContainerVisible = false;
             }
@@ -247,7 +253,7 @@ public class MusicPlayerActivity extends BaseActivity
         }
     }
 
-    public static void startAlphaAnimation (View v, long duration, int visibility) {
+    public static void startAlphaAnimation(View v, long duration, int visibility) {
         AlphaAnimation alphaAnimation = (visibility == View.VISIBLE)
                 ? new AlphaAnimation(0f, 1f)
                 : new AlphaAnimation(1f, 0f);

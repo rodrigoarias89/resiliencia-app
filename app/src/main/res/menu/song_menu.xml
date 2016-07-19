@@ -18,7 +18,7 @@
     <item
         android:id="@+id/action_settings_descargar"
         android:orderInCategory="100"
-        android:title="@string/download_all_item"
+        android:title="@string/download_item"
         app:showAsAction="never" />
     <item
         android:id="@+id/action_settings_compartir"
@@ -26,9 +26,4 @@
         android:title="@string/share_item"
         app:showAsAction="never" />
 
-    <item
-        android:id="@+id/media_route_menu_item"
-        android:title="@string/media_route_menu_title"
-        app:actionProviderClass="android.support.v7.app.MediaRouteActionProvider"
-        app:showAsAction="always" />
 </menu>

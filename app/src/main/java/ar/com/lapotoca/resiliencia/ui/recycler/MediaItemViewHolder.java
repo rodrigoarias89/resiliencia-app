@@ -17,7 +17,6 @@ import ar.com.lapotoca.resiliencia.R;
 
 public class MediaItemViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
 
-    static final int STATE_INVALID = -1;
     static final int STATE_NONE = 0;
     static final int STATE_PLAYABLE = 1;
     static final int STATE_PAUSED = 2;
@@ -39,7 +38,7 @@ public class MediaItemViewHolder extends RecyclerView.ViewHolder implements View
         mImageView = (ImageView) itemView.findViewById(R.id.play_eq);
         mTitleView = (TextView) itemView.findViewById(R.id.title);
         mDescriptionView = (TextView) itemView.findViewById(R.id.description);
-        mDownloadView = (ImageView) itemView.findViewById(R.id.download_btn);
+        mDownloadView = (ImageView) itemView.findViewById(R.id.song_menu_btn);
         this.listener = listener;
         this.itemView.setOnClickListener(this);
         this.mDownloadView.setOnClickListener(this);
@@ -106,9 +105,8 @@ public class MediaItemViewHolder extends RecyclerView.ViewHolder implements View
     @Override
     public void onClick(View v) {
         if(listener!= null) {
-            if(v.getId() == R.id.download_btn) {
-                listener.onMediaItemDownloadClicked(getAdapterPosition());
-                mDownloadView.setVisibility(View.GONE);
+            if(v.getId() == R.id.song_menu_btn) {
+                listener.onMediaItemSettingsClicked(v, getAdapterPosition());
             } else {
                 listener.onMediaItemClicked(getAdapterPosition());
             }
@@ -117,7 +115,7 @@ public class MediaItemViewHolder extends RecyclerView.ViewHolder implements View
     }
 
     public interface OnMediaItemClickListener {
+        void onMediaItemSettingsClicked(View view, int position);
         void onMediaItemClicked(int position);
-        void onMediaItemDownloadClicked(int position);
     }
 }
