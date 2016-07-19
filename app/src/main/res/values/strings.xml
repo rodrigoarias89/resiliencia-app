@@ -49,5 +49,7 @@
     <!-- Use the default receiver. To customize a styled media receiver, you can use
          the css and images under <project-root>/docs/cast_styled_receiver -->
     <string name="cast_application_id">CC1AD845</string>
+    <string name="facebook_app_id">1748521092070093</string>
+
 
 </resources>
