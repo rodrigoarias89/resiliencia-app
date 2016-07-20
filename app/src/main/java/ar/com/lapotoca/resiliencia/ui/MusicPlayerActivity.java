@@ -126,7 +126,7 @@ public class MusicPlayerActivity extends BaseActivity
 
     @Override
     public void onMediaItemShared(MediaBrowserCompat.MediaItem item) {
-        ShareHelper.shareContentOnFacebook(this, item);
+        ShareHelper.getInstance().shareContentOnFacebook(this, item);
     }
 
     @Override

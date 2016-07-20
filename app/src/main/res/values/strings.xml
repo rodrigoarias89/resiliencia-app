@@ -54,5 +54,10 @@
     <string name="cast_application_id">CC1AD845</string>
     <string name="facebook_app_id">1748521092070093</string>
 
+    <!--sharing-->
+    <string name="facebook_url_share">https://es-la.facebook.com/lapotocaoficial</string>
+    <string name="facebook_title_share">Resiliencia - La Potoca</string>
+    <string name="facebook_description_share">Escuchando %1$s</string>
+
 
 </resources>
