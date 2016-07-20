@@ -80,7 +80,7 @@ public class MusicProvider {
             return Collections.emptyList();
         }
         List<MediaMetadataCompat> shuffled = new ArrayList<>(mMusicListById.size());
-        for (MutableMediaMetadata mutableMetadata: mMusicListById.values()) {
+        for (MutableMediaMetadata mutableMetadata : mMusicListById.values()) {
             shuffled.add(mutableMetadata.metadata);
         }
         Collections.shuffle(shuffled);
@@ -89,7 +89,6 @@ public class MusicProvider {
 
     /**
      * Get music tracks of the given genre
-     *
      */
     public Iterable<MediaMetadataCompat> getMusicsByGenre(String genre) {
         if (mCurrentState != State.INITIALIZED || !mMusicListByGenre.containsKey(genre)) {
@@ -101,28 +100,9 @@ public class MusicProvider {
     /**
      * Very basic implementation of a search that filter music tracks with title containing
      * the given query.
-     *
      */
     public Iterable<MediaMetadataCompat> searchMusicBySongTitle(String query) {
         return searchMusic(MediaMetadataCompat.METADATA_KEY_TITLE, query);
-    }
-
-    /**
-     * Very basic implementation of a search that filter music tracks with album containing
-     * the given query.
-     *
-     */
-    public Iterable<MediaMetadataCompat> searchMusicByAlbum(String query) {
-        return searchMusic(MediaMetadataCompat.METADATA_KEY_ALBUM, query);
-    }
-
-    /**
-     * Very basic implementation of a search that filter music tracks with artist containing
-     * the given query.
-     *
-     */
-    public Iterable<MediaMetadataCompat> searchMusicByArtist(String query) {
-        return searchMusic(MediaMetadataCompat.METADATA_KEY_ARTIST, query);
     }
 
     Iterable<MediaMetadataCompat> searchMusic(String metadataField, String query) {
@@ -151,8 +131,8 @@ public class MusicProvider {
     }
 
     public MediaMetadataCompat getMusicByTitle(String title) {
-        for(MutableMediaMetadata media : mMusicListById.values()) {
-            if(media.metadata.getString(MediaMetadataCompat.METADATA_KEY_TITLE).equals(title)) {
+        for (MutableMediaMetadata media : mMusicListById.values()) {
+            if (media.metadata.getString(MediaMetadataCompat.METADATA_KEY_TITLE).equals(title)) {
                 return media.metadata;
             }
         }
@@ -161,8 +141,8 @@ public class MusicProvider {
 
     public boolean changeMetadataForNewOne(MediaMetadataCompat oldMetadata, MediaMetadataCompat newMetada) {
         Set<String> ids = mMusicListById.keySet();
-        for(String id : ids) {
-            if(mMusicListById.get(id).metadata == oldMetadata) {
+        for (String id : ids) {
+            if (mMusicListById.get(id).metadata == oldMetadata) {
                 mMusicListById.get(id).metadata = newMetada;
                 return true;
             }
@@ -251,9 +231,8 @@ public class MusicProvider {
         String genre = "";
 
 
-
         for (MutableMediaMetadata m : mMusicListById.values()) {
-            if(genre.isEmpty()) {
+            if (genre.isEmpty()) {
                 genre = m.metadata.getString(MediaMetadataCompat.METADATA_KEY_GENRE);
             }
             orderedList.add(m.metadata);
@@ -262,7 +241,7 @@ public class MusicProvider {
         Comparator<MediaMetadataCompat> compTrack = new Comparator<MediaMetadataCompat>() {
             @Override
             public int compare(MediaMetadataCompat lhs, MediaMetadataCompat rhs) {
-                return (int)(lhs.getLong(MediaMetadataCompat.METADATA_KEY_TRACK_NUMBER) - rhs.getLong(MediaMetadataCompat.METADATA_KEY_TRACK_NUMBER));
+                return (int) (lhs.getLong(MediaMetadataCompat.METADATA_KEY_TRACK_NUMBER) - rhs.getLong(MediaMetadataCompat.METADATA_KEY_TRACK_NUMBER));
             }
         };
 

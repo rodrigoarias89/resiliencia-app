@@ -42,9 +42,6 @@
     <string name="background_image_str">Background image for album art</string>
     <string name="loading">Cargando…</string>
     <string name="media_route_menu_title">Reproducir en…</string>
-    <string name="downloading">Descargando canción</string>
-    <string name="download_msg">Comenzó la descarga de %1$s</string>
-    <string name="no_permissions">Debe dar permisos a la app</string>
     <string name="download_all_item">Descargar todas</string>
     <string name="download_item">Descargar</string>
     <string name="share_item">Compartir</string>
@@ -60,6 +57,18 @@
     <string name="facebook_description_share_song">Escuchando %1$s</string>
     <string name="facebook_description_share_album">Escuchando a través de la App de Resiliencia.</string>
     <string name="facebook_image_url_share">http://www.fordoogle.com.ar/lapotoca/album_art.jpg</string>
+
+    <!--download-->
+    <string name="downloading">Descargando canción</string>
+    <string name="download_msg">Comenzó la descarga de %1$s</string>
+    <string name="no_permissions">Debe dar permisos a la app</string>
+    <string name="download_all_alert_title">Descargar todas</string>
+    <string name="download_all_alert_description">Descargará todas las canciones al dispositivo. ¿Desea continuar? </string>
+    <string name="download_all_alert_ok">Aceptar</string>
+    <string name="download_all_alert_cancel">Cancelar</string>
+    <string name="download_all_empty">Ya descargaste todas las canciones</string>
+    <string name="download_all_no_song_selected">No seleccionaste ninguna canción.</string>
+    <string name="download_all_msg">Descargando %1$s canciones</string>
 
 
 </resources>

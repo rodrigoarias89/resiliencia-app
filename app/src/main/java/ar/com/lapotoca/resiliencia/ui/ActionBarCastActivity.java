@@ -9,6 +9,7 @@ import android.view.MenuItem;
 import com.google.android.libraries.cast.companionlibrary.cast.VideoCastManager;
 import com.google.android.libraries.cast.companionlibrary.cast.callbacks.VideoCastConsumerImpl;
 
+import ar.com.lapotoca.resiliencia.DownloadMusicManager;
 import ar.com.lapotoca.resiliencia.R;
 import ar.com.lapotoca.resiliencia.utils.LogHelper;
 import ar.com.lapotoca.resiliencia.utils.ShareHelper;
@@ -111,6 +112,9 @@ public abstract class ActionBarCastActivity extends AppCompatActivity {
                 return true;
             case R.id.action_settings_descargar:
                 //TODO
+                if(DownloadMusicManager.getInstance() != null) {
+                    DownloadMusicManager.getInstance().downloadAll(this);
+                }
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
