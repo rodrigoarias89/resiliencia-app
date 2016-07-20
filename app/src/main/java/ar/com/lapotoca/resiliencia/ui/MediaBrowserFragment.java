@@ -26,6 +26,7 @@ import android.widget.Toast;
 
 import java.util.List;
 
+import ar.com.lapotoca.resiliencia.DownloadMusicManager;
 import ar.com.lapotoca.resiliencia.R;
 import ar.com.lapotoca.resiliencia.ui.recycler.BrowseRecyclerAdapter;
 import ar.com.lapotoca.resiliencia.ui.recycler.MediaItemViewHolder;
@@ -267,9 +268,6 @@ public class MediaBrowserFragment extends Fragment implements MediaItemViewHolde
             }
         }
         mErrorView.setVisibility(showError ? View.VISIBLE : View.GONE);
-        LogHelper.d(TAG, "checkForUserVisibleErrors. forceError=", forceError,
-                " showError=", showError,
-                " isOnline=", NetworkHelper.isOnline(getActivity()));
     }
 
     private void updateTitle() {
@@ -302,6 +300,15 @@ public class MediaBrowserFragment extends Fragment implements MediaItemViewHolde
         popup.setOnMenuItemClickListener(this);
         MenuInflater inflater = popup.getMenuInflater();
         inflater.inflate(R.menu.song_menu, popup.getMenu());
+
+        MediaBrowserCompat.MediaItem item = mBrowserAdapter.getItem(position);
+        DownloadMusicManager downloadMusicManager = DownloadMusicManager.getInstance();
+        if(downloadMusicManager != null) {
+            if (DownloadMusicManager.getInstance().isLocal(item)) {
+                popup.getMenu().findItem(R.id.action_settings_descargar).setEnabled(false);
+            }
+        }
+
         popup.show();
     }
 
@@ -318,7 +325,7 @@ public class MediaBrowserFragment extends Fragment implements MediaItemViewHolde
                 mMediaFragmentListener.onMediaItemDownloadSelected(mediaItem);
                 return true;
             case R.id.action_settings_compartir:
-                //TODO
+                mMediaFragmentListener.onMediaItemShared(mediaItem);
                 return true;
             default:
                 return false;
@@ -326,9 +333,12 @@ public class MediaBrowserFragment extends Fragment implements MediaItemViewHolde
     }
 
     public interface MediaFragmentListener extends MediaBrowserProvider {
+
         void onMediaItemSelected(MediaBrowserCompat.MediaItem item);
 
         void onMediaItemDownloadSelected(MediaBrowserCompat.MediaItem item);
+
+        void onMediaItemShared(MediaBrowserCompat.MediaItem item);
 
         void setToolbarTitle(CharSequence title);
     }

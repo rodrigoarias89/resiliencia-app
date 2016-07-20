@@ -23,6 +23,7 @@ import ar.com.lapotoca.resiliencia.DownloadMusicManager;
 import ar.com.lapotoca.resiliencia.R;
 import ar.com.lapotoca.resiliencia.utils.LogHelper;
 import ar.com.lapotoca.resiliencia.utils.NotificationHelper;
+import ar.com.lapotoca.resiliencia.utils.ShareHelper;
 
 /**
  * Main activity for the music player.
@@ -121,6 +122,11 @@ public class MusicPlayerActivity extends BaseActivity
         } catch (SecurityException e) {
             NotificationHelper.showNotification(this, getString(R.string.no_permissions));
         }
+    }
+
+    @Override
+    public void onMediaItemShared(MediaBrowserCompat.MediaItem item) {
+        ShareHelper.shareContentOnFacebook(this, item);
     }
 
     @Override

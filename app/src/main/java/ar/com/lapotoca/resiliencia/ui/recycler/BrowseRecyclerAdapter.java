@@ -13,7 +13,6 @@ import android.view.ViewGroup;
 
 import java.util.List;
 
-import ar.com.lapotoca.resiliencia.DownloadMusicManager;
 import ar.com.lapotoca.resiliencia.R;
 import ar.com.lapotoca.resiliencia.utils.MediaIDHelper;
 
@@ -22,13 +21,11 @@ public class BrowseRecyclerAdapter extends RecyclerView.Adapter<MediaItemViewHol
     List<MediaBrowserCompat.MediaItem> items;
     Context mContext;
     MediaItemViewHolder.OnMediaItemClickListener listener;
-    DownloadMusicManager downloadMusicManager;
 
     public BrowseRecyclerAdapter(List<MediaBrowserCompat.MediaItem> items, Context context, MediaItemViewHolder.OnMediaItemClickListener listener) {
         this.items = items;
         this.mContext = context;
         this.listener = listener;
-        downloadMusicManager = DownloadMusicManager.getInstance();
     }
 
     public MediaBrowserCompat.MediaItem getItem(int position) {
@@ -46,8 +43,7 @@ public class BrowseRecyclerAdapter extends RecyclerView.Adapter<MediaItemViewHol
     public void onBindViewHolder(MediaItemViewHolder holder, int position) {
         int itemState = getItemState(position);
         MediaBrowserCompat.MediaItem item = items.get(position);
-        boolean isLocal = downloadMusicManager.isLocal(item);
-        holder.setupView((Activity) mContext, item.getDescription(), itemState, isLocal);
+        holder.setupView((Activity) mContext, item.getDescription(), itemState);
     }
 
     public int getItemState(int itemPosition) {

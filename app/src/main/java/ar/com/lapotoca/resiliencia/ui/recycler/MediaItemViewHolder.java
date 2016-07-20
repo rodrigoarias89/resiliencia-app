@@ -44,7 +44,7 @@ public class MediaItemViewHolder extends RecyclerView.ViewHolder implements View
         this.mDownloadView.setOnClickListener(this);
     }
 
-    public void setupView(Activity activity, MediaDescriptionCompat description, int state, boolean isLocal) {
+    public void setupView(Activity activity, MediaDescriptionCompat description, int state) {
         mContext = activity;
 
         if (sColorStateNotPlaying == null || sColorStatePlaying == null) {
@@ -53,12 +53,6 @@ public class MediaItemViewHolder extends RecyclerView.ViewHolder implements View
 
         mTitleView.setText(description.getTitle());
         mDescriptionView.setText(description.getSubtitle());
-
-        if(isLocal) {
-            mDownloadView.setVisibility(View.GONE);
-        } else {
-            mDownloadView.setVisibility(View.VISIBLE);
-        }
 
         updateState(state);
     }
