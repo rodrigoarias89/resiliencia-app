@@ -3,6 +3,7 @@ package ar.com.lapotoca.resiliencia;
 
 import android.app.Application;
 
+import com.facebook.FacebookSdk;
 import com.google.android.libraries.cast.companionlibrary.cast.CastConfiguration;
 import com.google.android.libraries.cast.companionlibrary.cast.VideoCastManager;
 
@@ -16,6 +17,7 @@ public class UAMPApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
+        FacebookSdk.sdkInitialize(getApplicationContext());
         String applicationId = getResources().getString(R.string.cast_application_id);
         VideoCastManager.initialize(
                 getApplicationContext(),

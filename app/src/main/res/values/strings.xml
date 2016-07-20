@@ -45,9 +45,21 @@
     <string name="downloading">Descargando canción</string>
     <string name="download_msg">Comenzó la descarga de %1$s</string>
     <string name="no_permissions">Debe dar permisos a la app</string>
+    <string name="download_all_item">Descargar todas</string>
+    <string name="download_item">Descargar</string>
+    <string name="share_item">Compartir</string>
 
     <!-- Use the default receiver. To customize a styled media receiver, you can use
          the css and images under <project-root>/docs/cast_styled_receiver -->
     <string name="cast_application_id">CC1AD845</string>
+    <string name="facebook_app_id">1748521092070093</string>
+
+    <!--sharing-->
+    <string name="facebook_url_share">https://es-la.facebook.com/lapotocaoficial</string>
+    <string name="facebook_title_share">Resiliencia - La Potoca</string>
+    <string name="facebook_description_share_song">Escuchando %1$s</string>
+    <string name="facebook_description_share_album">Escuchando a través de la App de Resiliencia.</string>
+    <string name="facebook_image_url_share">http://www.fordoogle.com.ar/lapotoca/album_art.jpg</string>
+
 
 </resources>

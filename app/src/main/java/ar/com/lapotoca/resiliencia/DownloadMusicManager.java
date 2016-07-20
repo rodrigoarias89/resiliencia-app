@@ -12,6 +12,9 @@ import android.os.Environment;
 import android.support.v4.media.MediaBrowserCompat;
 import android.support.v4.media.MediaMetadataCompat;
 
+import com.facebook.share.model.ShareLinkContent;
+import com.facebook.share.widget.ShareDialog;
+
 import ar.com.lapotoca.resiliencia.model.MusicProvider;
 import ar.com.lapotoca.resiliencia.model.MusicProviderSource;
 import ar.com.lapotoca.resiliencia.utils.MediaIDHelper;
