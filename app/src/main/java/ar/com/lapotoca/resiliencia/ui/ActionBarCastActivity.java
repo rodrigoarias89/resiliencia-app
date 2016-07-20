@@ -11,6 +11,7 @@ import com.google.android.libraries.cast.companionlibrary.cast.callbacks.VideoCa
 
 import ar.com.lapotoca.resiliencia.R;
 import ar.com.lapotoca.resiliencia.utils.LogHelper;
+import ar.com.lapotoca.resiliencia.utils.ShareHelper;
 
 /**
  * Abstract activity with toolbar, navigation drawer and cast support. Needs to be extended by
@@ -20,10 +21,7 @@ public abstract class ActionBarCastActivity extends AppCompatActivity {
 
     private static final String TAG = LogHelper.makeLogTag(ActionBarCastActivity.class);
 
-    private static final int DELAY_MILLIS = 1000;
-
     private VideoCastManager mCastManager;
-    private MenuItem mMediaRouteMenuItem;
     private Toolbar mToolbar;
 
     private final VideoCastConsumerImpl mCastConsumer = new VideoCastConsumerImpl() {
@@ -78,7 +76,7 @@ public abstract class ActionBarCastActivity extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         super.onCreateOptionsMenu(menu);
         getMenuInflater().inflate(R.menu.main, menu);
-        mMediaRouteMenuItem = mCastManager.addMediaRouterButton(menu, R.id.media_route_menu_item);
+        mCastManager.addMediaRouterButton(menu, R.id.media_route_menu_item);
         return true;
     }
 
@@ -103,5 +101,21 @@ public abstract class ActionBarCastActivity extends AppCompatActivity {
             setSupportActionBar(mToolbar);
         }
     }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle item selection
+        switch (item.getItemId()) {
+            case R.id.action_settings_compartir:
+                ShareHelper.getInstance().shareContentOnFacebook(this);
+                return true;
+            case R.id.action_settings_descargar:
+                //TODO
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
 
 }

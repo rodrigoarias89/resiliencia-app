@@ -57,7 +57,9 @@
     <!--sharing-->
     <string name="facebook_url_share">https://es-la.facebook.com/lapotocaoficial</string>
     <string name="facebook_title_share">Resiliencia - La Potoca</string>
-    <string name="facebook_description_share">Escuchando %1$s</string>
+    <string name="facebook_description_share_song">Escuchando %1$s</string>
+    <string name="facebook_description_share_album">Escuchando a través de la App de Resiliencia.</string>
+    <string name="facebook_image_url_share">http://www.fordoogle.com.ar/lapotoca/album_art.jpg</string>
 
 
 </resources>

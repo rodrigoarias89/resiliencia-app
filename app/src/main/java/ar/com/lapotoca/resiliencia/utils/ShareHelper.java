@@ -14,9 +14,6 @@ import com.facebook.share.widget.ShareDialog;
 
 import ar.com.lapotoca.resiliencia.R;
 
-/**
- * Created by rarias on 7/19/16.
- */
 public class ShareHelper {
 
     private static String TAG = ShareHelper.class.getName();
@@ -34,10 +31,22 @@ public class ShareHelper {
 
     public void shareContentOnFacebook(Activity activity, MediaBrowserCompat.MediaItem item) {
         String title = activity.getString(R.string.facebook_title_share);
-        String description = String.format(activity.getString(R.string.facebook_description_share), item.getDescription().getTitle());
+        String description = String.format(activity.getString(R.string.facebook_description_share_song), item.getDescription().getTitle());
         String url = activity.getString(R.string.facebook_url_share);
+        shareContentOnFacebook(activity, title, description, url, item.getDescription().getIconUri());
+    }
+
+    public void shareContentOnFacebook(Activity activity) {
+        String title = activity.getString(R.string.facebook_title_share);
+        String description = (activity.getString(R.string.facebook_description_share_album));
+        String url = activity.getString(R.string.facebook_url_share);
+        Uri uriImage = Uri.parse(activity.getString(R.string.facebook_image_url_share));
+        shareContentOnFacebook(activity, title, description, url, uriImage);
+    }
+
+    private void shareContentOnFacebook(Activity activity, String title, String description, String url, Uri imageUri) {
         ShareLinkContent content = new ShareLinkContent.Builder().setContentTitle(title).setContentDescription(description)
-                .setContentUrl(Uri.parse(url)).setImageUrl(item.getDescription().getIconUri())
+                .setContentUrl(Uri.parse(url)).setImageUrl(imageUri)
                 .build();
         ShareDialog shareDialog = new ShareDialog(activity);
         shareDialog.show(content);
@@ -58,7 +67,6 @@ public class ShareHelper {
                 Log.e(TAG, "onError", error);
             }
         });
-
-
     }
+
 }
