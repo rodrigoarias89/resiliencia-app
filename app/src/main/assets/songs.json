@@ -18,7 +18,7 @@
     "image" : "album_art.jpg",
     "trackNumber" : 1,
     "totalTrackCount" : 9,
-    "duration" : 103,
+    "duration" : 300,
     "site" : "https://www.youtube.com/audiolibrary/music"
   },
   { "title" : "pipershut_lo",
@@ -29,7 +29,7 @@
     "image" : "album_art.jpg",
     "trackNumber" : 1,
     "totalTrackCount" : 9,
-    "duration" : 103,
+    "duration" : 232,
     "site" : "https://www.youtube.com/audiolibrary/music"
   },
   { "title" : "wearie_lo",
@@ -40,7 +40,7 @@
     "image" : "album_art.jpg",
     "trackNumber" : 1,
     "totalTrackCount" : 9,
-    "duration" : 103,
+    "duration" : 187,
     "site" : "https://www.youtube.com/audiolibrary/music"
   },
   { "title" : "Mayo Frances",
@@ -51,7 +51,7 @@
     "image" : "album_art.jpg",
     "trackNumber" : 1,
     "totalTrackCount" : 9,
-    "duration" : 103,
+    "duration" : 124,
     "site" : "https://www.youtube.com/audiolibrary/music"
   },
   { "title" : "Catarsis",

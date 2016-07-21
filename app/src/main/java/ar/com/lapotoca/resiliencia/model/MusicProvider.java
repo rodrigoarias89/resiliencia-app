@@ -299,13 +299,28 @@ public class MusicProvider {
         // when we get a onPlayFromMusicID call, so we can create the proper queue based
         // on where the music was selected from (by artist, by genre, random, etc)
         String genre = metadata.getString(MediaMetadataCompat.METADATA_KEY_GENRE);
+
         String hierarchyAwareMediaID = MediaIDHelper.createMediaID(
                 metadata.getDescription().getMediaId(), MediaIDHelper.MEDIA_ID_MUSICS_BY_GENRE, genre);
         MediaMetadataCompat copy = new MediaMetadataCompat.Builder(metadata)
                 .putString(MediaMetadataCompat.METADATA_KEY_MEDIA_ID, hierarchyAwareMediaID)
                 .build();
-        return new MediaBrowserCompat.MediaItem(copy.getDescription(),
+
+        MediaDescriptionCompat desc = copy.getDescription();
+        MediaDescriptionCompat.Builder bob = new MediaDescriptionCompat.Builder();
+        bob.setMediaId(desc.getMediaId());
+        bob.setTitle(desc.getTitle());
+        bob.setSubtitle(desc.getSubtitle());
+        bob.setDescription(desc.getDescription());
+        bob.setIconBitmap(desc.getIconBitmap());
+        bob.setIconUri(desc.getIconUri());
+        bob.setExtras(metadata.getBundle());
+        MediaDescriptionCompat newDescription = bob.build();
+
+
+        MediaBrowserCompat.MediaItem item = new MediaBrowserCompat.MediaItem(newDescription,
                 MediaBrowserCompat.MediaItem.FLAG_PLAYABLE);
+        return item;
 
     }
 
