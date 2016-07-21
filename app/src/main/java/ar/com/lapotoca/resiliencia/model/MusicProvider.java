@@ -281,15 +281,7 @@ public class MusicProvider {
             return mediaItems;
         }
 
-        if (MediaIDHelper.MEDIA_ID_ROOT.equals(mediaId)) {
-            mediaItems.add(createBrowsableMediaItemForRoot(resources));
-
-        } else if (MediaIDHelper.MEDIA_ID_MUSICS_BY_GENRE.equals(mediaId)) {
-            for (String genre : getGenres()) {
-                mediaItems.add(createBrowsableMediaItemForGenre(genre, resources));
-            }
-
-        } else if (mediaId.startsWith(MediaIDHelper.MEDIA_ID_MUSICS_BY_GENRE)) {
+        if (mediaId.startsWith(MediaIDHelper.MEDIA_ID_MUSICS_BY_GENRE)) {
             String genre = MediaIDHelper.getHierarchy(mediaId)[1];
             for (MediaMetadataCompat metadata : getMusicsByGenre(genre)) {
                 mediaItems.add(createMediaItem(metadata));
@@ -299,30 +291,6 @@ public class MusicProvider {
             LogHelper.w(TAG, "Skipping unmatched mediaId: ", mediaId);
         }
         return mediaItems;
-    }
-
-    private MediaBrowserCompat.MediaItem createBrowsableMediaItemForRoot(Resources resources) {
-        MediaDescriptionCompat description = new MediaDescriptionCompat.Builder()
-                .setMediaId(MediaIDHelper.MEDIA_ID_MUSICS_BY_GENRE)
-                .setTitle(resources.getString(R.string.browse_genres))
-                .setSubtitle(resources.getString(R.string.browse_genre_subtitle))
-                .setIconUri(Uri.parse("android.resource://" +
-                        "com.example.android.uamp/drawable/ic_by_genre"))
-                .build();
-        return new MediaBrowserCompat.MediaItem(description,
-                MediaBrowserCompat.MediaItem.FLAG_BROWSABLE);
-    }
-
-    private MediaBrowserCompat.MediaItem createBrowsableMediaItemForGenre(String genre,
-                                                                          Resources resources) {
-        MediaDescriptionCompat description = new MediaDescriptionCompat.Builder()
-                .setMediaId(MediaIDHelper.createMediaID(null, MediaIDHelper.MEDIA_ID_MUSICS_BY_GENRE, genre))
-                .setTitle(genre)
-                .setSubtitle(resources.getString(
-                        R.string.browse_musics_by_genre_subtitle, genre))
-                .build();
-        return new MediaBrowserCompat.MediaItem(description,
-                MediaBrowserCompat.MediaItem.FLAG_BROWSABLE);
     }
 
     private MediaBrowserCompat.MediaItem createMediaItem(MediaMetadataCompat metadata) {

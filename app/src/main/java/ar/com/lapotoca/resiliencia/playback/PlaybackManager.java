@@ -18,7 +18,7 @@ public class PlaybackManager implements Playback.Callback {
 
     private static final String TAG = LogHelper.makeLogTag(PlaybackManager.class);
     // Action to thumbs up a media item
-    private static final String CUSTOM_ACTION_THUMBS_UP = "com.example.android.uamp.THUMBS_UP";
+    private static final String CUSTOM_ACTION_THUMBS_UP = "ar.com.lapotoca.resiliencia.THUMBS_UP";
 
     private MusicProvider mMusicProvider;
     private QueueManager mQueueManager;

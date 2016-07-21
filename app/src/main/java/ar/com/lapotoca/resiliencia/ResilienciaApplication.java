@@ -9,10 +9,7 @@ import com.google.android.libraries.cast.companionlibrary.cast.VideoCastManager;
 
 import ar.com.lapotoca.resiliencia.ui.FullScreenPlayerActivity;
 
-/**
- * The {@link Application} for the uAmp application.
- */
-public class UAMPApplication extends Application {
+public class ResilienciaApplication extends Application {
 
     @Override
     public void onCreate() {

@@ -34,11 +34,11 @@ public class MediaNotificationManager extends BroadcastReceiver {
     private static final int NOTIFICATION_ID = 412;
     private static final int REQUEST_CODE = 100;
 
-    public static final String ACTION_PAUSE = "com.example.android.uamp.pause";
-    public static final String ACTION_PLAY = "com.example.android.uamp.play";
-    public static final String ACTION_PREV = "com.example.android.uamp.prev";
-    public static final String ACTION_NEXT = "com.example.android.uamp.next";
-    public static final String ACTION_STOP_CASTING = "com.example.android.uamp.stop_cast";
+    public static final String ACTION_PAUSE = "ar.com.lapotoca.resiliencia.pause";
+    public static final String ACTION_PLAY = "ar.com.lapotoca.resiliencia.play";
+    public static final String ACTION_PREV = "ar.com.lapotoca.resiliencia.prev";
+    public static final String ACTION_NEXT = "ar.com.lapotoca.resiliencia.next";
+    public static final String ACTION_STOP_CASTING = "ar.com.lapotoca.resiliencia.stop_cast";
 
     private final MusicService mService;
     private MediaSessionCompat.Token mSessionToken;
