@@ -119,31 +119,28 @@ public class DownloadMusicManager {
     }
 
     public void downloadItem(MediaBrowserCompat.MediaItem item) {
-
         MediaMetadataCompat track = mMusicProvider.getMusic(
                 MediaIDHelper.extractMusicIDFromMediaID(item.getDescription().getMediaId()));
-        String source = track.getString(MusicProviderSource.CUSTOM_METADATA_TRACK_SOURCE);
-
-        DownloadManager.Request request = new DownloadManager.Request(Uri.parse(source));
-
         String songName = "" + item.getDescription().getTitle();
-        String fileName = songName + ".mp3";
-
-        request.setDescription(mContext.getString(R.string.downloading));
-        request.setTitle(songName);
-
-        request.allowScanningByMediaScanner();
-        request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED);
-
-        request.setDestinationInExternalPublicDir(Environment.DIRECTORY_MUSIC, fileName);
-
-        enqueue = dm.enqueue(request);
-
+        addDownloadToQueue(track);
         showDownloadNotification(songName);
     }
 
+    private void addDownloadToQueue(MediaMetadataCompat track) {
+        String songName = ""+track.getDescription().getTitle();
+        String source = track.getString(MusicProviderSource.CUSTOM_METADATA_TRACK_SOURCE);
+        DownloadManager.Request request = new DownloadManager.Request(Uri.parse(source));
+        String fileName = songName + ".mp3";
+        request.setDescription(mContext.getString(R.string.downloading));
+        request.setTitle(songName);
+        request.allowScanningByMediaScanner();
+        request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED);
+        request.setDestinationInExternalPublicDir(Environment.DIRECTORY_MUSIC, fileName);
+        enqueue = dm.enqueue(request);
+    }
+
     public void downloadAll(Context context) {
-        List<MediaMetadataCompat> notLocal = new ArrayList<>();
+        final List<MediaMetadataCompat> notLocal = new ArrayList<>();
 
         for (MediaMetadataCompat media:mMusicProvider.getShuffledMusic()) {
             if(!isLocal(media)) {
@@ -162,8 +159,9 @@ public class DownloadMusicManager {
                     showNotification(mContext.getString(R.string.download_all_no_song_selected));
                     return;
                 }
-                // User clicked OK button
-                //TODO
+                for(Integer index:mSelectedItems) {
+                    addDownloadToQueue(notLocal.get(index));
+                }
                 showNotification(String.format(mContext.getString(R.string.download_all_msg), mSelectedItems.size()));
             }
         });
