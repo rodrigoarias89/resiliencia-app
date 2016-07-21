@@ -61,7 +61,7 @@ public class MusicPlayerActivity extends BaseActivity
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        setContentView(R.layout.activity_player);
+        setContentView(R.layout.activity_player_2);
         bindActivity();
 
         mAppBarLayout.addOnOffsetChangedListener(this);

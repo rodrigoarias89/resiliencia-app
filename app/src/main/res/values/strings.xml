@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
   Copyright (C) 2014 The Android Open Source Project
 
   Licensed under the Apache License, Version 2.0 (the "License");
@@ -69,6 +68,9 @@
     <string name="download_all_empty">Ya descargaste todas las canciones</string>
     <string name="download_all_no_song_selected">No seleccionaste ninguna canción.</string>
     <string name="download_all_msg">Descargando %1$s canciones</string>
+
+    <string name="open_content_drawer">Open the main menu</string>
+    <string name="close_content_drawer">Close the main menu</string>
 
 
 </resources>

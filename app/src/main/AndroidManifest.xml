@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     package="ar.com.lapotoca.resiliencia">
@@ -14,7 +15,6 @@
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
         android:theme="@style/ResilienciaAppTheme">
-
         <meta-data
             android:name="com.facebook.sdk.ApplicationId"
             android:value="@string/facebook_app_id" />
@@ -25,25 +25,31 @@
             android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
 
             <!-- Use this intent filter to get voice searches, like "Play The Beatles" -->
             <intent-filter>
                 <action android:name="android.media.action.MEDIA_PLAY_FROM_SEARCH" />
+
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
 
-        <!-- Proxy activity that opens either the NowPlaying TV or the mobile UI, depending on
-        the current environment -->
+        <!--
+        Proxy activity that opens either the NowPlaying TV or the mobile UI, depending on
+        the current environment
+        -->
         <activity
             android:name=".ui.NowPlayingActivity"
-            android:icon="@drawable/ic_launcher"></activity>
+            android:icon="@drawable/ic_launcher" />
 
-        <!-- Main music service, provides media browsing and media playback services to
+        <!--
+         Main music service, provides media browsing and media playback services to
          consumers through MediaBrowserService and MediaSession. Consumers connect to it through
-         MediaBrowser (for browsing) and MediaController (for play session control) -->
+         MediaBrowser (for browsing) and MediaController (for play session control)
+        -->
         <service
             android:name=".MusicService"
             android:exported="true"
@@ -56,8 +62,10 @@
         <!-- Service that keeps track of reconnecting to Cast when wifi is enabled. -->
         <service android:name="com.google.android.libraries.cast.companionlibrary.cast.reconnection.ReconnectionService" />
 
-        <!-- A full screen activity showing controls and a seek bar for
-             the current playing music -->
+        <!--
+             A full screen activity showing controls and a seek bar for
+             the current playing music
+        -->
         <activity
             android:name=".ui.FullScreenPlayerActivity"
             android:label="@string/app_name"
@@ -68,27 +76,31 @@
                 android:value=".ui.MusicPlayerActivity" />
         </activity>
 
-        <!--For facebook sharing-->
+        <!-- For facebook sharing -->
         <activity
             android:name="com.facebook.FacebookActivity"
             android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation"
             android:label="@string/app_name"
             android:theme="@android:style/Theme.Translucent.NoTitleBar" />
 
-        <!-- A receiver that will receive media buttons and send as
+        <!--
+             A receiver that will receive media buttons and send as
             intents to your MediaBrowserServiceCompat implementation.
             Required on pre-Lollipop. More information at
-            http://developer.android.com/reference/android/support/v4/media/session/MediaButtonReceiver.html -->
+            http://developer.android.com/reference/android/support/v4/media/session/MediaButtonReceiver.html
+        -->
         <receiver android:name="android.support.v4.media.session.MediaButtonReceiver">
             <intent-filter>
                 <action android:name="android.intent.action.MEDIA_BUTTON" />
             </intent-filter>
         </receiver>
 
-        <provider android:authorities="com.facebook.app.FacebookContentProvider1748521092070093"
+        <provider
             android:name="com.facebook.FacebookContentProvider"
-            android:exported="true"/>
+            android:authorities="com.facebook.app.FacebookContentProvider1748521092070093"
+            android:exported="true" />
 
+        <activity android:name=".ui.ArtActivity"></activity>
     </application>
 
 </manifest>
