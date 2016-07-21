@@ -160,7 +160,12 @@ public class DownloadMusicManager {
                     return;
                 }
                 for(Integer index:mSelectedItems) {
-                    addDownloadToQueue(notLocal.get(index));
+                    try {
+                        addDownloadToQueue(notLocal.get(index));
+                    } catch (SecurityException e) {
+                        showNotification(mContext.getString(R.string.download_no_permissions));
+                        return;
+                    }
                 }
                 showNotification(String.format(mContext.getString(R.string.download_all_msg), mSelectedItems.size()));
             }

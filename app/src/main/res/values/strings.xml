@@ -61,7 +61,7 @@
     <!--download-->
     <string name="downloading">Descargando canción</string>
     <string name="download_msg">Comenzó la descarga de %1$s</string>
-    <string name="no_permissions">Debe dar permisos a la app</string>
+    <string name="download_no_permissions">Debe dar permisos a la app</string>
     <string name="download_all_alert_title">Descargar todas</string>
     <string name="download_all_alert_description">Descargará todas las canciones al dispositivo. ¿Desea continuar? </string>
     <string name="download_all_alert_ok">Aceptar</string>

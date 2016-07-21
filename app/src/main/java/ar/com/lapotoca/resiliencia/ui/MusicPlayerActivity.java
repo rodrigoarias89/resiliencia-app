@@ -3,21 +3,15 @@ package ar.com.lapotoca.resiliencia.ui;
 import android.app.FragmentTransaction;
 import android.app.SearchManager;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.design.widget.AppBarLayout;
 import android.support.v4.media.MediaBrowserCompat;
-import android.support.v7.widget.PopupMenu;
 import android.text.TextUtils;
-import android.view.MenuInflater;
 import android.view.View;
 import android.view.animation.AlphaAnimation;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-
-import com.facebook.share.model.ShareLinkContent;
-import com.facebook.share.widget.ShareDialog;
 
 import ar.com.lapotoca.resiliencia.DownloadMusicManager;
 import ar.com.lapotoca.resiliencia.R;
@@ -120,7 +114,7 @@ public class MusicPlayerActivity extends BaseActivity
         try {
             DownloadMusicManager.getInstance().downloadItem(item);
         } catch (SecurityException e) {
-            NotificationHelper.showNotification(this, getString(R.string.no_permissions));
+            NotificationHelper.showNotification(this, getString(R.string.download_no_permissions));
         }
     }
 
