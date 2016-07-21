@@ -13,6 +13,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
+import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -28,9 +30,11 @@ public class PlaybackControlsFragment extends Fragment {
     private static final String TAG = LogHelper.makeLogTag(PlaybackControlsFragment.class);
 
     private ImageButton mPlayPause;
+    private ImageView mImageView;
     private TextView mTitle;
     private TextView mSubtitle;
     private TextView mExtraInfo;
+    private ProgressBar progressBar;
 
     // Receive callbacks from the MediaController. Here we update our state such as which queue
     // is being shown, the current title and description and the PlaybackState.
@@ -61,6 +65,9 @@ public class PlaybackControlsFragment extends Fragment {
         mPlayPause = (ImageButton) rootView.findViewById(R.id.play_pause);
         mPlayPause.setEnabled(true);
         mPlayPause.setOnClickListener(mButtonListener);
+
+        progressBar = (ProgressBar) rootView.findViewById(R.id.song_buffering);
+        mImageView = (ImageView) rootView.findViewById(R.id.album_art);
 
         mTitle = (TextView) rootView.findViewById(R.id.title);
         mSubtitle = (TextView) rootView.findViewById(R.id.artist);
@@ -152,14 +159,24 @@ public class PlaybackControlsFragment extends Fragment {
         }
         boolean enablePlay = false;
         switch (state.getState()) {
+            case PlaybackStateCompat.STATE_BUFFERING:
+                mImageView.setVisibility(View.INVISIBLE);
+                progressBar.setVisibility(View.VISIBLE);
+                break;
             case PlaybackStateCompat.STATE_PAUSED:
             case PlaybackStateCompat.STATE_STOPPED:
+                mImageView.setVisibility(View.VISIBLE);
+                progressBar.setVisibility(View.GONE);
                 enablePlay = true;
                 break;
             case PlaybackStateCompat.STATE_ERROR:
+                mImageView.setVisibility(View.VISIBLE);
+                progressBar.setVisibility(View.GONE);
                 LogHelper.e(TAG, "error playbackstate: ", state.getErrorMessage());
                 Toast.makeText(getActivity(), state.getErrorMessage(), Toast.LENGTH_LONG).show();
                 break;
+            default:
+                mImageView.setVisibility(View.VISIBLE);
         }
 
         if (enablePlay) {

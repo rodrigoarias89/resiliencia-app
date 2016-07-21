@@ -83,6 +83,9 @@ public final class AlbumArtCache {
                             MAX_ART_WIDTH, MAX_ART_HEIGHT);
                     Bitmap icon = BitmapHelper.scaleBitmap(bitmap,
                             MAX_ART_WIDTH_ICON, MAX_ART_HEIGHT_ICON);
+                    if(icon == null) {
+                        return null;
+                    }
                     bitmaps = new Bitmap[] {bitmap, icon};
                     mCache.put(artUrl, bitmaps);
                 } catch (IOException e) {
