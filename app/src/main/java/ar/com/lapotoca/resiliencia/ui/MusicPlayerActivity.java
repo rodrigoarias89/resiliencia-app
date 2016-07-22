@@ -4,7 +4,6 @@ import android.app.FragmentTransaction;
 import android.app.SearchManager;
 import android.content.Intent;
 import android.os.Bundle;
-import android.provider.MediaStore;
 import android.support.design.widget.AppBarLayout;
 import android.support.v4.media.MediaBrowserCompat;
 import android.text.TextUtils;
@@ -18,6 +17,7 @@ import ar.com.lapotoca.resiliencia.R;
 import ar.com.lapotoca.resiliencia.utils.LogHelper;
 import ar.com.lapotoca.resiliencia.utils.NotificationHelper;
 import ar.com.lapotoca.resiliencia.utils.ShareHelper;
+import de.hdodenhof.circleimageview.CircleImageView;
 
 /**
  * Main activity for the music player.
@@ -48,14 +48,17 @@ public class MusicPlayerActivity extends BaseActivity
     //layout specials
     private static final float PERCENTAGE_TO_SHOW_TITLE_AT_TOOLBAR = 0.9f;
     private static final float PERCENTAGE_TO_HIDE_TITLE_DETAILS = 0.3f;
+    private static final float PERCENTAGE_TO_HIDE_ICON = 0.75f;
     private static final int ALPHA_ANIMATIONS_DURATION = 200;
 
     private LinearLayout mTitleContainer;
     private TextView mTitle;
     private AppBarLayout mAppBarLayout;
+    private CircleImageView mCircleImageView;
 
     private boolean mIsTheTitleVisible = false;
     private boolean mIsTheTitleContainerVisible = true;
+    private boolean mIsTheIconVisible = true;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -84,6 +87,7 @@ public class MusicPlayerActivity extends BaseActivity
         }
         mTitleContainer = (LinearLayout) findViewById(R.id.main_linearlayout_title);
         mAppBarLayout = (AppBarLayout) findViewById(R.id.main_appbar);
+        mCircleImageView = (CircleImageView) findViewById(R.id.circle);
     }
 
     @Override
@@ -148,20 +152,12 @@ public class MusicPlayerActivity extends BaseActivity
 
     protected void initializeFromParams(Bundle savedInstanceState, Intent intent) {
         String mediaId = null;
-        // check if we were started from a "Play XYZ" voice search. If so, we save the extras
-        // (which contain the query details) in a parameter, so we can reuse it later, when the
-        // MediaSession is connected.
-        if (intent.getAction() != null
-                && intent.getAction().equals(MediaStore.INTENT_ACTION_MEDIA_PLAY_FROM_SEARCH)) {
-            mVoiceSearchParams = intent.getExtras();
-            LogHelper.d(TAG, "Starting from voice search query=",
-                    mVoiceSearchParams.getString(SearchManager.QUERY));
-        } else {
-            if (savedInstanceState != null) {
-                // If there is a saved media ID, use it
-                mediaId = savedInstanceState.getString(SAVED_MEDIA_ID);
-            }
+
+        if (savedInstanceState != null) {
+            // If there is a saved media ID, use it
+            mediaId = savedInstanceState.getString(SAVED_MEDIA_ID);
         }
+
         navigateToBrowser(mediaId);
     }
 
@@ -218,18 +214,16 @@ public class MusicPlayerActivity extends BaseActivity
 
         handleAlphaOnTitle(percentage);
         handleToolbarTitleVisibility(percentage);
+        handleToolbarIconVisibility(percentage);
     }
 
     private void handleToolbarTitleVisibility(float percentage) {
         if (percentage >= PERCENTAGE_TO_SHOW_TITLE_AT_TOOLBAR) {
-
             if (!mIsTheTitleVisible) {
                 startAlphaAnimation(mTitle, ALPHA_ANIMATIONS_DURATION, View.VISIBLE);
                 mIsTheTitleVisible = true;
             }
-
         } else {
-
             if (mIsTheTitleVisible) {
                 startAlphaAnimation(mTitle, ALPHA_ANIMATIONS_DURATION, View.INVISIBLE);
                 mIsTheTitleVisible = false;
@@ -243,12 +237,24 @@ public class MusicPlayerActivity extends BaseActivity
                 startAlphaAnimation(mTitleContainer, ALPHA_ANIMATIONS_DURATION, View.INVISIBLE);
                 mIsTheTitleContainerVisible = false;
             }
-
         } else {
-
             if (!mIsTheTitleContainerVisible) {
                 startAlphaAnimation(mTitleContainer, ALPHA_ANIMATIONS_DURATION, View.VISIBLE);
                 mIsTheTitleContainerVisible = true;
+            }
+        }
+    }
+
+    private void handleToolbarIconVisibility(float percentage) {
+        if (percentage >= PERCENTAGE_TO_HIDE_ICON) {
+            if (mIsTheIconVisible) {
+                startAlphaAnimation(mCircleImageView, ALPHA_ANIMATIONS_DURATION, View.INVISIBLE);
+                mIsTheIconVisible = false;
+            }
+        } else {
+            if (!mIsTheIconVisible) {
+                startAlphaAnimation(mCircleImageView, ALPHA_ANIMATIONS_DURATION, View.VISIBLE);
+                mIsTheIconVisible = true;
             }
         }
     }

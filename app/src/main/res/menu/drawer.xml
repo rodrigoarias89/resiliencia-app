@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/navigation_allmusic"
+            android:checked="true"
+            android:title="@string/drawer_allmusic_title"/>
+        <item
+            android:id="@+id/navigation_gallery"
+            android:title="@string/drawer_playlists_title"/>
+    </group>
+</menu>

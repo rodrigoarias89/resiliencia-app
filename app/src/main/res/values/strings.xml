@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
   Copyright (C) 2014 The Android Open Source Project
 
   Licensed under the Apache License, Version 2.0 (the "License");
@@ -36,8 +35,8 @@
 
     <string name="home_title">Home</string>
     <string name="action_listen">Escuchar</string>
-    <string name="drawer_allmusic_title">Toda la musica</string>
-    <string name="drawer_playlists_title">Playlists</string>
+    <string name="drawer_allmusic_title">Canciones</string>
+    <string name="drawer_playlists_title">Arte</string>
     <string name="now_playing">Ahora suena</string>
     <string name="background_image_str">Background image for album art</string>
     <string name="loading">Cargando…</string>
@@ -69,6 +68,9 @@
     <string name="download_all_empty">Ya descargaste todas las canciones</string>
     <string name="download_all_no_song_selected">No seleccionaste ninguna canción.</string>
     <string name="download_all_msg">Descargando %1$s canciones</string>
+
+    <string name="open_content_drawer">Abre el menu</string>
+    <string name="close_content_drawer">Cierra el menu</string>
 
 
 </resources>
