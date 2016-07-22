@@ -73,7 +73,7 @@ public abstract class ActionBarCastActivity extends AppCompatActivity {
                     case R.id.navigation_allmusic:
                         activityClass = MusicPlayerActivity.class;
                         break;
-                    case R.id.navigation_playlists:
+                    case R.id.navigation_gallery:
                         activityClass = ArtActivity.class;
                         break;
                 }
@@ -97,8 +97,6 @@ public abstract class ActionBarCastActivity extends AppCompatActivity {
         @Override
         public void onDrawerOpened(View drawerView) {
             if (mDrawerToggle != null) mDrawerToggle.onDrawerOpened(drawerView);
-            if (getSupportActionBar() != null) getSupportActionBar()
-                    .setTitle(R.string.app_name);
         }
     };
 
@@ -164,30 +162,24 @@ public abstract class ActionBarCastActivity extends AppCompatActivity {
 
     protected void initializeToolbar() {
         mToolbar = (Toolbar) findViewById(R.id.main_toolbar);
-        if(mToolbar != null) {
+        if (mToolbar != null) {
             mToolbar.inflateMenu(R.menu.main);
             //Sobreescribimos el titulo por otro TextView
             mToolbar.setTitle("");
 
             mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
-            if (mDrawerLayout != null) {
+            if(mDrawerLayout != null) {
                 NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
-                if (navigationView == null) {
-                    throw new IllegalStateException("Layout requires a NavigationView " +
-                            "with id 'nav_view'");
-                }
-
-                // Create an ActionBarDrawerToggle that will handle opening/closing of the drawer:
 
                 mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout,
                         mToolbar, R.string.open_content_drawer, R.string.close_content_drawer);
-                mDrawerLayout.setDrawerListener(mDrawerListener);
+                mDrawerLayout.addDrawerListener(mDrawerListener);
                 populateDrawerItems(navigationView);
-                setSupportActionBar(mToolbar);
-                updateDrawerToggle();
-            } else {
-                setSupportActionBar(mToolbar);
             }
+
+            setSupportActionBar(mToolbar);
+            updateDrawerToggle();
+
         }
     }
 
@@ -199,11 +191,14 @@ public abstract class ActionBarCastActivity extends AppCompatActivity {
                 ShareHelper.getInstance().shareContentOnFacebook(this);
                 return true;
             case R.id.action_settings_descargar:
-                if(DownloadMusicManager.getInstance() != null) {
+                if (DownloadMusicManager.getInstance() != null) {
                     DownloadMusicManager.getInstance().downloadAll(this);
                 }
                 return true;
             default:
+                if (mDrawerToggle != null && mDrawerToggle.onOptionsItemSelected(item)) {
+                    return true;
+                }
                 return super.onOptionsItemSelected(item);
         }
     }
@@ -223,7 +218,7 @@ public abstract class ActionBarCastActivity extends AppCompatActivity {
         if (MusicPlayerActivity.class.isAssignableFrom(getClass())) {
             navigationView.setCheckedItem(R.id.navigation_allmusic);
         } else if (ArtActivity.class.isAssignableFrom(getClass())) {
-            navigationView.setCheckedItem(R.id.navigation_playlists);
+            navigationView.setCheckedItem(R.id.navigation_gallery);
         }
     }
 
