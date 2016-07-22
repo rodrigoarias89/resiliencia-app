@@ -67,7 +67,9 @@ public class MusicPlayerActivity extends BaseActivity
         setContentView(R.layout.activity_player);
         bindActivity();
 
-        mAppBarLayout.addOnOffsetChangedListener(this);
+        if(mAppBarLayout != null) {
+            mAppBarLayout.addOnOffsetChangedListener(this);
+        }
 
         initializeToolbar();
         initializeFromParams(savedInstanceState, getIntent());
@@ -209,12 +211,13 @@ public class MusicPlayerActivity extends BaseActivity
 
     @Override
     public void onOffsetChanged(AppBarLayout appBarLayout, int offset) {
-        int maxScroll = appBarLayout.getTotalScrollRange();
-        float percentage = (float) Math.abs(offset) / (float) maxScroll;
-
-        handleAlphaOnTitle(percentage);
-        handleToolbarTitleVisibility(percentage);
-        handleToolbarIconVisibility(percentage);
+        if(mTitle != null) {
+            int maxScroll = appBarLayout.getTotalScrollRange();
+            float percentage = (float) Math.abs(offset) / (float) maxScroll;
+            handleAlphaOnTitle(percentage);
+            handleToolbarTitleVisibility(percentage);
+            handleToolbarIconVisibility(percentage);
+        }
     }
 
     private void handleToolbarTitleVisibility(float percentage) {
