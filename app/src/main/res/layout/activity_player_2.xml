@@ -114,11 +114,6 @@
                         android:orientation="horizontal"
                         >
 
-                        <Space
-                            android:layout_width="@dimen/image_final_width"
-                            android:layout_height="@dimen/image_final_width"
-                            />
-
                         <TextView
                             android:id="@+id/main.textview.title"
                             android:layout_width="wrap_content"
@@ -146,7 +141,7 @@
                     app:startToolbarPosition="2dp"
                     app:startHeight="2dp"
                     app:startXPosition="2dp"
-                    />
+                    android:id="@+id/circle" />
 
 
             </android.support.design.widget.CoordinatorLayout>
