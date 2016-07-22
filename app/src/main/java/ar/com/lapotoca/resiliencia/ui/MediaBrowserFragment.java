@@ -1,11 +1,13 @@
 package ar.com.lapotoca.resiliencia.ui;
 
+import android.app.Activity;
 import android.app.Fragment;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.net.ConnectivityManager;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.FragmentActivity;
@@ -132,9 +134,15 @@ public class MediaBrowserFragment extends Fragment implements MediaItemViewHolde
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        // If used on an activity that doesn't implement MediaFragmentListener, it
-        // will throw an exception as expected:
         mMediaFragmentListener = (MediaFragmentListener) context;
+    }
+
+    @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
+            mMediaFragmentListener = (MediaFragmentListener) activity;
+        }
     }
 
     @Override
@@ -161,13 +169,15 @@ public class MediaBrowserFragment extends Fragment implements MediaItemViewHolde
         super.onStart();
 
         // fetch browsing information to fill the listview:
-        MediaBrowserCompat mediaBrowser = mMediaFragmentListener.getMediaBrowser();
+        if (mMediaFragmentListener != null) {
+            MediaBrowserCompat mediaBrowser = mMediaFragmentListener.getMediaBrowser();
 
-        LogHelper.d(TAG, "fragment.onStart, mediaId=", mMediaId,
-                "  onConnected=" + mediaBrowser.isConnected());
+            LogHelper.d(TAG, "fragment.onStart, mediaId=", mMediaId,
+                    "  onConnected=" + mediaBrowser.isConnected());
 
-        if (mediaBrowser.isConnected()) {
-            onConnected();
+            if (mediaBrowser.isConnected()) {
+                onConnected();
+            }
         }
 
         // Registers BroadcastReceiver to track network connection changes.

@@ -93,7 +93,6 @@ public class PlaybackControlsFragment extends Fragment {
     @Override
     public void onStart() {
         super.onStart();
-        LogHelper.d(TAG, "fragment.onStart");
         MediaControllerCompat controller = ((FragmentActivity) getActivity())
                 .getSupportMediaController();
         if (controller != null) {
@@ -104,7 +103,6 @@ public class PlaybackControlsFragment extends Fragment {
     @Override
     public void onStop() {
         super.onStop();
-        LogHelper.d(TAG, "fragment.onStop");
         MediaControllerCompat controller = ((FragmentActivity) getActivity())
                 .getSupportMediaController();
         if (controller != null) {
@@ -115,7 +113,6 @@ public class PlaybackControlsFragment extends Fragment {
     public void onConnected() {
         MediaControllerCompat controller = ((FragmentActivity) getActivity())
                 .getSupportMediaController();
-        LogHelper.d(TAG, "onConnected, mediaController==null? ", controller == null);
         if (controller != null) {
             onMetadataChanged(controller.getMetadata());
             onPlaybackStateChanged(controller.getPlaybackState());
@@ -124,7 +121,6 @@ public class PlaybackControlsFragment extends Fragment {
     }
 
     private void onMetadataChanged(MediaMetadataCompat metadata) {
-        LogHelper.d(TAG, "onMetadataChanged ", metadata);
         if (getActivity() == null) {
             LogHelper.w(TAG, "onMetadataChanged called when getActivity null," +
                     "this should not happen if the callback was properly unregistered. Ignoring.");
