@@ -101,7 +101,6 @@ public abstract class BaseActivity extends ActionBarCastActivity implements Medi
     }
 
     protected void hidePlaybackControls() {
-        LogHelper.d(TAG, "hidePlaybackControls");
         getFragmentManager().beginTransaction()
                 .hide(mControlsFragment)
                 .commit();
