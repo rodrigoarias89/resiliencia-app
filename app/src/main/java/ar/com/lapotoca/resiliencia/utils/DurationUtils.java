@@ -3,7 +3,7 @@ package ar.com.lapotoca.resiliencia.utils;
 /**
  * Created by rarias on 7/21/16.
  */
-public class Utils {
+public class DurationUtils {
 
     public static String getMilisecondsToMMSS(int ms) {
         int secondsTotal = ms / 1000;

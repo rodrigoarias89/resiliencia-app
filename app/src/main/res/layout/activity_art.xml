@@ -30,13 +30,10 @@ tools:context="ar.com.lapotoca.resiliencia.ui.ArtActivity">
 
     <include layout="@layout/include_toolbar" android:id="@+id/toolbar_container"/>
 
-    <TextView
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_centerInParent="true"
-        android:gravity="center"
-        android:text="SACAR" />
+        android:layout_height="match_parent"
+        android:id="@+id/art_grid_content"></FrameLayout>
 
     <!--android:drawableTop="@drawable/ic_info_outline_grey600_48dp"-->
 

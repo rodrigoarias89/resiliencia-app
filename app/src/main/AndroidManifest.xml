@@ -101,6 +101,15 @@
             android:exported="true" />
 
         <activity android:name=".ui.ArtActivity"></activity>
+
+        <activity android:name=".gallery.ui.ImageGridActivity"></activity>
+
+        <activity android:name=".gallery.ui.ImageDetailActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".gallery.ui.ImageGridActivity" />
+        </activity>
+
     </application>
 
 </manifest>

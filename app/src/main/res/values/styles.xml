@@ -26,6 +26,11 @@
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
+    <style name="PhotoGridLayout">
+        <item name="android:drawSelectorOnTop">true</item>
+        <item name="android:listSelector">@drawable/photogrid_list_selector</item>
+    </style>
+
     <!--TODO sacar-->
     <style name="UAmpAppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="colorPrimary">#ffff5722</item>

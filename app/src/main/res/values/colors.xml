@@ -27,4 +27,7 @@
     <color name="background_gradient_start">#000000</color>
     <color name="background_gradient_end">#DDDDDD</color>
     <color name="default_background">#0096a6</color>
+    <color name="grid_state_pressed">#1Affffff</color>
+    <color name="grid_state_focused">#80000000</color>
+
 </resources>

@@ -20,6 +20,7 @@ import com.google.android.libraries.cast.companionlibrary.cast.callbacks.VideoCa
 
 import ar.com.lapotoca.resiliencia.DownloadMusicManager;
 import ar.com.lapotoca.resiliencia.R;
+import ar.com.lapotoca.resiliencia.gallery.ui.ImageGridActivity;
 import ar.com.lapotoca.resiliencia.utils.LogHelper;
 import ar.com.lapotoca.resiliencia.utils.ShareHelper;
 
@@ -74,7 +75,8 @@ public abstract class ActionBarCastActivity extends AppCompatActivity {
                         activityClass = MusicPlayerActivity.class;
                         break;
                     case R.id.navigation_gallery:
-                        activityClass = ArtActivity.class;
+//                        activityClass = ArtActivity.class;
+                        activityClass = ImageGridActivity.class;
                         break;
                 }
                 if (activityClass != null) {
@@ -168,7 +170,7 @@ public abstract class ActionBarCastActivity extends AppCompatActivity {
             mToolbar.setTitle("");
 
             mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
-            if(mDrawerLayout != null) {
+            if (mDrawerLayout != null) {
                 NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
 
                 mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout,
@@ -217,7 +219,10 @@ public abstract class ActionBarCastActivity extends AppCompatActivity {
 
         if (MusicPlayerActivity.class.isAssignableFrom(getClass())) {
             navigationView.setCheckedItem(R.id.navigation_allmusic);
-        } else if (ArtActivity.class.isAssignableFrom(getClass())) {
+//        } else if (ArtActivity.class.isAssignableFrom(getClass())) {
+//            navigationView.setCheckedItem(R.id.navigation_gallery);
+//        }
+        } else if (ImageGridActivity.class.isAssignableFrom(getClass())) {
             navigationView.setCheckedItem(R.id.navigation_gallery);
         }
     }

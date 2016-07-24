@@ -13,7 +13,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import ar.com.lapotoca.resiliencia.R;
-import ar.com.lapotoca.resiliencia.utils.Utils;
+import ar.com.lapotoca.resiliencia.utils.DurationUtils;
 
 public class MediaItemViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
 
@@ -47,7 +47,7 @@ public class MediaItemViewHolder extends RecyclerView.ViewHolder implements View
 
         long duration = description.getExtras().getLong(MediaMetadataCompat.METADATA_KEY_DURATION, -1);
         if(duration > 0) {
-            mDescriptionView.setText(Utils.getMilisecondsToMMSS((int)duration));
+            mDescriptionView.setText(DurationUtils.getMilisecondsToMMSS((int)duration));
         } else {
             mDescriptionView.setText(description.getSubtitle());
         }
