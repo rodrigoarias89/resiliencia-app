@@ -17,6 +17,7 @@ import android.support.v4.media.session.MediaControllerCompat;
 import android.support.v4.media.session.MediaSessionCompat;
 import android.support.v4.media.session.PlaybackStateCompat;
 import android.text.format.DateUtils;
+import android.text.method.ScrollingMovementMethod;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
@@ -54,6 +55,7 @@ public class FullScreenPlayerActivity extends ActionBarCastActivity {
     private TextView mLine1;
     private TextView mLine2;
     private TextView mLine3;
+    private TextView mLyrics;
     private ProgressBar mLoading;
     private View mControllers;
     private Drawable mPauseDrawable;
@@ -130,6 +132,7 @@ public class FullScreenPlayerActivity extends ActionBarCastActivity {
         mLine3 = (TextView) findViewById(R.id.line3);
         mLoading = (ProgressBar) findViewById(R.id.progressBar1);
         mControllers = findViewById(R.id.controllers);
+        mLyrics = (TextView) findViewById(R.id.lyrics);
 
         mSkipNext.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -317,6 +320,15 @@ public class FullScreenPlayerActivity extends ActionBarCastActivity {
         mLine1.setText(description.getTitle());
         mLine2.setText(description.getSubtitle());
         fetchImageAsync(description);
+
+        updateLyrics();
+    }
+
+    private void updateLyrics() {
+        if(mLyrics != null) {
+            mLyrics.setMovementMethod(new ScrollingMovementMethod());
+            mLyrics.setText(getString(R.string.multiline));
+        }
     }
 
     private void updateDuration(MediaMetadataCompat metadata) {
