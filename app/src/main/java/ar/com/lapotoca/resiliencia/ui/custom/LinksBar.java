@@ -2,6 +2,7 @@ package ar.com.lapotoca.resiliencia.ui.custom;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.TypedArray;
 import android.net.Uri;
 import android.util.AttributeSet;
 import android.view.View;
@@ -20,10 +21,14 @@ public class LinksBar extends LinearLayout {
     private ImageView btnChrome;
     private ImageView btnSpotify;
 
+    private int mIconPadding;
+
 
     public LinksBar (Context context, AttributeSet attrs) {
         super(context, attrs);
         mContext = context;
+        TypedArray a = context.getTheme().obtainStyledAttributes(attrs, R.styleable.LinksBar, 0, 0);
+        mIconPadding = a.getInteger(R.styleable.LinksBar_iconPadding, 0);
         init();
     }
 
@@ -34,6 +39,13 @@ public class LinksBar extends LinearLayout {
         btnInstagram = (ImageView) findViewById(R.id.btnInstagram);
         btnChrome = (ImageView) findViewById(R.id.btnChrome);
         btnSpotify = (ImageView) findViewById(R.id.btnSpotify);
+
+        btnFacebook.setPadding(mIconPadding, 0, mIconPadding, 0);
+        btnTwitter.setPadding(mIconPadding, 0, mIconPadding, 0);
+        btnInstagram.setPadding(mIconPadding, 0, mIconPadding, 0);
+        btnChrome.setPadding(mIconPadding, 0, mIconPadding, 0);
+        btnSpotify.setPadding(mIconPadding, 0, mIconPadding, 0);
+
         addListeners();
     }
 

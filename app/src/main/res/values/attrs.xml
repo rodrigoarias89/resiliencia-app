@@ -7,4 +7,8 @@
         <attr name="startHeight" format="dimension" />
         <attr name="finalHeight" format="dimension" />
     </declare-styleable>
+
+    <declare-styleable name="LinksBar">
+        <attr name="iconPadding" format="integer"></attr>
+    </declare-styleable>
 </resources>
