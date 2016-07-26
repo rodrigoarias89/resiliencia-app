@@ -75,7 +75,6 @@ public abstract class ActionBarCastActivity extends AppCompatActivity {
                         activityClass = MusicPlayerActivity.class;
                         break;
                     case R.id.navigation_gallery:
-//                        activityClass = ArtActivity.class;
                         activityClass = ImageGridActivity.class;
                         break;
                 }
@@ -219,9 +218,6 @@ public abstract class ActionBarCastActivity extends AppCompatActivity {
 
         if (MusicPlayerActivity.class.isAssignableFrom(getClass())) {
             navigationView.setCheckedItem(R.id.navigation_allmusic);
-//        } else if (ArtActivity.class.isAssignableFrom(getClass())) {
-//            navigationView.setCheckedItem(R.id.navigation_gallery);
-//        }
         } else if (ImageGridActivity.class.isAssignableFrom(getClass())) {
             navigationView.setCheckedItem(R.id.navigation_gallery);
         }

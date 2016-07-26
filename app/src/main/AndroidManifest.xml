@@ -100,8 +100,6 @@
             android:authorities="com.facebook.app.FacebookContentProvider1748521092070093"
             android:exported="true" />
 
-        <activity android:name=".ui.ArtActivity"></activity>
-
         <activity android:name=".gallery.ui.ImageGridActivity"></activity>
 
         <activity android:name=".gallery.ui.ImageDetailActivity">
