@@ -27,7 +27,7 @@
         android:layout_gravity="center" />
 
     <ar.com.lapotoca.resiliencia.gallery.ui.RecyclingImageView
-        android:id="@+id/imageView"
+        android:id="@+id/picImageView"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent" />
 

@@ -20,7 +20,6 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
@@ -28,7 +27,6 @@ import android.widget.ProgressBar;
 import ar.com.lapotoca.resiliencia.R;
 import ar.com.lapotoca.resiliencia.gallery.util.ImageFetcher;
 import ar.com.lapotoca.resiliencia.gallery.util.ImageWorker;
-import ar.com.lapotoca.resiliencia.gallery.util.Utils;
 
 
 /**
@@ -77,7 +75,7 @@ public class ImageDetailFragment extends Fragment implements ImageWorker.OnImage
             Bundle savedInstanceState) {
         // Inflate and locate the main ImageView
         final View v = inflater.inflate(R.layout.image_detail_fragment, container, false);
-        mImageView = (ImageView) v.findViewById(R.id.imageView);
+        mImageView = (ImageView) v.findViewById(R.id.picImageView);
         mProgressBar = (ProgressBar) v.findViewById(R.id.progressbar);
         return v;
     }
@@ -91,11 +89,6 @@ public class ImageDetailFragment extends Fragment implements ImageWorker.OnImage
         if (ImageDetailActivity.class.isInstance(getActivity())) {
             mImageFetcher = ((ImageDetailActivity) getActivity()).getImageFetcher();
             mImageFetcher.loadImage(mImageUrl, mImageView, this);
-        }
-
-        // Pass clicks on the ImageView to the parent activity to handle
-        if (OnClickListener.class.isInstance(getActivity()) && Utils.hasHoneycomb()) {
-            mImageView.setOnClickListener((OnClickListener) getActivity());
         }
     }
 

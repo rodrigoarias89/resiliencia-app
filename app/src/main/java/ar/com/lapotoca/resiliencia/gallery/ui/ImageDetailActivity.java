@@ -16,21 +16,28 @@
 
 package ar.com.lapotoca.resiliencia.gallery.ui;
 
-import android.annotation.TargetApi;
-import android.os.Build.VERSION_CODES;
+import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
-import android.support.v4.app.NavUtils;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBar;
+import android.support.v7.widget.ShareActionProvider;
 import android.util.DisplayMetrics;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.view.View.OnClickListener;
 import android.view.WindowManager.LayoutParams;
+import android.widget.ImageView;
+
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
 
 import ar.com.lapotoca.resiliencia.BuildConfig;
 import ar.com.lapotoca.resiliencia.R;
@@ -40,8 +47,7 @@ import ar.com.lapotoca.resiliencia.gallery.util.ImageFetcher;
 import ar.com.lapotoca.resiliencia.gallery.util.Utils;
 import ar.com.lapotoca.resiliencia.ui.ActionBarCastActivity;
 
-//public class ImageDetailActivity extends FragmentActivity implements OnClickListener {
-public class ImageDetailActivity extends ActionBarCastActivity implements OnClickListener {
+public class ImageDetailActivity extends ActionBarCastActivity{
 
     private static final String IMAGE_CACHE_DIR = "images";
     public static final String EXTRA_IMAGE = "extra_image";
@@ -50,14 +56,16 @@ public class ImageDetailActivity extends ActionBarCastActivity implements OnClic
     private ImageFetcher mImageFetcher;
     private ViewPager mPager;
 
-    @TargetApi(VERSION_CODES.HONEYCOMB)
+    // Keep reference to the ShareActionProvider from the menu
+    private ShareActionProvider mShareActionProvider;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         if (BuildConfig.DEBUG) {
             Utils.enableStrictMode();
         }
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.image_detail_pager_2);
+        setContentView(R.layout.image_detail_pager);
 
         // Fetch screen height and width, to use as our max size when loading images as this
         // activity runs full screen
@@ -127,20 +135,59 @@ public class ImageDetailActivity extends ActionBarCastActivity implements OnClic
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case android.R.id.home:
-                NavUtils.navigateUpFromSameTask(this);
-                return true;
-            //TODO
-        }
-        return super.onOptionsItemSelected(item);
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.image_menu, menu);
+        MenuItem shareItem = menu.findItem(R.id.menu_share);
+        shareItem.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                mPager.getCurrentItem();
+                ImageView iv = (ImageView) findViewById(R.id.picImageView);
+                Uri bmpUri = getLocalBitmapUri(iv);
+                if (bmpUri != null) {
+                    // Construct a ShareIntent with link to image
+                    Intent shareIntent = new Intent();
+                    shareIntent.setAction(Intent.ACTION_SEND);
+                    shareIntent.putExtra(Intent.EXTRA_STREAM, bmpUri);
+                    shareIntent.setType("image/*");
+                    // Launch sharing dialog for image
+            startActivity(Intent.createChooser(shareIntent, getString(R.string.share_item)));
+
+                    return true;
+                } else {
+                    // ...sharing failed, handle error
+                    return false;
+                }
+            }
+        });
+        return true;
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.main, menu);
-        return true;
+    // Returns the URI path to the Bitmap displayed in specified ImageView
+    public Uri getLocalBitmapUri(ImageView imageView) {
+        // Extract Bitmap from ImageView drawable
+        Drawable drawable = imageView.getDrawable();
+        Bitmap bmp = null;
+        if (drawable instanceof BitmapDrawable){
+            bmp = ((BitmapDrawable) imageView.getDrawable()).getBitmap();
+        } else {
+            return null;
+        }
+        // Store image to default external storage directory
+        Uri bmpUri = null;
+        try {
+            // Use methods on Context to access package-specific directories on external storage.
+            // This way, you don't need to request external read/write permission.
+            // See https://youtu.be/5xVh-7ywKpE?t=25m25s
+            File file =  new File(getExternalFilesDir(Environment.DIRECTORY_PICTURES), "share_image_" + System.currentTimeMillis() + ".png");
+            FileOutputStream out = new FileOutputStream(file);
+            bmp.compress(Bitmap.CompressFormat.PNG, 90, out);
+            out.close();
+            bmpUri = Uri.fromFile(file);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return bmpUri;
     }
 
     /**
@@ -174,18 +221,5 @@ public class ImageDetailActivity extends ActionBarCastActivity implements OnClic
         }
     }
 
-    /**
-     * Set on the ImageView in the ViewPager children fragments, to enable/disable low profile mode
-     * when the ImageView is touched.
-     */
-    @TargetApi(VERSION_CODES.HONEYCOMB)
-    @Override
-    public void onClick(View v) {
-        final int vis = mPager.getSystemUiVisibility();
-        if ((vis & View.SYSTEM_UI_FLAG_LOW_PROFILE) != 0) {
-            mPager.setSystemUiVisibility(View.SYSTEM_UI_FLAG_VISIBLE);
-        } else {
-            mPager.setSystemUiVisibility(View.SYSTEM_UI_FLAG_LOW_PROFILE);
-        }
-    }
+
 }

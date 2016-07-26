@@ -72,5 +72,7 @@
     <string name="open_content_drawer">Abre el menu</string>
     <string name="close_content_drawer">Cierra el menu</string>
 
+    <string name="menu_share">Compartir</string>
+
 
 </resources>
