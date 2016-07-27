@@ -17,6 +17,7 @@
 package ar.com.lapotoca.resiliencia.gallery.util;
 
 import android.content.Context;
+import android.content.res.AssetManager;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -51,6 +52,7 @@ public abstract class ImageWorker {
     private final Object mPauseWorkLock = new Object();
 
     protected Resources mResources;
+    protected AssetManager mAssets;
 
     private static final int MESSAGE_CLEAR = 0;
     private static final int MESSAGE_INIT_DISK_CACHE = 1;
@@ -59,6 +61,7 @@ public abstract class ImageWorker {
 
     protected ImageWorker(Context context) {
         mResources = context.getResources();
+        mAssets = context.getAssets();
     }
 
     /**
@@ -73,7 +76,7 @@ public abstract class ImageWorker {
      * @param imageView The ImageView to bind the downloaded image to.
      * @param listener A listener that will be called back once the image has been loaded.
      */
-    public void loadImage(Object data, ImageView imageView, OnImageLoadedListener listener) {
+    public void loadImage(Object data, boolean localSource, ImageView imageView, OnImageLoadedListener listener) {
         if (data == null) {
             return;
         }
@@ -90,18 +93,28 @@ public abstract class ImageWorker {
             if (listener != null) {
                 listener.onImageLoaded(true);
             }
-        } else if (cancelPotentialWork(data, imageView)) {
-            //BEGIN_INCLUDE(execute_background_task)
-            final BitmapWorkerTask task = new BitmapWorkerTask(data, imageView, listener);
-            final AsyncDrawable asyncDrawable =
-                    new AsyncDrawable(mResources, mLoadingBitmap, task);
-            imageView.setImageDrawable(asyncDrawable);
+        } else {
+            if(localSource) {
+                Drawable drawable = null;
+                try {
+                    drawable = Drawable.createFromStream(mAssets.open(data.toString()), null);
+                    imageView.setImageDrawable(drawable);
+                } catch(Exception e) {
+                    Log.e(TAG, "No se pudo cargar la imagen", e);
+                }
+            } else if (cancelPotentialWork(data, imageView)) {
+                //BEGIN_INCLUDE(execute_background_task)
+                final BitmapWorkerTask task = new BitmapWorkerTask(data, imageView, listener);
+                final AsyncDrawable asyncDrawable =
+                        new AsyncDrawable(mResources, mLoadingBitmap, task);
+                imageView.setImageDrawable(asyncDrawable);
 
-            // NOTE: This uses a custom version of AsyncTask that has been pulled from the
-            // framework and slightly modified. Refer to the docs at the top of the class
-            // for more info on what was changed.
-            task.executeOnExecutor(AsyncTask.DUAL_THREAD_EXECUTOR);
-            //END_INCLUDE(execute_background_task)
+                // NOTE: This uses a custom version of AsyncTask that has been pulled from the
+                // framework and slightly modified. Refer to the docs at the top of the class
+                // for more info on what was changed.
+                task.executeOnExecutor(AsyncTask.DUAL_THREAD_EXECUTOR);
+                //END_INCLUDE(execute_background_task)
+            }
         }
     }
 
@@ -117,7 +130,11 @@ public abstract class ImageWorker {
      * @param imageView The ImageView to bind the downloaded image to.
      */
     public void loadImage(Object data, ImageView imageView) {
-        loadImage(data, imageView, null);
+        loadImage(data, false, imageView, null);
+    }
+
+    public void loadImage(Object data, boolean isLocal, ImageView imageView) {
+        loadImage(data, isLocal, imageView, null);
     }
 
     /**

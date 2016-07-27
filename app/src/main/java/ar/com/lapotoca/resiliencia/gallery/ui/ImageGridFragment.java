@@ -16,11 +16,9 @@
 
 package ar.com.lapotoca.resiliencia.gallery.ui;
 
-import android.annotation.TargetApi;
 import android.app.ActivityOptions;
 import android.content.Context;
 import android.content.Intent;
-import android.os.Build.VERSION_CODES;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -119,7 +117,6 @@ public class ImageGridFragment extends Fragment implements AdapterView.OnItemCli
         // of each view so we get nice square thumbnails.
         mGridView.getViewTreeObserver().addOnGlobalLayoutListener(
                 new ViewTreeObserver.OnGlobalLayoutListener() {
-                    @TargetApi(VERSION_CODES.JELLY_BEAN)
                     @Override
                     public void onGlobalLayout() {
                         if (mAdapter.getNumColumns() == 0) {
@@ -169,7 +166,6 @@ public class ImageGridFragment extends Fragment implements AdapterView.OnItemCli
         mImageFetcher.closeCache();
     }
 
-    @TargetApi(VERSION_CODES.JELLY_BEAN)
     @Override
     public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
         final Intent i = new Intent(getActivity(), ImageDetailActivity.class);
@@ -282,7 +278,9 @@ public class ImageGridFragment extends Fragment implements AdapterView.OnItemCli
 
             // Finally load the image asynchronously into the ImageView, this also takes care of
             // setting a placeholder image while the background thread runs
-            mImageFetcher.loadImage(Images.imageThumbUrls[position - mNumColumns], imageView);
+            //TODO ver si sale
+            mImageFetcher.loadImage(Images.imageThumb[position - mNumColumns].getUrl(), Images.imageThumb[position - mNumColumns].isLocal(), imageView);
+//            mImageFetcher.loadImage(Images.imageThumbUrls[position - mNumColumns], imageView);
             return imageView;
             //END_INCLUDE(load_gridview_item)
         }

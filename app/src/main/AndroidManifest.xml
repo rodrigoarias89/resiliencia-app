@@ -83,6 +83,14 @@
             android:label="@string/app_name"
             android:theme="@android:style/Theme.Translucent.NoTitleBar" />
 
+        <activity android:name=".gallery.ui.ImageGridActivity"></activity>
+
+        <activity android:name=".gallery.ui.ImageDetailActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".gallery.ui.ImageGridActivity" />
+        </activity>
+
         <!--
              A receiver that will receive media buttons and send as
             intents to your MediaBrowserServiceCompat implementation.
@@ -100,13 +108,14 @@
             android:authorities="com.facebook.app.FacebookContentProvider1748521092070093"
             android:exported="true" />
 
-        <activity android:name=".gallery.ui.ImageGridActivity"></activity>
+        <!-- ContentProvider which serves files from this application's asset folder -->
+        <provider
+            android:name=".gallery.provider.AssetProvider"
+            android:authorities="ar.com.lapotoca.resiliencia"
+            android:grantUriPermissions="true"
+            android:exported="true" />
 
-        <activity android:name=".gallery.ui.ImageDetailActivity">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value=".gallery.ui.ImageGridActivity" />
-        </activity>
+
 
     </application>
 
