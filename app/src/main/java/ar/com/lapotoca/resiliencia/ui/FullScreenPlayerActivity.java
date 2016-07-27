@@ -33,6 +33,7 @@ import ar.com.lapotoca.resiliencia.AlbumArtCache;
 import ar.com.lapotoca.resiliencia.MusicService;
 import ar.com.lapotoca.resiliencia.R;
 import ar.com.lapotoca.resiliencia.utils.LogHelper;
+import ar.com.lapotoca.resiliencia.utils.LyricsHelper;
 
 import static android.view.View.INVISIBLE;
 import static android.view.View.VISIBLE;
@@ -321,13 +322,18 @@ public class FullScreenPlayerActivity extends ActionBarCastActivity {
         mLine2.setText(description.getSubtitle());
         fetchImageAsync(description);
 
-        updateLyrics();
+        updateLyrics(description.getTitle().toString());
     }
 
-    private void updateLyrics() {
+    private void updateLyrics(String songName) {
         if(mLyrics != null) {
-            mLyrics.setMovementMethod(new ScrollingMovementMethod());
-            mLyrics.setText(getString(R.string.multiline));
+            String lyrics = LyricsHelper.getLyrics(songName);
+            if(lyrics != null && !lyrics.isEmpty()) {
+                mLyrics.setMovementMethod(new ScrollingMovementMethod());
+                mLyrics.setText(lyrics);
+            } else {
+                mLyrics.setText("");
+            }
         }
     }
 
