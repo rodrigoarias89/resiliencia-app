@@ -7,8 +7,7 @@
     "image" : "album_art.jpg",
     "trackNumber" : 1,
     "totalTrackCount" : 9,
-    "duration" : 103,
-    "site" : "https://www.youtube.com/audiolibrary/music"
+    "duration" : 103
   },
   { "title" : "cairnomount_lo",
     "album" : "Resiliencia",
@@ -18,8 +17,7 @@
     "image" : "album_art.jpg",
     "trackNumber" : 1,
     "totalTrackCount" : 9,
-    "duration" : 300,
-    "site" : "https://www.youtube.com/audiolibrary/music"
+    "duration" : 300
   },
   { "title" : "pipershut_lo",
     "album" : "Resiliencia",
@@ -29,8 +27,7 @@
     "image" : "album_art.jpg",
     "trackNumber" : 1,
     "totalTrackCount" : 9,
-    "duration" : 232,
-    "site" : "https://www.youtube.com/audiolibrary/music"
+    "duration" : 232
   },
   { "title" : "wearie_lo",
     "album" : "Resiliencia",
@@ -40,8 +37,7 @@
     "image" : "album_art.jpg",
     "trackNumber" : 1,
     "totalTrackCount" : 9,
-    "duration" : 187,
-    "site" : "https://www.youtube.com/audiolibrary/music"
+    "duration" : 187
   },
   { "title" : "Mayo Frances",
     "album" : "Resiliencia",
@@ -51,8 +47,7 @@
     "image" : "album_art.jpg",
     "trackNumber" : 1,
     "totalTrackCount" : 9,
-    "duration" : 124,
-    "site" : "https://www.youtube.com/audiolibrary/music"
+    "duration" : 124
   },
   { "title" : "Catarsis",
     "album" : "Resiliencia",
@@ -62,8 +57,7 @@
     "image" : "album_art.jpg",
     "trackNumber" : 2,
     "totalTrackCount" : 9,
-    "duration" : 132,
-    "site" : "https://www.youtube.com/audiolibrary/music"
+    "duration" : 132
   },
   { "title" : "El consumismo nos consume",
     "album" : "Resiliencia",
@@ -73,8 +67,7 @@
     "image" : "album_art.jpg",
     "trackNumber" : 3,
     "totalTrackCount" : 9,
-    "duration" : 162,
-    "site" : "https://www.youtube.com/audiolibrary/music"
+    "duration" : 162
   },
   { "title" : "Dame",
     "album" : "Resiliencia",
@@ -84,8 +77,7 @@
     "image" : "album_art.jpg",
     "trackNumber" : 4,
     "totalTrackCount" : 9,
-    "duration" : 66,
-    "site" : "https://www.youtube.com/audiolibrary/music"
+    "duration" : 66
   },
   { "title" : "Las Moscas, el Dinero y Vos",
     "album" : "Resiliencia",
@@ -95,8 +87,7 @@
     "image" : "album_art.jpg",
     "trackNumber" : 5,
     "totalTrackCount" : 9,
-    "duration" : 91,
-    "site" : "https://www.youtube.com/audiolibrary/music"
+    "duration" : 91
   },
   { "title" : "Idilio",
     "album" : "Resiliencia",
@@ -106,8 +97,7 @@
     "image" : "album_art.jpg",
     "trackNumber" : 6,
     "totalTrackCount" : 9,
-    "duration" : 121,
-    "site" : "https://www.youtube.com/audiolibrary/music"
+    "duration" : 121
   },
   { "title" : "A Medio Tomar",
     "album" : "Resiliencia",
@@ -117,8 +107,7 @@
     "image" : "album_art.jpg",
     "trackNumber" : 7,
     "totalTrackCount" : 9,
-    "duration" : 182,
-    "site" : "https://www.youtube.com/audiolibrary/music"
+    "duration" : 182
   },
   { "title" : "Naufragio",
     "album" : "Resiliencia",
@@ -128,8 +117,7 @@
     "image" : "album_art.jpg",
     "trackNumber" : 8,
     "totalTrackCount" : 9,
-    "duration" : 169,
-    "site" : "https://www.youtube.com/audiolibrary/music"
+    "duration" : 169
   },
   { "title" : "Los Marginados",
     "album" : "Resiliencia",
@@ -139,7 +127,6 @@
     "image" : "album_art.jpg",
     "trackNumber" : 9,
     "totalTrackCount" : 9,
-    "duration" : 220,
-    "site" : "https://www.youtube.com/audiolibrary/music"
+    "duration" : 220
   }
 ]}
