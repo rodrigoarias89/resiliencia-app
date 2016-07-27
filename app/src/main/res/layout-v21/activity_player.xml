@@ -63,7 +63,8 @@ android:fitsSystemWindows="true">
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
                             android:orientation="vertical"
-                            >
+                            android:paddingTop="35dp"
+                            android:paddingBottom="20dp">
 
                             <TextView
                                 android:layout_width="wrap_content"
@@ -74,6 +75,12 @@ android:fitsSystemWindows="true">
                                 android:textColor="@android:color/white"
                                 android:textSize="30sp"
                                 />
+
+                            <!--<ImageView-->
+                                <!--android:layout_width="wrap_content"-->
+                                <!--android:layout_height="wrap_content"-->
+                                <!--android:id="@+id/imageView"-->
+                                <!--android:src="@drawable/logo" />-->
 
                         </LinearLayout>
                     </FrameLayout>
