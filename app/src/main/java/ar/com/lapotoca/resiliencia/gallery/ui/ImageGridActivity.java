@@ -16,6 +16,7 @@
 
 package ar.com.lapotoca.resiliencia.gallery.ui;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
 
@@ -23,6 +24,7 @@ import ar.com.lapotoca.resiliencia.BuildConfig;
 import ar.com.lapotoca.resiliencia.R;
 import ar.com.lapotoca.resiliencia.gallery.util.Utils;
 import ar.com.lapotoca.resiliencia.ui.BaseActivity;
+import ar.com.lapotoca.resiliencia.ui.MusicPlayerActivity;
 
 /**
  * Simple FragmentActivity to hold the main {@link ImageGridFragment} and not much else.
@@ -47,4 +49,12 @@ public class ImageGridActivity extends BaseActivity {
 
         initializeToolbar();
     }
+
+    @Override
+    public void onBackPressed() {
+        finish();
+        Intent intent = new Intent(ImageGridActivity.this, MusicPlayerActivity.class);
+        startActivity(intent);
+    }
+
 }
