@@ -20,9 +20,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
 
-import ar.com.lapotoca.resiliencia.BuildConfig;
 import ar.com.lapotoca.resiliencia.R;
-import ar.com.lapotoca.resiliencia.gallery.util.Utils;
 import ar.com.lapotoca.resiliencia.ui.BaseActivity;
 import ar.com.lapotoca.resiliencia.ui.MusicPlayerActivity;
 
@@ -35,9 +33,6 @@ public class ImageGridActivity extends BaseActivity {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
-        if (BuildConfig.DEBUG) {
-            Utils.enableStrictMode();
-        }
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_art);
 

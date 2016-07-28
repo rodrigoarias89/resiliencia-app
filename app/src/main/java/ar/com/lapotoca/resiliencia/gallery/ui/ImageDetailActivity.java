@@ -38,14 +38,12 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
-import ar.com.lapotoca.resiliencia.BuildConfig;
 import ar.com.lapotoca.resiliencia.R;
 import ar.com.lapotoca.resiliencia.gallery.provider.AssetProvider;
 import ar.com.lapotoca.resiliencia.gallery.provider.ImageHolder;
 import ar.com.lapotoca.resiliencia.gallery.provider.Images;
 import ar.com.lapotoca.resiliencia.gallery.util.ImageCache;
 import ar.com.lapotoca.resiliencia.gallery.util.ImageFetcher;
-import ar.com.lapotoca.resiliencia.gallery.util.Utils;
 import ar.com.lapotoca.resiliencia.ui.ActionBarCastActivity;
 
 public class ImageDetailActivity extends ActionBarCastActivity {
@@ -59,9 +57,6 @@ public class ImageDetailActivity extends ActionBarCastActivity {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
-        if (BuildConfig.DEBUG) {
-            Utils.enableStrictMode();
-        }
         super.onCreate(savedInstanceState);
         setContentView(R.layout.image_detail_pager);
 

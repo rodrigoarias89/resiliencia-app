@@ -21,7 +21,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -34,12 +33,10 @@ import android.widget.BaseAdapter;
 import android.widget.GridView;
 import android.widget.ImageView;
 
-import ar.com.lapotoca.resiliencia.BuildConfig;
 import ar.com.lapotoca.resiliencia.R;
 import ar.com.lapotoca.resiliencia.gallery.provider.Images;
 import ar.com.lapotoca.resiliencia.gallery.util.ImageCache;
 import ar.com.lapotoca.resiliencia.gallery.util.ImageFetcher;
-import ar.com.lapotoca.resiliencia.gallery.util.Utils;
 
 /**
  * The main fragment that powers the ImageGridActivity screen. Fairly straight forward GridView
@@ -95,12 +92,7 @@ public class ImageGridFragment extends Fragment implements AdapterView.OnItemCli
             @Override
             public void onScrollStateChanged(AbsListView absListView, int scrollState) {
                 // Pause fetcher to ensure smoother scrolling when flinging
-                if (scrollState == AbsListView.OnScrollListener.SCROLL_STATE_FLING) {
-                    // Before Honeycomb pause image loading on scroll to help with performance
-                    if (!Utils.hasHoneycomb()) {
-                        mImageFetcher.setPauseWork(true);
-                    }
-                } else {
+                if (scrollState != AbsListView.OnScrollListener.SCROLL_STATE_FLING) {
                     mImageFetcher.setPauseWork(false);
                 }
             }
@@ -127,16 +119,8 @@ public class ImageGridFragment extends Fragment implements AdapterView.OnItemCli
                                         (mGridView.getWidth() / numColumns) - mImageThumbSpacing;
                                 mAdapter.setNumColumns(numColumns);
                                 mAdapter.setItemHeight(columnWidth);
-                                if (BuildConfig.DEBUG) {
-                                    Log.d(TAG, "onCreateView - numColumns set to " + numColumns);
-                                }
-                                if (Utils.hasJellyBean()) {
-                                    mGridView.getViewTreeObserver()
-                                            .removeOnGlobalLayoutListener(this);
-                                } else {
-                                    mGridView.getViewTreeObserver()
-                                            .removeGlobalOnLayoutListener(this);
-                                }
+                                mGridView.getViewTreeObserver()
+                                        .removeOnGlobalLayoutListener(this);
                             }
                         }
                     }
@@ -170,16 +154,9 @@ public class ImageGridFragment extends Fragment implements AdapterView.OnItemCli
     public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
         final Intent i = new Intent(getActivity(), ImageDetailActivity.class);
         i.putExtra(ImageDetailActivity.EXTRA_IMAGE, (int) id);
-        if (Utils.hasJellyBean()) {
-            // makeThumbnailScaleUpAnimation() looks kind of ugly here as the loading spinner may
-            // show plus the thumbnail image in GridView is cropped. so using
-            // makeScaleUpAnimation() instead.
-            ActivityOptions options =
-                    ActivityOptions.makeScaleUpAnimation(v, 0, 0, v.getWidth(), v.getHeight());
-            getActivity().startActivity(i, options.toBundle());
-        } else {
-            startActivity(i);
-        }
+        ActivityOptions options =
+                ActivityOptions.makeScaleUpAnimation(v, 0, 0, v.getWidth(), v.getHeight());
+        getActivity().startActivity(i, options.toBundle());
     }
 
     /**
