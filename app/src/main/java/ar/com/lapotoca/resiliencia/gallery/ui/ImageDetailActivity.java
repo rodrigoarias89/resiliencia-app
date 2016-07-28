@@ -28,7 +28,6 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBar;
-import android.support.v7.widget.ShareActionProvider;
 import android.util.DisplayMetrics;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -41,13 +40,15 @@ import java.io.IOException;
 
 import ar.com.lapotoca.resiliencia.BuildConfig;
 import ar.com.lapotoca.resiliencia.R;
+import ar.com.lapotoca.resiliencia.gallery.provider.AssetProvider;
+import ar.com.lapotoca.resiliencia.gallery.provider.ImageHolder;
 import ar.com.lapotoca.resiliencia.gallery.provider.Images;
 import ar.com.lapotoca.resiliencia.gallery.util.ImageCache;
 import ar.com.lapotoca.resiliencia.gallery.util.ImageFetcher;
 import ar.com.lapotoca.resiliencia.gallery.util.Utils;
 import ar.com.lapotoca.resiliencia.ui.ActionBarCastActivity;
 
-public class ImageDetailActivity extends ActionBarCastActivity{
+public class ImageDetailActivity extends ActionBarCastActivity {
 
     private static final String IMAGE_CACHE_DIR = "images";
     public static final String EXTRA_IMAGE = "extra_image";
@@ -55,9 +56,6 @@ public class ImageDetailActivity extends ActionBarCastActivity{
     private ImagePagerAdapter mAdapter;
     private ImageFetcher mImageFetcher;
     private ViewPager mPager;
-
-    // Keep reference to the ShareActionProvider from the menu
-    private ShareActionProvider mShareActionProvider;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -91,7 +89,7 @@ public class ImageDetailActivity extends ActionBarCastActivity{
         mImageFetcher.setImageFadeIn(false);
 
         // Set up ViewPager and backing adapter
-        mAdapter = new ImagePagerAdapter(getSupportFragmentManager(), Images.imageUrls.length);
+        mAdapter = new ImagePagerAdapter(getSupportFragmentManager(), Images.image.length);
         mPager = (ViewPager) findViewById(R.id.pager);
         mPager.setAdapter(mAdapter);
         mPager.setPageMargin((int) getResources().getDimension(R.dimen.horizontal_page_margin));
@@ -103,7 +101,7 @@ public class ImageDetailActivity extends ActionBarCastActivity{
         initializeToolbar();
         final ActionBar actionBar = getSupportActionBar();
 
-        if(actionBar != null) {
+        if (actionBar != null) {
             actionBar.setDisplayShowTitleEnabled(false);
             actionBar.setDisplayHomeAsUpEnabled(true);
         }
@@ -141,20 +139,32 @@ public class ImageDetailActivity extends ActionBarCastActivity{
         shareItem.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem item) {
-                mPager.getCurrentItem();
-                ImageView iv = (ImageView) findViewById(R.id.picImageView);
-                Uri bmpUri = getLocalBitmapUri(iv);
-                if (bmpUri != null) {
-                    // Construct a ShareIntent with link to image
-                    Intent shareIntent = new Intent();
-                    shareIntent.setAction(Intent.ACTION_SEND);
-                    shareIntent.putExtra(Intent.EXTRA_STREAM, bmpUri);
-                    shareIntent.setType("image/*");
-                    // Launch sharing dialog for image
-            startActivity(Intent.createChooser(shareIntent, getString(R.string.share_item)));
+                try {
+                    mPager.getCurrentItem();
+                    ImageHolder img = Images.image[mPager.getCurrentItem()];
+                    if (img == null) {
+                        return false;
+                    }
 
-                    return true;
-                } else {
+                    Uri bmpUri;
+                    if (img.isLocal()) {
+                        bmpUri = Uri.parse("content://" + AssetProvider.CONTENT_URI + "/" + img.getUrl());
+                    } else {
+                        ImageView iv = (ImageView) findViewById(R.id.picImageView);
+                        bmpUri = getLocalBitmapUri(iv);
+                    }
+                    if (bmpUri != null) {
+                        Intent shareIntent = new Intent();
+                        shareIntent.setAction(Intent.ACTION_SEND);
+                        shareIntent.putExtra(Intent.EXTRA_STREAM, bmpUri);
+                        shareIntent.setType("image/*");
+                        startActivity(Intent.createChooser(shareIntent, getString(R.string.share_item)));
+                        return true;
+                    } else {
+                        // ...sharing failed, handle error
+                        return false;
+                    }
+                } catch (Exception e) {
                     // ...sharing failed, handle error
                     return false;
                 }
@@ -164,13 +174,16 @@ public class ImageDetailActivity extends ActionBarCastActivity{
     }
 
     // Returns the URI path to the Bitmap displayed in specified ImageView
-    public Uri getLocalBitmapUri(ImageView imageView) {
+    private Uri getLocalBitmapUri(ImageView imageView) {
         // Extract Bitmap from ImageView drawable
         Drawable drawable = imageView.getDrawable();
-        Bitmap bmp = null;
-        if (drawable instanceof BitmapDrawable){
+        Bitmap bmp;
+        if (drawable instanceof BitmapDrawable) {
             bmp = ((BitmapDrawable) imageView.getDrawable()).getBitmap();
         } else {
+            return null;
+        }
+        if (bmp == null) {
             return null;
         }
         // Store image to default external storage directory
@@ -179,7 +192,7 @@ public class ImageDetailActivity extends ActionBarCastActivity{
             // Use methods on Context to access package-specific directories on external storage.
             // This way, you don't need to request external read/write permission.
             // See https://youtu.be/5xVh-7ywKpE?t=25m25s
-            File file =  new File(getExternalFilesDir(Environment.DIRECTORY_PICTURES), "share_image_" + System.currentTimeMillis() + ".png");
+            File file = new File(getExternalFilesDir(Environment.DIRECTORY_PICTURES), "share_image_" + System.currentTimeMillis() + ".png");
             FileOutputStream out = new FileOutputStream(file);
             bmp.compress(Bitmap.CompressFormat.PNG, 90, out);
             out.close();
@@ -217,7 +230,8 @@ public class ImageDetailActivity extends ActionBarCastActivity{
 
         @Override
         public Fragment getItem(int position) {
-            return ImageDetailFragment.newInstance(Images.imageUrls[position]);
+//            return ImageDetailFragment.newInstance(Images.imageUrls[position]);
+            return ImageDetailFragment.newInstance(Images.image[position]);
         }
     }
 

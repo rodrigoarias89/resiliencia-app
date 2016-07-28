@@ -25,6 +25,7 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 
 import ar.com.lapotoca.resiliencia.R;
+import ar.com.lapotoca.resiliencia.gallery.provider.ImageHolder;
 import ar.com.lapotoca.resiliencia.gallery.util.ImageFetcher;
 import ar.com.lapotoca.resiliencia.gallery.util.ImageWorker;
 
@@ -34,7 +35,9 @@ import ar.com.lapotoca.resiliencia.gallery.util.ImageWorker;
  */
 public class ImageDetailFragment extends Fragment implements ImageWorker.OnImageLoadedListener {
     private static final String IMAGE_DATA_EXTRA = "extra_image_data";
+    private static final String IMAGE_DATA_SOURCE = "extra_image_source";
     private String mImageUrl;
+    private boolean mIsLocal;
     private ImageView mImageView;
     private ProgressBar mProgressBar;
     private ImageFetcher mImageFetcher;
@@ -42,14 +45,15 @@ public class ImageDetailFragment extends Fragment implements ImageWorker.OnImage
     /**
      * Factory method to generate a new instance of the fragment given an image number.
      *
-     * @param imageUrl The image url to load
+     * @param image The image holder to load
      * @return A new instance of ImageDetailFragment with imageNum extras
      */
-    public static ImageDetailFragment newInstance(String imageUrl) {
+    public static ImageDetailFragment newInstance(ImageHolder image) {
         final ImageDetailFragment f = new ImageDetailFragment();
 
         final Bundle args = new Bundle();
-        args.putString(IMAGE_DATA_EXTRA, imageUrl);
+        args.putString(IMAGE_DATA_EXTRA, image.getUrl());
+        args.putBoolean(IMAGE_DATA_SOURCE, image.isLocal());
         f.setArguments(args);
 
         return f;
@@ -62,12 +66,13 @@ public class ImageDetailFragment extends Fragment implements ImageWorker.OnImage
 
     /**
      * Populate image using a url from extras, use the convenience factory method
-     * {@link ImageDetailFragment#newInstance(String)} to create this fragment.
+     * {@link ImageDetailFragment#newInstance(ImageHolder)} to create this fragment.
      */
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mImageUrl = getArguments() != null ? getArguments().getString(IMAGE_DATA_EXTRA) : null;
+        mIsLocal = getArguments() != null ? getArguments().getBoolean(IMAGE_DATA_SOURCE) : false;
     }
 
     @Override
@@ -88,7 +93,7 @@ public class ImageDetailFragment extends Fragment implements ImageWorker.OnImage
         // cache can be used over all pages in the ViewPager
         if (ImageDetailActivity.class.isInstance(getActivity())) {
             mImageFetcher = ((ImageDetailActivity) getActivity()).getImageFetcher();
-            mImageFetcher.loadImage(mImageUrl, mImageView, this);
+            mImageFetcher.loadImage(mImageUrl, mIsLocal, mImageView, this);
         }
     }
 
