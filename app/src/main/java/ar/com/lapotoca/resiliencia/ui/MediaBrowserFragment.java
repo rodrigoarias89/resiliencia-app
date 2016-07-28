@@ -40,7 +40,7 @@ import ar.com.lapotoca.resiliencia.utils.NetworkHelper;
 /**
  * A Fragment that lists all the various browsable queues available
  * from a {@link android.service.media.MediaBrowserService}.
- * <p>
+ * <p/>
  * It uses a {@link MediaBrowserCompat} to connect to the {@link ar.com.lapotoca.resiliencia.MusicService}.
  * Once connected, the fragment subscribes to get all the children.
  * All {@link MediaBrowserCompat.MediaItem}'s that can be browsed are shown in a ListView.
@@ -101,7 +101,14 @@ public class MediaBrowserFragment extends Fragment implements MediaItemViewHolde
                 public void onPlaybackStateChanged(@NonNull PlaybackStateCompat state) {
                     super.onPlaybackStateChanged(state);
                     LogHelper.d(TAG, "Received state change: ", state);
-                    checkForUserVisibleErrors(false);
+                    switch (state.getState()) {
+                        case PlaybackStateCompat.STATE_ERROR:
+                        case PlaybackStateCompat.STATE_CONNECTING:
+                        case PlaybackStateCompat.STATE_NONE:
+                            checkForUserVisibleErrors(false);
+                        default:
+                            break;
+                    }
                     mBrowserAdapter.notifyDataSetChanged();
                 }
             };
@@ -255,9 +262,13 @@ public class MediaBrowserFragment extends Fragment implements MediaItemViewHolde
     }
 
     private void checkForUserVisibleErrors(boolean forceError) {
+        checkForUserVisibleErrors(forceError, false);
+    }
+
+    private void checkForUserVisibleErrors(boolean forceError, boolean isLocal) {
         boolean showError = forceError;
         // If offline, message is about the lack of connectivity:
-        if (!NetworkHelper.isOnline(getActivity())) {
+        if (!isLocal && !NetworkHelper.isOnline(getActivity())) {
             mErrorMessage.setText(R.string.error_no_connection);
             showError = true;
         } else {
@@ -298,9 +309,10 @@ public class MediaBrowserFragment extends Fragment implements MediaItemViewHolde
 
     @Override
     public void onMediaItemClicked(int position) {
-        Log.i(TAG, "item clicked: "+position);
-        checkForUserVisibleErrors(false);
+        Log.i(TAG, "item clicked: " + position);
         MediaBrowserCompat.MediaItem item = mBrowserAdapter.getItem(position);
+        boolean isLocal = DownloadMusicManager.getInstance().isLocal(item);
+        checkForUserVisibleErrors(false, isLocal);
         mMediaFragmentListener.onMediaItemSelected(item);
     }
 
@@ -313,7 +325,7 @@ public class MediaBrowserFragment extends Fragment implements MediaItemViewHolde
 
         MediaBrowserCompat.MediaItem item = mBrowserAdapter.getItem(position);
         DownloadMusicManager downloadMusicManager = DownloadMusicManager.getInstance();
-        if(downloadMusicManager != null) {
+        if (downloadMusicManager != null) {
             if (DownloadMusicManager.getInstance().isLocal(item)) {
                 popup.getMenu().findItem(R.id.action_settings_descargar).setEnabled(false);
             }
@@ -323,7 +335,7 @@ public class MediaBrowserFragment extends Fragment implements MediaItemViewHolde
     }
 
     public boolean onMenuItemClick(MenuItem item) {
-        if(selectedItem < 0) {
+        if (selectedItem < 0) {
             return false;
         }
 

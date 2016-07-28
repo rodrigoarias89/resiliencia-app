@@ -16,7 +16,6 @@ import android.support.v4.media.session.PlaybackStateCompat;
 import ar.com.lapotoca.resiliencia.MusicService;
 import ar.com.lapotoca.resiliencia.R;
 import ar.com.lapotoca.resiliencia.utils.LogHelper;
-import ar.com.lapotoca.resiliencia.utils.NetworkHelper;
 import ar.com.lapotoca.resiliencia.utils.ResourceHelper;
 
 /**
@@ -90,14 +89,12 @@ public abstract class BaseActivity extends ActionBarCastActivity implements Medi
 
     protected void showPlaybackControls() {
         LogHelper.d(TAG, "showPlaybackControls");
-        if (NetworkHelper.isOnline(this)) {
-            getFragmentManager().beginTransaction()
-                    .setCustomAnimations(
-                            R.animator.slide_in_from_bottom, R.animator.slide_out_to_bottom,
-                            R.animator.slide_in_from_bottom, R.animator.slide_out_to_bottom)
-                    .show(mControlsFragment)
-                    .commit();
-        }
+        getFragmentManager().beginTransaction()
+                .setCustomAnimations(
+                        R.animator.slide_in_from_bottom, R.animator.slide_out_to_bottom,
+                        R.animator.slide_in_from_bottom, R.animator.slide_out_to_bottom)
+                .show(mControlsFragment)
+                .commit();
     }
 
     protected void hidePlaybackControls() {
