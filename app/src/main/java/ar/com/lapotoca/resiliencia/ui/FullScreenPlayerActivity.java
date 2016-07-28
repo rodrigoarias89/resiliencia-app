@@ -24,6 +24,9 @@ import android.widget.ProgressBar;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
+import com.google.android.gms.analytics.HitBuilders;
+import com.google.android.gms.analytics.Tracker;
+
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.ScheduledFuture;
@@ -32,6 +35,7 @@ import java.util.concurrent.TimeUnit;
 import ar.com.lapotoca.resiliencia.AlbumArtCache;
 import ar.com.lapotoca.resiliencia.MusicService;
 import ar.com.lapotoca.resiliencia.R;
+import ar.com.lapotoca.resiliencia.ResilienciaApplication;
 import ar.com.lapotoca.resiliencia.utils.LogHelper;
 import ar.com.lapotoca.resiliencia.utils.LyricsHelper;
 
@@ -43,6 +47,8 @@ import static android.view.View.VISIBLE;
  * depicting the album art. The activity also has controls to seek/pause/play the audio.
  */
 public class FullScreenPlayerActivity extends ActionBarCastActivity {
+
+    private static final String ACTIVITY_NAME = FullScreenPlayerActivity.class.getSimpleName();
     private static final String TAG = LogHelper.makeLogTag(FullScreenPlayerActivity.class);
     private static final long PROGRESS_UPDATE_INTERNAL = 1000;
     private static final long PROGRESS_UPDATE_INITIAL_INTERVAL = 100;
@@ -66,6 +72,8 @@ public class FullScreenPlayerActivity extends ActionBarCastActivity {
     private String mCurrentArtUrl;
     private final Handler mHandler = new Handler();
     private MediaBrowserCompat mMediaBrowser;
+
+    private Tracker mTracker;
 
     private final Runnable mUpdateProgressTask = new Runnable() {
         @Override
@@ -112,6 +120,10 @@ public class FullScreenPlayerActivity extends ActionBarCastActivity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        ResilienciaApplication application = (ResilienciaApplication) getApplication();
+        mTracker = application.getDefaultTracker();
+
         setContentView(R.layout.activity_full_player);
         initializeToolbar();
         if (getSupportActionBar() != null) {
@@ -203,6 +215,13 @@ public class FullScreenPlayerActivity extends ActionBarCastActivity {
 
         mMediaBrowser = new MediaBrowserCompat(this,
                 new ComponentName(this, MusicService.class), mConnectionCallback, null);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        mTracker.setScreenName(ACTIVITY_NAME);
+        mTracker.send(new HitBuilders.ScreenViewBuilder().build());
     }
 
     private void connectToSession(MediaSessionCompat.Token token) throws RemoteException {

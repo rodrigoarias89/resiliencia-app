@@ -34,11 +34,15 @@ import android.view.MenuItem;
 import android.view.WindowManager.LayoutParams;
 import android.widget.ImageView;
 
+import com.google.android.gms.analytics.HitBuilders;
+import com.google.android.gms.analytics.Tracker;
+
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
 import ar.com.lapotoca.resiliencia.R;
+import ar.com.lapotoca.resiliencia.ResilienciaApplication;
 import ar.com.lapotoca.resiliencia.gallery.provider.AssetProvider;
 import ar.com.lapotoca.resiliencia.gallery.provider.ImageHolder;
 import ar.com.lapotoca.resiliencia.gallery.provider.Images;
@@ -47,6 +51,9 @@ import ar.com.lapotoca.resiliencia.gallery.util.ImageFetcher;
 import ar.com.lapotoca.resiliencia.ui.ActionBarCastActivity;
 
 public class ImageDetailActivity extends ActionBarCastActivity {
+
+    private static final String ACTIVITY_NAME = ImageDetailActivity.class.getSimpleName();
+    private Tracker mTracker;
 
     private static final String IMAGE_CACHE_DIR = "images";
     public static final String EXTRA_IMAGE = "extra_image";
@@ -58,6 +65,10 @@ public class ImageDetailActivity extends ActionBarCastActivity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        ResilienciaApplication application = (ResilienciaApplication) getApplication();
+        mTracker = application.getDefaultTracker();
+
         setContentView(R.layout.image_detail_pager);
 
         // Fetch screen height and width, to use as our max size when loading images as this
@@ -111,6 +122,8 @@ public class ImageDetailActivity extends ActionBarCastActivity {
     @Override
     public void onResume() {
         super.onResume();
+        mTracker.setScreenName(ACTIVITY_NAME);
+        mTracker.send(new HitBuilders.ScreenViewBuilder().build());
         mImageFetcher.setExitTasksEarly(false);
     }
 

@@ -82,5 +82,7 @@
     <string name="link_chrome">http://www.lapotoca.com.ar</string>
     <string name="link_youtube">https://www.youtube.com/user/LaPotocaOficial/</string>
 
+    <!--Analytics-->
+    <string name="analytics_tracker">UA-81565123-1</string>
 
 </resources>

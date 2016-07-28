@@ -12,8 +12,12 @@ import android.view.animation.AlphaAnimation;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.google.android.gms.analytics.HitBuilders;
+import com.google.android.gms.analytics.Tracker;
+
 import ar.com.lapotoca.resiliencia.DownloadMusicManager;
 import ar.com.lapotoca.resiliencia.R;
+import ar.com.lapotoca.resiliencia.ResilienciaApplication;
 import ar.com.lapotoca.resiliencia.utils.LogHelper;
 import ar.com.lapotoca.resiliencia.utils.NotificationHelper;
 import ar.com.lapotoca.resiliencia.utils.ShareHelper;
@@ -28,6 +32,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
 public class MusicPlayerActivity extends BaseActivity
         implements MediaBrowserFragment.MediaFragmentListener, AppBarLayout.OnOffsetChangedListener {
 
+    private static final String ACTIVITY_NAME = MusicPlayerActivity.class.getSimpleName();
     private static final String TAG = LogHelper.makeLogTag(MusicPlayerActivity.class);
     private static final String SAVED_MEDIA_ID = "ar.com.lapotoca.resiliencia.MEDIA_ID";
     private static final String FRAGMENT_TAG = "resiliencia_list_container";
@@ -60,9 +65,14 @@ public class MusicPlayerActivity extends BaseActivity
     private boolean mIsTheTitleContainerVisible = true;
     private boolean mIsTheIconVisible = true;
 
+    private Tracker mTracker;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        ResilienciaApplication application = (ResilienciaApplication) getApplication();
+        mTracker = application.getDefaultTracker();
 
         setContentView(R.layout.activity_player);
         bindActivity();
@@ -90,6 +100,13 @@ public class MusicPlayerActivity extends BaseActivity
         mTitleContainer = (LinearLayout) findViewById(R.id.main_linearlayout_title);
         mAppBarLayout = (AppBarLayout) findViewById(R.id.main_appbar);
         mCircleImageView = (CircleImageView) findViewById(R.id.circle);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        mTracker.setScreenName(ACTIVITY_NAME);
+        mTracker.send(new HitBuilders.ScreenViewBuilder().build());
     }
 
     @Override

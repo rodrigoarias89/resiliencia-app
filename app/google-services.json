@@ -1,0 +1,38 @@
+{
+  "project_info": {
+    "project_number": "12605206627",
+    "project_id": "firebase-resiliencia"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:12605206627:android:6d664a7cf4196db5",
+        "android_client_info": {
+          "package_name": "ar.com.lapotoca.resiliencia"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyACkt_y6QV9rJOnzYOHpV9gOqRZCk5-pSQ"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 2,
+          "analytics_property": {
+            "tracking_id": "UA-81565123-1"
+          }
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 1
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
