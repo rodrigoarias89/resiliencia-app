@@ -34,11 +34,7 @@ public class QueueHelper {
 
         Iterable<MediaMetadataCompat> tracks = null;
         // This sample only supports genre and by_search category types.
-        if (categoryType.equals(MediaIDHelper.MEDIA_ID_MUSICS_BY_GENRE)) {
-            tracks = musicProvider.getMusicsByGenre(categoryValue);
-        } else if (categoryType.equals(MediaIDHelper.MEDIA_ID_MUSICS_BY_SEARCH)) {
-            tracks = musicProvider.searchMusicBySongTitle(categoryValue);
-        }
+        tracks = musicProvider.getMusicList();
 
         if (tracks == null) {
             LogHelper.e(TAG, "Unrecognized category type: ", categoryType, " for media ", mediaId);
@@ -95,26 +91,6 @@ public class QueueHelper {
         }
         return queue;
 
-    }
-
-    /**
-     * Create a random queue with at most {@link #RANDOM_QUEUE_SIZE} elements.
-     *
-     * @param musicProvider the provider used for fetching music.
-     * @return list containing {@link MediaSessionCompat.QueueItem}'s
-     */
-    public static List<MediaSessionCompat.QueueItem> getRandomQueue(MusicProvider musicProvider) {
-        List<MediaMetadataCompat> result = new ArrayList<>(RANDOM_QUEUE_SIZE);
-        Iterable<MediaMetadataCompat> shuffled = musicProvider.getShuffledMusic();
-        for (MediaMetadataCompat metadata: shuffled) {
-            if (result.size() == RANDOM_QUEUE_SIZE) {
-                break;
-            }
-            result.add(metadata);
-        }
-        LogHelper.d(TAG, "getRandomQueue: result.size=", result.size());
-
-        return convertToQueue(result, MediaIDHelper.MEDIA_ID_MUSICS_BY_SEARCH, "random");
     }
 
     public static boolean isIndexPlayable(int index, List<MediaSessionCompat.QueueItem> queue) {

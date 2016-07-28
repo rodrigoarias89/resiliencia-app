@@ -41,53 +41,52 @@ import ar.com.lapotoca.resiliencia.utils.MediaIDHelper;
  * user interfaces that need to interact with your media session, like Android Auto. You can
  * (should) also use the same service from your app's UI, which gives a seamless playback
  * experience to the user.
- *
+ * <p/>
  * To implement a MediaBrowserService, you need to:
- *
+ * <p/>
  * <ul>
- *
+ * <p/>
  * <li> Extend {@link android.service.media.MediaBrowserService}, implementing the media browsing
- *      related methods {@link android.service.media.MediaBrowserService#onGetRoot} and
- *      {@link android.service.media.MediaBrowserService#onLoadChildren};
+ * related methods {@link android.service.media.MediaBrowserService#onGetRoot} and
+ * {@link android.service.media.MediaBrowserService#onLoadChildren};
  * <li> In onCreate, start a new {@link android.media.session.MediaSession} and notify its parent
- *      with the session's token {@link android.service.media.MediaBrowserService#setSessionToken};
- *
+ * with the session's token {@link android.service.media.MediaBrowserService#setSessionToken};
+ * <p/>
  * <li> Set a callback on the
- *      {@link android.media.session.MediaSession#setCallback(android.media.session.MediaSession.Callback)}.
- *      The callback will receive all the user's actions, like play, pause, etc;
- *
+ * {@link android.media.session.MediaSession#setCallback(android.media.session.MediaSession.Callback)}.
+ * The callback will receive all the user's actions, like play, pause, etc;
+ * <p/>
  * <li> Handle all the actual music playing using any method your app prefers (for example,
- *      {@link android.media.MediaPlayer})
- *
+ * {@link android.media.MediaPlayer})
+ * <p/>
  * <li> Update playbackState, "now playing" metadata and queue, using MediaSession proper methods
- *      {@link android.media.session.MediaSession#setPlaybackState(android.media.session.PlaybackState)}
- *      {@link android.media.session.MediaSession#setMetadata(android.media.MediaMetadata)} and
- *      {@link android.media.session.MediaSession#setQueue(java.util.List)})
- *
+ * {@link android.media.session.MediaSession#setPlaybackState(android.media.session.PlaybackState)}
+ * {@link android.media.session.MediaSession#setMetadata(android.media.MediaMetadata)} and
+ * {@link android.media.session.MediaSession#setQueue(java.util.List)})
+ * <p/>
  * <li> Declare and export the service in AndroidManifest with an intent receiver for the action
- *      android.media.browse.MediaBrowserService
- *
+ * android.media.browse.MediaBrowserService
+ * <p/>
  * </ul>
- *
+ * <p/>
  * To make your app compatible with Android Auto, you also need to:
- *
+ * <p/>
  * <ul>
- *
+ * <p/>
  * <li> Declare a meta-data tag in AndroidManifest.xml linking to a xml resource
- *      with a &lt;automotiveApp&gt; root element. For a media app, this must include
- *      an &lt;uses name="media"/&gt; element as a child.
- *      For example, in AndroidManifest.xml:
- *          &lt;meta-data android:name="com.google.android.gms.car.application"
- *              android:resource="@xml/automotive_app_desc"/&gt;
- *      And in res/values/automotive_app_desc.xml:
- *          &lt;automotiveApp&gt;
- *              &lt;uses name="media"/&gt;
- *          &lt;/automotiveApp&gt;
- *
+ * with a &lt;automotiveApp&gt; root element. For a media app, this must include
+ * an &lt;uses name="media"/&gt; element as a child.
+ * For example, in AndroidManifest.xml:
+ * &lt;meta-data android:name="com.google.android.gms.car.application"
+ * android:resource="@xml/automotive_app_desc"/&gt;
+ * And in res/values/automotive_app_desc.xml:
+ * &lt;automotiveApp&gt;
+ * &lt;uses name="media"/&gt;
+ * &lt;/automotiveApp&gt;
+ * <p/>
  * </ul>
-
- * @see <a href="README.md">README.md</a> for more details.
  *
+ * @see <a href="README.md">README.md</a> for more details.
  */
 public class MusicService extends MediaBrowserServiceCompat implements
         PlaybackManager.PlaybackServiceCallback {
@@ -202,12 +201,12 @@ public class MusicService extends MediaBrowserServiceCompat implements
                     }
                 });
 
-        if(DownloadMusicManager.getInstance() == null) {
+        if (DownloadMusicManager.getInstance() == null) {
             DownloadMusicManager.createInstance(this, mMusicProvider);
         }
 
         LocalPlayback playback = new LocalPlayback(this, mMusicProvider);
-        mPlaybackManager = new PlaybackManager(this, getResources(), mMusicProvider, queueManager,
+        mPlaybackManager = new PlaybackManager(this, queueManager,
                 playback);
 
         // Start a new MediaSession
@@ -239,6 +238,7 @@ public class MusicService extends MediaBrowserServiceCompat implements
 
     /**
      * (non-Javadoc)
+     *
      * @see android.app.Service#onStartCommand(android.content.Intent, int, int)
      */
     @Override
@@ -266,6 +266,7 @@ public class MusicService extends MediaBrowserServiceCompat implements
 
     /**
      * (non-Javadoc)
+     *
      * @see android.app.Service#onDestroy()
      */
     @Override
@@ -291,17 +292,16 @@ public class MusicService extends MediaBrowserServiceCompat implements
     @Override
     public void onLoadChildren(@NonNull final String parentMediaId,
                                @NonNull final Result<List<MediaItem>> result) {
-        LogHelper.d(TAG, "OnLoadChildren: parentMediaId=", parentMediaId);
         if (mMusicProvider.isInitialized()) {
-            // if music library is ready, return immediately
-            result.sendResult(mMusicProvider.getChildren(parentMediaId, getResources()));
+            // if music library is ready, return immediatelyr
+            result.sendResult(mMusicProvider.getAllMusic());
         } else {
             // otherwise, only return results when the music library is retrieved
             result.detach();
             mMusicProvider.retrieveMediaAsync(new MusicProvider.Callback() {
                 @Override
                 public void onMusicCatalogReady(boolean success) {
-                    result.sendResult(mMusicProvider.getChildren(parentMediaId, getResources()));
+                    result.sendResult(mMusicProvider.getAllMusic());
                 }
             });
         }

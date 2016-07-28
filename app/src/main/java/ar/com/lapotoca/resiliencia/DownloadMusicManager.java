@@ -142,7 +142,7 @@ public class DownloadMusicManager {
     public void downloadAll(Context context) {
         final List<MediaMetadataCompat> notLocal = new ArrayList<>();
 
-        for (MediaMetadataCompat media:mMusicProvider.getShuffledMusic()) {
+        for (MediaMetadataCompat media:mMusicProvider.getMusicList()) {
             if(!isLocal(media)) {
                 notLocal.add(media);
             }

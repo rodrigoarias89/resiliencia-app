@@ -96,11 +96,6 @@ public class QueueManager {
         return true;
     }
 
-    public void setRandomQueue() {
-        setCurrentQueue(mResources.getString(R.string.random_queue_title),
-                QueueHelper.getRandomQueue(mMusicProvider));
-    }
-
     public void setQueueFromMusic(String mediaId) {
         LogHelper.d(TAG, "setQueueFromMusic", mediaId);
 
