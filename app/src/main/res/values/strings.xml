@@ -77,9 +77,10 @@
     <!--Links-->
     <string name="link_facebook">https://www.facebook.com/lapotocaoficial/</string>
     <string name="link_twitter">https://twitter.com/lapotocaoficial</string>
-    <string name="link_instagram">https://www.instagram.com/lapotocaoficial/</string>
+    <string name="link_instagram">https://www.instagram.com/potocaok/</string>
     <string name="link_spotify">https://open.spotify.com/artist/0bFz60mbGBaIloOnlk33Eu</string>
     <string name="link_chrome">http://www.lapotoca.com.ar</string>
+    <string name="link_youtube">https://www.youtube.com/user/LaPotocaOficial/</string>
 
 
 </resources>

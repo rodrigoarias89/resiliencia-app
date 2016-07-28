@@ -20,6 +20,7 @@ public class LinksBar extends LinearLayout {
     private ImageView btnInstagram;
     private ImageView btnChrome;
     private ImageView btnSpotify;
+    private ImageView btnYoutube;
 
     private int mIconPadding;
 
@@ -39,12 +40,14 @@ public class LinksBar extends LinearLayout {
         btnInstagram = (ImageView) findViewById(R.id.btnInstagram);
         btnChrome = (ImageView) findViewById(R.id.btnChrome);
         btnSpotify = (ImageView) findViewById(R.id.btnSpotify);
+        btnYoutube = (ImageView) findViewById(R.id.btnYoutube);
 
         btnFacebook.setPadding(mIconPadding, 0, mIconPadding, 0);
         btnTwitter.setPadding(mIconPadding, 0, mIconPadding, 0);
         btnInstagram.setPadding(mIconPadding, 0, mIconPadding, 0);
         btnChrome.setPadding(mIconPadding, 0, mIconPadding, 0);
         btnSpotify.setPadding(mIconPadding, 0, mIconPadding, 0);
+        btnYoutube.setPadding(mIconPadding, 0, mIconPadding, 0);
 
         addListeners();
     }
@@ -55,6 +58,7 @@ public class LinksBar extends LinearLayout {
         btnInstagram.setOnClickListener(getListenerForUrl(mContext.getString(R.string.link_instagram)));
         btnChrome.setOnClickListener(getListenerForUrl(mContext.getString(R.string.link_chrome)));
         btnSpotify.setOnClickListener(getListenerForUrl(mContext.getString(R.string.link_spotify)));
+        btnYoutube.setOnClickListener(getListenerForUrl(mContext.getString(R.string.link_youtube)));
     }
 
     private OnClickListener getListenerForUrl(final String url) {

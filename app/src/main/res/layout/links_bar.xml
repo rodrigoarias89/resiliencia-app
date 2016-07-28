@@ -20,6 +20,12 @@
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:id="@+id/btnYoutube"
+        android:src="@drawable/youtube" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:id="@+id/btnTwitter"
         android:src="@drawable/twitter" />
 
