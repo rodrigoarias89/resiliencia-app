@@ -77,6 +77,7 @@ public class RemoteJSONSource implements MusicProviderSource {
         String artist = json.getString(JSON_ARTIST);
         String genre = json.getString(JSON_GENRE);
         String source = json.getString(JSON_SOURCE);
+        String remoteSource = json.getString(JSON_SOURCE);
         String iconUrl = json.getString(JSON_IMAGE);
         long isLocal = 0;
         int trackNumber = json.getInt(JSON_TRACK_NUMBER);
@@ -96,11 +97,10 @@ public class RemoteJSONSource implements MusicProviderSource {
             source = localURL;
             isLocal = 1;
         } else {
-            // Media is stored relative to JSON file
-            if (!source.startsWith("http")) {
-                source = basePath + source;
-            }
+            source = basePath + source;
         }
+
+        remoteSource = basePath + remoteSource;
 
 
         if (!iconUrl.startsWith("http")) {
@@ -113,6 +113,7 @@ public class RemoteJSONSource implements MusicProviderSource {
         return new MediaMetadataCompat.Builder()
                 .putString(MediaMetadataCompat.METADATA_KEY_MEDIA_ID, id)
                 .putString(MusicProviderSource.CUSTOM_METADATA_TRACK_SOURCE, source)
+                .putString(MusicProviderSource.CUSTOM_METADATA_TRACK_REMOTE, remoteSource)
                 .putString(MediaMetadataCompat.METADATA_KEY_ALBUM, album)
                 .putString(MediaMetadataCompat.METADATA_KEY_ARTIST, artist)
                 .putLong(MediaMetadataCompat.METADATA_KEY_DURATION, duration)

@@ -92,14 +92,14 @@ public class DownloadMusicManager {
     }
 
     public static void destroy() {
-        if(instance != null) {
+        if (instance != null) {
             instance.unregisterReceiver();
             instance = null;
         }
     }
 
     public void unregisterReceiver() {
-        if(mContext != null) {
+        if (mContext != null) {
             mContext.unregisterReceiver(broadcastReceiver);
         }
     }
@@ -114,7 +114,7 @@ public class DownloadMusicManager {
         return isLocal(track);
     }
 
-    private boolean isLocal(MediaMetadataCompat track) {
+    public boolean isLocal(MediaMetadataCompat track) {
         long isLocal = track.getLong(MusicProviderSource.CUSTOM_METADATA_TRACK_LOCAL);
         return isLocal != 0;
     }
@@ -128,7 +128,7 @@ public class DownloadMusicManager {
     }
 
     private void addDownloadToQueue(MediaMetadataCompat track) {
-        String songName = ""+track.getDescription().getTitle();
+        String songName = "" + track.getDescription().getTitle();
         String source = track.getString(MusicProviderSource.CUSTOM_METADATA_TRACK_SOURCE);
         DownloadManager.Request request = new DownloadManager.Request(Uri.parse(source));
         String fileName = songName + ".mp3";
@@ -145,24 +145,24 @@ public class DownloadMusicManager {
     public void downloadAll(Context context) {
         final List<MediaMetadataCompat> notLocal = new ArrayList<>();
 
-        for (MediaMetadataCompat media:mMusicProvider.getMusicList()) {
-            if(!isLocal(media)) {
+        for (MediaMetadataCompat media : mMusicProvider.getMusicList()) {
+            if (!isLocal(media)) {
                 notLocal.add(media);
             }
         }
 
-        if(notLocal.isEmpty()) {
+        if (notLocal.isEmpty()) {
             showNotification(context.getString(R.string.download_all_empty));
             return;
         }
 
         showDownloadAllDialog(context, notLocal, new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int id) {
-                if(mSelectedItems == null || mSelectedItems.size()==0 ){
+                if (mSelectedItems == null || mSelectedItems.size() == 0) {
                     showNotification(mContext.getString(R.string.download_all_no_song_selected));
                     return;
                 }
-                for(Integer index:mSelectedItems) {
+                for (Integer index : mSelectedItems) {
                     try {
                         addDownloadToQueue(notLocal.get(index));
                     } catch (SecurityException e) {
@@ -189,7 +189,7 @@ public class DownloadMusicManager {
 
         CharSequence[] songNames = new CharSequence[songs.size()];
         boolean[] defaults = new boolean[songs.size()];
-        for (int i = 0; i<songs.size(); i++) {
+        for (int i = 0; i < songs.size(); i++) {
             songNames[i] = songs.get(i).getDescription().getTitle();
             defaults[i] = true;
             mSelectedItems.add(i);

@@ -7,6 +7,7 @@ import java.util.Iterator;
 public interface MusicProviderSource {
     String CUSTOM_METADATA_TRACK_SOURCE = "__SOURCE__";
     String CUSTOM_METADATA_TRACK_LOCAL = "__ISLOCAL__";
+    String CUSTOM_METADATA_TRACK_REMOTE = "__REMOTE__";
     Iterator<MediaMetadataCompat> iterator();
 }
 
