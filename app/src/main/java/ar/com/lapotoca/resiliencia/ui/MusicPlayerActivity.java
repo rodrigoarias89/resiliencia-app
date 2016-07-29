@@ -12,12 +12,9 @@ import android.view.animation.AlphaAnimation;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.google.android.gms.analytics.HitBuilders;
-import com.google.android.gms.analytics.Tracker;
-
 import ar.com.lapotoca.resiliencia.DownloadMusicManager;
 import ar.com.lapotoca.resiliencia.R;
-import ar.com.lapotoca.resiliencia.ResilienciaApplication;
+import ar.com.lapotoca.resiliencia.utils.AnalyticsHelper;
 import ar.com.lapotoca.resiliencia.utils.LogHelper;
 import ar.com.lapotoca.resiliencia.utils.NotificationHelper;
 import ar.com.lapotoca.resiliencia.utils.ShareHelper;
@@ -65,14 +62,9 @@ public class MusicPlayerActivity extends BaseActivity
     private boolean mIsTheTitleContainerVisible = true;
     private boolean mIsTheIconVisible = true;
 
-    private Tracker mTracker;
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        ResilienciaApplication application = (ResilienciaApplication) getApplication();
-        mTracker = application.getDefaultTracker();
 
         setContentView(R.layout.activity_player);
         bindActivity();
@@ -105,8 +97,7 @@ public class MusicPlayerActivity extends BaseActivity
     @Override
     public void onResume() {
         super.onResume();
-        mTracker.setScreenName(ACTIVITY_NAME);
-        mTracker.send(new HitBuilders.ScreenViewBuilder().build());
+        AnalyticsHelper.getInstance().sendScreen(ACTIVITY_NAME);
     }
 
     @Override

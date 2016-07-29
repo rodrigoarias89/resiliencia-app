@@ -34,26 +34,22 @@ import android.view.MenuItem;
 import android.view.WindowManager.LayoutParams;
 import android.widget.ImageView;
 
-import com.google.android.gms.analytics.HitBuilders;
-import com.google.android.gms.analytics.Tracker;
-
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
 import ar.com.lapotoca.resiliencia.R;
-import ar.com.lapotoca.resiliencia.ResilienciaApplication;
 import ar.com.lapotoca.resiliencia.gallery.provider.AssetProvider;
 import ar.com.lapotoca.resiliencia.gallery.provider.ImageHolder;
 import ar.com.lapotoca.resiliencia.gallery.provider.Images;
 import ar.com.lapotoca.resiliencia.gallery.util.ImageCache;
 import ar.com.lapotoca.resiliencia.gallery.util.ImageFetcher;
 import ar.com.lapotoca.resiliencia.ui.ActionBarCastActivity;
+import ar.com.lapotoca.resiliencia.utils.AnalyticsHelper;
 
 public class ImageDetailActivity extends ActionBarCastActivity {
 
     private static final String ACTIVITY_NAME = ImageDetailActivity.class.getSimpleName();
-    private Tracker mTracker;
 
     private static final String IMAGE_CACHE_DIR = "images";
     public static final String EXTRA_IMAGE = "extra_image";
@@ -65,9 +61,6 @@ public class ImageDetailActivity extends ActionBarCastActivity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        ResilienciaApplication application = (ResilienciaApplication) getApplication();
-        mTracker = application.getDefaultTracker();
 
         setContentView(R.layout.image_detail_pager);
 
@@ -122,8 +115,7 @@ public class ImageDetailActivity extends ActionBarCastActivity {
     @Override
     public void onResume() {
         super.onResume();
-        mTracker.setScreenName(ACTIVITY_NAME);
-        mTracker.send(new HitBuilders.ScreenViewBuilder().build());
+        AnalyticsHelper.getInstance().sendScreen(ACTIVITY_NAME);
         mImageFetcher.setExitTasksEarly(false);
     }
 
@@ -148,11 +140,14 @@ public class ImageDetailActivity extends ActionBarCastActivity {
             @Override
             public boolean onMenuItemClick(MenuItem item) {
                 try {
+
                     mPager.getCurrentItem();
                     ImageHolder img = Images.image[mPager.getCurrentItem()];
                     if (img == null) {
                         return false;
                     }
+
+                    AnalyticsHelper.getInstance().sendImageShareEvent(img.getUrl());
 
                     Uri bmpUri;
                     if (img.isLocal()) {
@@ -167,13 +162,16 @@ public class ImageDetailActivity extends ActionBarCastActivity {
                         shareIntent.putExtra(Intent.EXTRA_STREAM, bmpUri);
                         shareIntent.setType("image/*");
                         startActivity(Intent.createChooser(shareIntent, getString(R.string.share_item)));
+
+                        AnalyticsHelper.getInstance().sendImageShareCompleted();
                         return true;
                     } else {
-                        // ...sharing failed, handle error
+
+                        AnalyticsHelper.getInstance().sendImageShareCanceled();
                         return false;
                     }
                 } catch (Exception e) {
-                    // ...sharing failed, handle error
+                    AnalyticsHelper.getInstance().sendImageShareFailed(e.getMessage());
                     return false;
                 }
             }
@@ -238,7 +236,6 @@ public class ImageDetailActivity extends ActionBarCastActivity {
 
         @Override
         public Fragment getItem(int position) {
-//            return ImageDetailFragment.newInstance(Images.imageUrls[position]);
             return ImageDetailFragment.newInstance(Images.image[position]);
         }
     }

@@ -19,6 +19,7 @@ import java.util.List;
 
 import ar.com.lapotoca.resiliencia.model.MusicProvider;
 import ar.com.lapotoca.resiliencia.model.MusicProviderSource;
+import ar.com.lapotoca.resiliencia.utils.AnalyticsHelper;
 import ar.com.lapotoca.resiliencia.utils.MediaIDHelper;
 import ar.com.lapotoca.resiliencia.utils.NotificationHelper;
 
@@ -137,6 +138,8 @@ public class DownloadMusicManager {
         request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED);
         request.setDestinationInExternalPublicDir(Environment.DIRECTORY_MUSIC, fileName);
         enqueue = dm.enqueue(request);
+
+        AnalyticsHelper.getInstance().sendDownloadSong(songName);
     }
 
     public void downloadAll(Context context) {

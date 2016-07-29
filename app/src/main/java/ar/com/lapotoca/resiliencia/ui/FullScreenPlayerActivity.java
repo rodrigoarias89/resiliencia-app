@@ -24,9 +24,6 @@ import android.widget.ProgressBar;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
-import com.google.android.gms.analytics.HitBuilders;
-import com.google.android.gms.analytics.Tracker;
-
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.ScheduledFuture;
@@ -35,7 +32,7 @@ import java.util.concurrent.TimeUnit;
 import ar.com.lapotoca.resiliencia.AlbumArtCache;
 import ar.com.lapotoca.resiliencia.MusicService;
 import ar.com.lapotoca.resiliencia.R;
-import ar.com.lapotoca.resiliencia.ResilienciaApplication;
+import ar.com.lapotoca.resiliencia.utils.AnalyticsHelper;
 import ar.com.lapotoca.resiliencia.utils.LogHelper;
 import ar.com.lapotoca.resiliencia.utils.LyricsHelper;
 
@@ -72,8 +69,6 @@ public class FullScreenPlayerActivity extends ActionBarCastActivity {
     private String mCurrentArtUrl;
     private final Handler mHandler = new Handler();
     private MediaBrowserCompat mMediaBrowser;
-
-    private Tracker mTracker;
 
     private final Runnable mUpdateProgressTask = new Runnable() {
         @Override
@@ -120,9 +115,6 @@ public class FullScreenPlayerActivity extends ActionBarCastActivity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        ResilienciaApplication application = (ResilienciaApplication) getApplication();
-        mTracker = application.getDefaultTracker();
 
         setContentView(R.layout.activity_full_player);
         initializeToolbar();
@@ -220,8 +212,7 @@ public class FullScreenPlayerActivity extends ActionBarCastActivity {
     @Override
     public void onResume() {
         super.onResume();
-        mTracker.setScreenName(ACTIVITY_NAME);
-        mTracker.send(new HitBuilders.ScreenViewBuilder().build());
+        AnalyticsHelper.getInstance().sendScreen(ACTIVITY_NAME);
     }
 
     private void connectToSession(MediaSessionCompat.Token token) throws RemoteException {

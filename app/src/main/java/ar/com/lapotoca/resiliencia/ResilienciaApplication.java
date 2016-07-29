@@ -10,6 +10,7 @@ import com.google.android.libraries.cast.companionlibrary.cast.CastConfiguration
 import com.google.android.libraries.cast.companionlibrary.cast.VideoCastManager;
 
 import ar.com.lapotoca.resiliencia.ui.FullScreenPlayerActivity;
+import ar.com.lapotoca.resiliencia.utils.AnalyticsHelper;
 
 public class ResilienciaApplication extends Application {
 
@@ -30,6 +31,7 @@ public class ResilienciaApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
+        AnalyticsHelper.createInstance(this);
         FacebookSdk.sdkInitialize(getApplicationContext());
         String applicationId = getResources().getString(R.string.cast_application_id);
         VideoCastManager.initialize(

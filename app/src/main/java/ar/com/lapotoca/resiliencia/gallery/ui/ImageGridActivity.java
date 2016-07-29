@@ -20,13 +20,10 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
 
-import com.google.android.gms.analytics.HitBuilders;
-import com.google.android.gms.analytics.Tracker;
-
 import ar.com.lapotoca.resiliencia.R;
-import ar.com.lapotoca.resiliencia.ResilienciaApplication;
 import ar.com.lapotoca.resiliencia.ui.BaseActivity;
 import ar.com.lapotoca.resiliencia.ui.MusicPlayerActivity;
+import ar.com.lapotoca.resiliencia.utils.AnalyticsHelper;
 
 /**
  * Simple FragmentActivity to hold the main {@link ImageGridFragment} and not much else.
@@ -34,15 +31,11 @@ import ar.com.lapotoca.resiliencia.ui.MusicPlayerActivity;
 public class ImageGridActivity extends BaseActivity {
 
     private static final String ACTIVITY_NAME = ImageGridActivity.class.getSimpleName();
-    private Tracker mTracker;
     private static final String TAG = "ImageGridActivity";
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        ResilienciaApplication application = (ResilienciaApplication) getApplication();
-        mTracker = application.getDefaultTracker();
 
         setContentView(R.layout.activity_art);
 
@@ -58,8 +51,7 @@ public class ImageGridActivity extends BaseActivity {
     @Override
     public void onResume() {
         super.onResume();
-        mTracker.setScreenName(ACTIVITY_NAME);
-        mTracker.send(new HitBuilders.ScreenViewBuilder().build());
+        AnalyticsHelper.getInstance().sendScreen(ACTIVITY_NAME);
     }
 
     @Override
