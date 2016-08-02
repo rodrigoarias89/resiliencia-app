@@ -27,7 +27,8 @@ public class SimpleDividerItemDecoration extends RecyclerView.ItemDecoration {
             RecyclerView.LayoutParams params = (RecyclerView.LayoutParams) child.getLayoutParams();
 
             int top = child.getBottom() + params.bottomMargin;
-            int bottom = top + mDivider.getIntrinsicHeight();
+//            int bottom = top + mDivider.getIntrinsicHeight();
+            int bottom = top + 1;
 
             mDivider.setBounds(left, top, right, bottom);
             mDivider.draw(c);
