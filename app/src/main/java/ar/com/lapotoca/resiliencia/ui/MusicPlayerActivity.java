@@ -1,24 +1,22 @@
 package ar.com.lapotoca.resiliencia.ui;
 
-import android.app.FragmentTransaction;
-import android.app.SearchManager;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.AppBarLayout;
+import android.support.design.widget.TabLayout;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.media.MediaBrowserCompat;
+import android.support.v4.view.ViewPager;
 import android.text.TextUtils;
-import android.view.View;
-import android.view.animation.AlphaAnimation;
-import android.widget.LinearLayout;
-import android.widget.TextView;
+import android.widget.ImageView;
 
 import ar.com.lapotoca.resiliencia.DownloadMusicManager;
 import ar.com.lapotoca.resiliencia.R;
+import ar.com.lapotoca.resiliencia.ui.custom.TabsAdapter;
 import ar.com.lapotoca.resiliencia.utils.AnalyticsHelper;
 import ar.com.lapotoca.resiliencia.utils.LogHelper;
 import ar.com.lapotoca.resiliencia.utils.NotificationHelper;
 import ar.com.lapotoca.resiliencia.utils.ShareHelper;
-import de.hdodenhof.circleimageview.CircleImageView;
 
 /**
  * Main activity for the music player.
@@ -26,13 +24,20 @@ import de.hdodenhof.circleimageview.CircleImageView;
  * when it is created and connect/disconnect on start/stop. Thus, a MediaBrowser will be always
  * connected while this activity is running.
  */
-public class MusicPlayerActivity extends BaseActivity
-        implements MediaBrowserFragment.MediaFragmentListener, AppBarLayout.OnOffsetChangedListener {
+//public class MusicPlayerActivity extends BaseActivity
+//        implements MediaBrowserFragment.MediaFragmentListener, AppBarLayout.OnOffsetChangedListener {
+public class MusicPlayerActivity extends BaseActivity2 implements AppBarLayout.OnOffsetChangedListener, MediaFragmentListener{
+
+    private static final int PERCENTAGE_TO_ANIMATE_AVATAR = 20;
+    private boolean mIsAvatarShown = true;
+
+    private ImageView mProfileImage;
+    private int mMaxScrollSize;
 
     private static final String ACTIVITY_NAME = MusicPlayerActivity.class.getSimpleName();
     private static final String TAG = LogHelper.makeLogTag(MusicPlayerActivity.class);
     private static final String SAVED_MEDIA_ID = "ar.com.lapotoca.resiliencia.MEDIA_ID";
-    private static final String FRAGMENT_TAG = "resiliencia_list_container";
+    public static final String FRAGMENT_TAG = "resiliencia_list_container";
 
     public static final String EXTRA_START_FULLSCREEN =
             "ar.com.lapotoca.resiliencia.EXTRA_START_FULLSCREEN";
@@ -45,53 +50,36 @@ public class MusicPlayerActivity extends BaseActivity
     public static final String EXTRA_CURRENT_MEDIA_DESCRIPTION =
             "ar.com.lapotoca.resiliencia.CURRENT_MEDIA_DESCRIPTION";
 
-    private Bundle mVoiceSearchParams;
 
-    //layout specials
-    private static final float PERCENTAGE_TO_SHOW_TITLE_AT_TOOLBAR = 0.9f;
-    private static final float PERCENTAGE_TO_HIDE_TITLE_DETAILS = 0.3f;
-    private static final float PERCENTAGE_TO_HIDE_ICON = 0.75f;
-    private static final int ALPHA_ANIMATIONS_DURATION = 200;
 
-    private LinearLayout mTitleContainer;
-    private TextView mTitle;
     private AppBarLayout mAppBarLayout;
-    private CircleImageView mCircleImageView;
-
-    private boolean mIsTheTitleVisible = false;
-    private boolean mIsTheTitleContainerVisible = true;
-    private boolean mIsTheIconVisible = true;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        setContentView(R.layout.activity_player);
-        bindActivity();
+        setContentView(R.layout.activity_player_3);
 
         if(mAppBarLayout != null) {
             mAppBarLayout.addOnOffsetChangedListener(this);
         }
 
         initializeToolbar();
-        initializeFromParams(savedInstanceState, getIntent());
 
-        // Only check if a full screen player is needed on the first time:
+        TabLayout tabLayout = (TabLayout) findViewById(R.id.materialup_tabs);
+        ViewPager viewPager  = (ViewPager) findViewById(R.id.materialup_viewpager);
+        AppBarLayout appbarLayout = (AppBarLayout) findViewById(R.id.main_appbar);
+        mProfileImage = (ImageView) findViewById(R.id.circle);
+
+        viewPager.setAdapter(new TabsAdapter(getSupportFragmentManager(), this));
+        tabLayout.setupWithViewPager(viewPager);
+//        initializeFromParams(savedInstanceState, getIntent());
+
         if (savedInstanceState == null) {
             startFullScreenActivityIfNeeded(getIntent());
-            //TODO
-            navigateToBrowser("__BY_GENRE__/Rock");
+//            navigateToBrowser("__BY_GENRE__/Rock");
         }
-    }
 
-    private void bindActivity() {
-        mTitle = (TextView) findViewById(R.id.main_textview_title);
-        if (mTitle != null) {
-            mTitle.setVisibility(View.INVISIBLE);
-        }
-        mTitleContainer = (LinearLayout) findViewById(R.id.main_linearlayout_title);
-        mAppBarLayout = (AppBarLayout) findViewById(R.id.main_appbar);
-        mCircleImageView = (CircleImageView) findViewById(R.id.circle);
     }
 
     @Override
@@ -136,11 +124,11 @@ public class MusicPlayerActivity extends BaseActivity
     public void onMediaItemShared(MediaBrowserCompat.MediaItem item) {
         ShareHelper.getInstance().shareContentOnFacebook(this, item);
     }
-
-    @Override
-    public void setToolbarTitle(CharSequence title) {
-        setTitle("");
-    }
+//
+//    @Override
+//    public void setToolbarTitle(CharSequence title) {
+//        setTitle("");
+//    }
 
     @Override
     protected void onNewIntent(Intent intent) {
@@ -178,10 +166,7 @@ public class MusicPlayerActivity extends BaseActivity
         if (fragment == null || !TextUtils.equals(fragment.getMediaId(), mediaId)) {
             fragment = new MediaBrowserFragment();
             fragment.setMediaId(mediaId);
-            FragmentTransaction transaction = getFragmentManager().beginTransaction();
-            transaction.setCustomAnimations(
-                    R.animator.slide_in_from_right, R.animator.slide_out_to_left,
-                    R.animator.slide_in_from_left, R.animator.slide_out_to_right);
+            FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
             transaction.replace(R.id.container, fragment, FRAGMENT_TAG);
             transaction.commit();
         }
@@ -195,22 +180,8 @@ public class MusicPlayerActivity extends BaseActivity
         return fragment.getMediaId();
     }
 
-    private MediaBrowserFragment getBrowseFragment() {
-        return (MediaBrowserFragment) getFragmentManager().findFragmentByTag(FRAGMENT_TAG);
-    }
-
-    @Override
-    protected void onMediaControllerConnected() {
-        if (mVoiceSearchParams != null) {
-            // If there is a bootstrap parameter to start from a search query, we
-            // send it to the media session and set it to null, so it won't play again
-            // when the activity is stopped/started or recreated:
-            String query = mVoiceSearchParams.getString(SearchManager.QUERY);
-            getSupportMediaController().getTransportControls()
-                    .playFromSearch(query, mVoiceSearchParams);
-            mVoiceSearchParams = null;
-        }
-        getBrowseFragment().onConnected();
+    public MediaBrowserFragment getBrowseFragment() {
+        return (MediaBrowserFragment) getSupportFragmentManager().findFragmentByTag(FRAGMENT_TAG);
     }
 
     /*
@@ -219,65 +190,24 @@ public class MusicPlayerActivity extends BaseActivity
 
     @Override
     public void onOffsetChanged(AppBarLayout appBarLayout, int offset) {
-        if(mTitle != null) {
-            int maxScroll = appBarLayout.getTotalScrollRange();
-            float percentage = (float) Math.abs(offset) / (float) maxScroll;
-            handleAlphaOnTitle(percentage);
-            handleToolbarTitleVisibility(percentage);
-            handleToolbarIconVisibility(percentage);
+        if (mMaxScrollSize == 0)
+            mMaxScrollSize = appBarLayout.getTotalScrollRange();
+
+        int percentage = (Math.abs(offset)) * 100 / mMaxScrollSize;
+
+        if (percentage >= PERCENTAGE_TO_ANIMATE_AVATAR && mIsAvatarShown) {
+            mIsAvatarShown = false;
+            mProfileImage.animate().scaleY(0).scaleX(0).setDuration(200).start();
+        }
+
+        if (percentage <= PERCENTAGE_TO_ANIMATE_AVATAR && !mIsAvatarShown) {
+            mIsAvatarShown = true;
+
+            mProfileImage.animate()
+                    .scaleY(1).scaleX(1)
+                    .start();
         }
     }
 
-    private void handleToolbarTitleVisibility(float percentage) {
-        if (percentage >= PERCENTAGE_TO_SHOW_TITLE_AT_TOOLBAR) {
-            if (!mIsTheTitleVisible) {
-                startAlphaAnimation(mTitle, ALPHA_ANIMATIONS_DURATION, View.VISIBLE);
-                mIsTheTitleVisible = true;
-            }
-        } else {
-            if (mIsTheTitleVisible) {
-                startAlphaAnimation(mTitle, ALPHA_ANIMATIONS_DURATION, View.INVISIBLE);
-                mIsTheTitleVisible = false;
-            }
-        }
-    }
-
-    private void handleAlphaOnTitle(float percentage) {
-        if (percentage >= PERCENTAGE_TO_HIDE_TITLE_DETAILS) {
-            if (mIsTheTitleContainerVisible) {
-                startAlphaAnimation(mTitleContainer, ALPHA_ANIMATIONS_DURATION, View.INVISIBLE);
-                mIsTheTitleContainerVisible = false;
-            }
-        } else {
-            if (!mIsTheTitleContainerVisible) {
-                startAlphaAnimation(mTitleContainer, ALPHA_ANIMATIONS_DURATION, View.VISIBLE);
-                mIsTheTitleContainerVisible = true;
-            }
-        }
-    }
-
-    private void handleToolbarIconVisibility(float percentage) {
-        if (percentage >= PERCENTAGE_TO_HIDE_ICON) {
-            if (mIsTheIconVisible) {
-                startAlphaAnimation(mCircleImageView, ALPHA_ANIMATIONS_DURATION, View.INVISIBLE);
-                mIsTheIconVisible = false;
-            }
-        } else {
-            if (!mIsTheIconVisible) {
-                startAlphaAnimation(mCircleImageView, ALPHA_ANIMATIONS_DURATION, View.VISIBLE);
-                mIsTheIconVisible = true;
-            }
-        }
-    }
-
-    public static void startAlphaAnimation(View v, long duration, int visibility) {
-        AlphaAnimation alphaAnimation = (visibility == View.VISIBLE)
-                ? new AlphaAnimation(0f, 1f)
-                : new AlphaAnimation(1f, 0f);
-
-        alphaAnimation.setDuration(duration);
-        alphaAnimation.setFillAfter(true);
-        v.startAnimation(alphaAnimation);
-    }
 
 }

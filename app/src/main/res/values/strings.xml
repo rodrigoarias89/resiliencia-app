@@ -35,8 +35,8 @@
 
     <string name="home_title">Home</string>
     <string name="action_listen">Escuchar</string>
-    <string name="drawer_allmusic_title">Canciones</string>
-    <string name="drawer_playlists_title">Arte</string>
+    <string name="tab_allmusic_title">Canciones</string>
+    <string name="tab_art_title">Arte</string>
     <string name="now_playing">Ahora suena</string>
     <string name="background_image_str">Background image for album art</string>
     <string name="loading">Cargando…</string>

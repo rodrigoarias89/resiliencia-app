@@ -25,6 +25,8 @@ import ar.com.lapotoca.resiliencia.utils.MediaIDHelper;
  */
 public class MusicProvider {
 
+    private static MusicProvider instance;
+
     private static final String TAG = LogHelper.makeLogTag(MusicProvider.class);
 
     private MusicProviderSource mSource;
@@ -43,11 +45,20 @@ public class MusicProvider {
         void onMusicCatalogReady(boolean success);
     }
 
-    public MusicProvider(Context context) {
+    public static MusicProvider getInstance() {
+        return instance;
+    }
+
+    public static MusicProvider createInstance(Context context) {
+        instance = new MusicProvider(context);
+        return instance;
+    }
+
+    private MusicProvider(Context context) {
         this(new RemoteJSONSource(context));
     }
 
-    public MusicProvider(MusicProviderSource source) {
+    private MusicProvider(MusicProviderSource source) {
         mSource = source;
         mMusicListById = new ConcurrentHashMap<>();
         mMusicList = new ArrayList<>();

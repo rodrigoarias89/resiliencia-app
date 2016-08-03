@@ -4,11 +4,11 @@
         <item
             android:id="@+id/navigation_allmusic"
             android:checked="true"
-            android:title="@string/drawer_allmusic_title"
+            android:title="@string/tab_allmusic_title"
             android:icon="@android:drawable/ic_menu_slideshow"/>
         <item
             android:id="@+id/navigation_gallery"
-            android:title="@string/drawer_playlists_title"
+            android:title="@string/tab_art_title"
             android:icon="@android:drawable/ic_menu_gallery"/>
     </group>
 </menu>

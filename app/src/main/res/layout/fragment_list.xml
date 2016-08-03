@@ -53,17 +53,13 @@
             android:id="@+id/recycler_list"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_alignParentBottom="false"
-            android:layout_below="@id/playback_error"
             app:layoutManager="LinearLayoutManager"
-            tools:listitem="@layout/media_list_item"
-            android:layout_above="@+id/links_container" />
+            tools:listitem="@layout/media_list_item" />
 
         <ar.com.lapotoca.resiliencia.ui.custom.LinksBar
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/links_container"
-            android:layout_alignParentBottom="true"
             app:iconPadding="10"/>
     </LinearLayout>
 </RelativeLayout>

@@ -59,6 +59,10 @@ public class ImageGridFragment extends Fragment implements AdapterView.OnItemCli
      */
     public ImageGridFragment() {}
 
+    public static Fragment newInstance() {
+        return new ImageGridFragment();
+    }
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
