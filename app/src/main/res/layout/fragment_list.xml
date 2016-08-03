@@ -49,6 +49,12 @@
         android:layout_below="@+id/playback_error"
         android:layout_alignParentBottom="true">
 
+        <ar.com.lapotoca.resiliencia.ui.custom.LinksBar
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/links_container"
+            app:iconPadding="10"/>
+
         <android.support.v7.widget.RecyclerView
             android:id="@+id/recycler_list"
             android:layout_width="match_parent"
@@ -56,10 +62,5 @@
             app:layoutManager="LinearLayoutManager"
             tools:listitem="@layout/media_list_item" />
 
-        <ar.com.lapotoca.resiliencia.ui.custom.LinksBar
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/links_container"
-            app:iconPadding="10"/>
     </LinearLayout>
 </RelativeLayout>

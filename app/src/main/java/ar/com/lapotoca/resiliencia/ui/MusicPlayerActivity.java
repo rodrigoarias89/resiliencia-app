@@ -4,10 +4,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.TabLayout;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v4.media.MediaBrowserCompat;
 import android.support.v4.view.ViewPager;
-import android.text.TextUtils;
 import android.widget.ImageView;
 
 import ar.com.lapotoca.resiliencia.DownloadMusicManager;
@@ -73,11 +71,9 @@ public class MusicPlayerActivity extends BaseActivity2 implements AppBarLayout.O
 
         viewPager.setAdapter(new TabsAdapter(getSupportFragmentManager(), this));
         tabLayout.setupWithViewPager(viewPager);
-//        initializeFromParams(savedInstanceState, getIntent());
 
         if (savedInstanceState == null) {
             startFullScreenActivityIfNeeded(getIntent());
-//            navigateToBrowser("__BY_GENRE__/Rock");
         }
 
     }
@@ -99,16 +95,8 @@ public class MusicPlayerActivity extends BaseActivity2 implements AppBarLayout.O
 
     @Override
     public void onMediaItemSelected(MediaBrowserCompat.MediaItem item) {
-        LogHelper.d(TAG, "onMediaItemSelected, mediaId=" + item.getMediaId());
-        if (item.isPlayable()) {
-            getSupportMediaController().getTransportControls()
-                    .playFromMediaId(item.getMediaId(), null);
-        } else if (item.isBrowsable()) {
-            navigateToBrowser(item.getMediaId());
-        } else {
-            LogHelper.w(TAG, "Ignoring MediaItem that is neither browsable nor playable: ",
-                    "mediaId=", item.getMediaId());
-        }
+        getSupportMediaController().getTransportControls()
+                .playFromMediaId(item.getMediaId(), null);
     }
 
     @Override
@@ -124,16 +112,9 @@ public class MusicPlayerActivity extends BaseActivity2 implements AppBarLayout.O
     public void onMediaItemShared(MediaBrowserCompat.MediaItem item) {
         ShareHelper.getInstance().shareContentOnFacebook(this, item);
     }
-//
-//    @Override
-//    public void setToolbarTitle(CharSequence title) {
-//        setTitle("");
-//    }
 
     @Override
     protected void onNewIntent(Intent intent) {
-        LogHelper.d(TAG, "onNewIntent, intent=" + intent);
-        initializeFromParams(null, intent);
         startFullScreenActivityIfNeeded(intent);
     }
 
@@ -145,30 +126,6 @@ public class MusicPlayerActivity extends BaseActivity2 implements AppBarLayout.O
                     .putExtra(EXTRA_CURRENT_MEDIA_DESCRIPTION,
                             intent.getParcelableExtra(EXTRA_CURRENT_MEDIA_DESCRIPTION));
             startActivity(fullScreenIntent);
-        }
-    }
-
-    protected void initializeFromParams(Bundle savedInstanceState, Intent intent) {
-        String mediaId = null;
-
-        if (savedInstanceState != null) {
-            // If there is a saved media ID, use it
-            mediaId = savedInstanceState.getString(SAVED_MEDIA_ID);
-        }
-
-        navigateToBrowser(mediaId);
-    }
-
-    private void navigateToBrowser(String mediaId) {
-        LogHelper.d(TAG, "navigateToBrowser, mediaId=" + mediaId);
-        MediaBrowserFragment fragment = getBrowseFragment();
-
-        if (fragment == null || !TextUtils.equals(fragment.getMediaId(), mediaId)) {
-            fragment = new MediaBrowserFragment();
-            fragment.setMediaId(mediaId);
-            FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-            transaction.replace(R.id.container, fragment, FRAGMENT_TAG);
-            transaction.commit();
         }
     }
 

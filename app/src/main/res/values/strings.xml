@@ -16,12 +16,9 @@
 <resources>
 
     <string name="app_name">Resiliencia</string>
-    <string name="favorite">Favorito</string>
+    <string name="band_name">La Potoca</string>
     <string name="error_no_metadata">No se puede obtener información.</string>
-    <string name="browse_genres">Géneros</string>
-    <string name="browse_genre_subtitle">Canciones por género</string>
     <string name="browse_musics_by_genre_subtitle">%1$s canciones</string>
-    <string name="random_queue_title">Random</string>
     <string name="error_no_connection">No se pudo conectar al servidor. Por favor, verifique su conexión de internet.</string>
     <string name="error_loading_media">Error cargando canción</string>
     <string name="casting_to_device">Transmitiendo a %1$s</string>
@@ -33,11 +30,8 @@
     <string name="skip_next">Siguiente</string>
     <string name="skip_prev">Anterior</string>
 
-    <string name="home_title">Home</string>
-    <string name="action_listen">Escuchar</string>
     <string name="tab_allmusic_title">Canciones</string>
     <string name="tab_art_title">Arte</string>
-    <string name="now_playing">Ahora suena</string>
     <string name="background_image_str">Background image for album art</string>
     <string name="loading">Cargando…</string>
     <string name="media_route_menu_title">Reproducir en…</string>

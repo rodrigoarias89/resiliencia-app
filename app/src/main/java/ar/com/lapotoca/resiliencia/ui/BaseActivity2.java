@@ -38,6 +38,16 @@ public class BaseActivity2 extends ActionBarCastActivity implements MediaBrowser
     }
 
     @Override
+    protected void onStop() {
+        super.onStop();
+        if (getSupportMediaController() != null) {
+            getSupportMediaController().unregisterCallback(mMediaControllerCallback);
+        }
+        mMediaBrowser.disconnect();
+    }
+
+
+    @Override
     public MediaBrowserCompat getMediaBrowser() {
         return mMediaBrowser;
     }
