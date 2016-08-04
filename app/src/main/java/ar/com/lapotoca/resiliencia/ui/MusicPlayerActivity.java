@@ -22,9 +22,7 @@ import ar.com.lapotoca.resiliencia.utils.ShareHelper;
  * when it is created and connect/disconnect on start/stop. Thus, a MediaBrowser will be always
  * connected while this activity is running.
  */
-//public class MusicPlayerActivity extends BaseActivity
-//        implements MediaBrowserFragment.MediaFragmentListener, AppBarLayout.OnOffsetChangedListener {
-public class MusicPlayerActivity extends BaseActivity2 implements AppBarLayout.OnOffsetChangedListener, MediaFragmentListener{
+public class MusicPlayerActivity extends BaseActivity implements AppBarLayout.OnOffsetChangedListener, MediaFragmentListener{
 
     private static final int PERCENTAGE_TO_ANIMATE_AVATAR = 20;
     private boolean mIsAvatarShown = true;
@@ -47,7 +45,7 @@ public class MusicPlayerActivity extends BaseActivity2 implements AppBarLayout.O
      */
     public static final String EXTRA_CURRENT_MEDIA_DESCRIPTION =
             "ar.com.lapotoca.resiliencia.CURRENT_MEDIA_DESCRIPTION";
-    
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

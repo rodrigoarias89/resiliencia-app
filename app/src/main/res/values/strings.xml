@@ -75,8 +75,17 @@
     <string name="link_spotify">https://open.spotify.com/artist/0bFz60mbGBaIloOnlk33Eu</string>
     <string name="link_chrome">http://www.lapotoca.com.ar</string>
     <string name="link_youtube">https://www.youtube.com/user/LaPotocaOficial/</string>
+    <!--Content Description-->
+    <string name="link_facebook_desc">Link a faceboook</string>
+    <string name="link_twitter_desc">Link a twitter</string>
+    <string name="link_instagram_desc">Link a instagram</string>
+    <string name="link_spotify_desc">Link a spotify</string>
+    <string name="link_chrome_desc">Link a chrome</string>
+    <string name="link_youtube_desc">Link a youtube</string>
 
     <!--Analytics-->
     <string name="analytics_tracker">UA-81565123-1</string>
+
+
 
 </resources>

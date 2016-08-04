@@ -82,7 +82,7 @@ public class SongsFragment extends Fragment implements MediaItemViewHolder.OnMed
     }
 
     private void initList() {
-        List songs = MusicProvider.getInstance().getAllMusic();
+        List<MediaBrowserCompat.MediaItem> songs = MusicProvider.getInstance().getAllMusic();
         mBrowserAdapter = new BrowseRecyclerAdapter(songs, mContext, SongsFragment.this);
         recyclerView.setAdapter(mBrowserAdapter);
         mBrowserAdapter.notifyDataSetChanged();
