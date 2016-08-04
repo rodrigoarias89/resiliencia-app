@@ -6,7 +6,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
 import ar.com.lapotoca.resiliencia.R;
-import ar.com.lapotoca.resiliencia.gallery.ui.ImageGridFragment;
+import ar.com.lapotoca.resiliencia.gallery.ui.ImageListFragment;
 import ar.com.lapotoca.resiliencia.ui.SongsFragment;
 
 /**
@@ -33,7 +33,8 @@ public class TabsAdapter extends FragmentPagerAdapter {
             case 0:
                 return SongsFragment.newInstance();
             case 1:
-                return ImageGridFragment.newInstance();
+                return ImageListFragment.newInstance();
+//                return ImageGridFragment.newInstance();
         }
         return null;
     }

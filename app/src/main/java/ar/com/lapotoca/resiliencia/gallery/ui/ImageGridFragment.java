@@ -121,7 +121,8 @@ public class ImageGridFragment extends Fragment implements AdapterView.OnItemCli
                             if (numColumns > 0) {
                                 final int columnWidth =
                                         (mGridView.getWidth() / numColumns) - mImageThumbSpacing;
-                                mAdapter.setNumColumns(numColumns);
+//                                mAdapter.setNumColumns(numColumns);
+                                mAdapter.setNumColumns(1);
                                 mAdapter.setItemHeight(columnWidth);
                                 mGridView.getViewTreeObserver()
                                         .removeOnGlobalLayoutListener(this);
