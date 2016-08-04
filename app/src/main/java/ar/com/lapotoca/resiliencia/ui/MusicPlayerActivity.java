@@ -47,27 +47,23 @@ public class MusicPlayerActivity extends BaseActivity2 implements AppBarLayout.O
      */
     public static final String EXTRA_CURRENT_MEDIA_DESCRIPTION =
             "ar.com.lapotoca.resiliencia.CURRENT_MEDIA_DESCRIPTION";
-
-
-
-    private AppBarLayout mAppBarLayout;
-
+    
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        setContentView(R.layout.activity_player_3);
-
-        if(mAppBarLayout != null) {
-            mAppBarLayout.addOnOffsetChangedListener(this);
-        }
-
-        initializeToolbar();
+        setContentView(R.layout.activity_player);
 
         TabLayout tabLayout = (TabLayout) findViewById(R.id.materialup_tabs);
         ViewPager viewPager  = (ViewPager) findViewById(R.id.materialup_viewpager);
         AppBarLayout appbarLayout = (AppBarLayout) findViewById(R.id.main_appbar);
         mProfileImage = (ImageView) findViewById(R.id.circle);
+
+        initializeToolbar();
+
+        if(appbarLayout != null) {
+            appbarLayout.addOnOffsetChangedListener(this);
+        }
 
         viewPager.setAdapter(new TabsAdapter(getSupportFragmentManager(), this));
         tabLayout.setupWithViewPager(viewPager);

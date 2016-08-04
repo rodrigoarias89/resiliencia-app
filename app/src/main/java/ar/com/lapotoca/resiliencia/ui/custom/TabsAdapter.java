@@ -34,7 +34,6 @@ public class TabsAdapter extends FragmentPagerAdapter {
                 return SongsFragment.newInstance();
             case 1:
                 return ImageListFragment.newInstance();
-//                return ImageGridFragment.newInstance();
         }
         return null;
     }

@@ -38,13 +38,7 @@ import ar.com.lapotoca.resiliencia.gallery.provider.Images;
 import ar.com.lapotoca.resiliencia.gallery.util.ImageCache;
 import ar.com.lapotoca.resiliencia.gallery.util.ImageFetcher;
 
-/**
- * The main fragment that powers the ImageGridActivity screen. Fairly straight forward GridView
- * implementation with the key addition being the ImageWorker class w/ImageCache to load children
- * asynchronously, keeping the UI nice and smooth and caching thumbnails for quick retrieval. The
- * cache is retained over configuration changes like orientation change so the images are populated
- * quickly if, for example, the user rotates the device.
- */
+
 public class ImageGridFragment extends Fragment implements AdapterView.OnItemClickListener {
     private static final String TAG = "ImageGridFragment";
     private static final String IMAGE_CACHE_DIR = "thumbs";
