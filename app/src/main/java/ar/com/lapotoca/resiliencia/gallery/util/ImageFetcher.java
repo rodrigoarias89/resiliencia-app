@@ -53,18 +53,6 @@ public class ImageFetcher extends ImageResizer {
     private static final int DISK_CACHE_INDEX = 0;
 
     /**
-     * Initialize providing a target image width and height for the processing images.
-     *
-     * @param context
-     * @param imageWidth
-     * @param imageHeight
-     */
-    public ImageFetcher(Context context, int imageWidth, int imageHeight) {
-        super(context, imageWidth, imageHeight);
-        init(context);
-    }
-
-    /**
      * Initialize providing a single target image size (used for both width and height);
      *
      * @param context
