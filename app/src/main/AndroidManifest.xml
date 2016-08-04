@@ -83,16 +83,10 @@
             android:label="@string/app_name"
             android:theme="@android:style/Theme.Translucent.NoTitleBar" />
 
-        <activity android:name=".gallery.ui.ImageGridActivity">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value=".ui.MusicPlayerActivity" />
-        </activity>
-
         <activity android:name=".gallery.ui.ImageDetailActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".gallery.ui.ImageGridActivity" />
+                android:value=".ui.MusicPlayerActivity" />
         </activity>
 
         <!--

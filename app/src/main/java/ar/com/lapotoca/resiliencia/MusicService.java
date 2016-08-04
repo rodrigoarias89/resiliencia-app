@@ -168,7 +168,7 @@ public class MusicService extends MediaBrowserServiceCompat implements
         super.onCreate();
         LogHelper.d(TAG, "onCreate");
 
-        mMusicProvider = new MusicProvider(this);
+        mMusicProvider = MusicProvider.createInstance(this);
 
         // To make the app more responsive, fetch and cache catalog information now.
         // This can help improve the response time in the method

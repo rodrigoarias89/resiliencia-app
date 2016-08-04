@@ -10,7 +10,7 @@ import java.util.Map;
 public class LyricsHelper {
 
     public final static Map<String, String> mapLyrics = new HashMap<String, String>() {{
-        put("mayofrances", "Ni en mayo Frances me juego que hubo tanto fuego\n" +
+        put("quenoimportenada", "Ni en mayo Frances me juego que hubo tanto fuego\n" +
                 "(su silueta aun en mi cama).\n" +
                 "Ni en mayo Francés me juego que hubo tanto fuego\n" +
                 "(Su silueta aún en mi cama).\n" +
@@ -40,7 +40,7 @@ public class LyricsHelper {
                 "Reencontré a mis lágrimas.\n" +
                 "Cinco viajes , mil noches inmersos sin sosiego\n" +
                 "a un oasis pasional.");
-        put("catarsis", "Después de estancarme en un pozo ciego.\n" +
+        put("armandolio", "Después de estancarme en un pozo ciego.\n" +
                 "Después que me defrauden. Harto del fraudulento.\n" +
                 "\n" +
                 "Cambiaron mis ojos ya no creo en cuentos.\n" +
@@ -80,7 +80,7 @@ public class LyricsHelper {
                 "Qué paradoja que hay\n" +
                 "Justicia, honestidad\n" +
                 "Secuestradas están!");
-        put("elconsumismonosconsume", "Medios complotados a un circo exquisito.\n" +
+        put("riodejaneiro", "Medios complotados a un circo exquisito.\n" +
                 "Tus tres celus y en Congo la muerte ahí va...\n" +
                 "Ellos dicen fabricar el parche que va aliviar\n" +
                 "el agujero existencial, el nuevo sol.\n" +
@@ -107,7 +107,7 @@ public class LyricsHelper {
                 "¿Querés ser campeón mundial?\n" +
                 "derroca el lucro mental\n" +
                 "dale pan a la verdad, casa y canción.");
-        put("dame", "Dame alguna alternativa,\n" +
+        put("decaravana", "Dame alguna alternativa,\n" +
                 "dame alguna chance en V.\n" +
                 "Dame un mundo de ilusiones aunque incite al daño.\n" +
                 "Conjuguemos el placer.\n" +
@@ -137,7 +137,7 @@ public class LyricsHelper {
                 "\n" +
                 "Dame tu soledad\n" +
                 "dame tu libertad!");
-        put("lasmoscaseldineroyvos", "Explotando contra la almohada \n" +
+        put("resilientes", "Explotando contra la almohada \n" +
                 "no hay caricia que preste calma.\n" +
                 "Gobernantes y policías\n" +
                 "dan la mano y venden asfixia.\n" +
@@ -167,7 +167,7 @@ public class LyricsHelper {
                 "\n" +
                 "En un laberinto lleno de pretextos fríos\n" +
                 "voy a celebrar con tu cuerpo y el mío.");
-        put("idilio", "Pedir más sería palpar la ambición\n" +
+        put("jardinesdeavellaneda", "Pedir más sería palpar la ambición\n" +
                 "(Siempre caigo en excesos).\n" +
                 "Catarata impulsiva con sabor\n" +
                 "de un célebre encuentro.\n" +
@@ -193,7 +193,7 @@ public class LyricsHelper {
                 "y enroscarme en tu magia.\n" +
                 "¡Una historia tan romántica de dos\n" +
                 "que salva la distancia!");
-        put("amediotomar", "Y así fue, se quebró nuestro dique\n" +
+        put("campeonesdeesquina", "Y así fue, se quebró nuestro dique\n" +
                 "que sostenía ficción.\n" +
                 "Dos guerreros maltratados\n" +
                 "limando a la obsesión.\n" +
@@ -223,7 +223,7 @@ public class LyricsHelper {
                 "\n" +
                 "Ay, amor querido no te vayas nunca,\n" +
                 "quiero verte una vez más.");
-        put("naufragio", "De olvidar me olvidé,\n" +
+        put("aunconfieso...", "De olvidar me olvidé,\n" +
                 "me hice fiel a mis lamentos.\n" +
                 "Para anclar en la piel\n" +
                 "mi rechazo a perdernos.\n" +
@@ -247,7 +247,39 @@ public class LyricsHelper {
                 "Cuando el amor es compatible\n" +
                 "imposible es compartir\n" +
                 "mirar a la ilusión partir.");
-        put("losmarginados", "Dicen que somos los traidores\n" +
+        put("beatlesvinoyreir", "Dicen que somos los traidores\n" +
+                "que deleitamos liberar.\n" +
+                "El dolor nos transforma. Te voy a contar:\n" +
+                "\n" +
+                "Hijos, siervos de depresiones,\n" +
+                "con la avidez de emancipar\n" +
+                "a un mundo embrujado de frialdad.\n" +
+                "\n" +
+                "Hartos de amo, patrón y jefe\n" +
+                "De descifrar sólo sobras.\n" +
+                "(La inocencia ha golpeado feos uppercuts)\n" +
+                "\n" +
+                "Nacen secuelas desde un suelo\n" +
+                "que alguna vez brotó: Esperar.\n" +
+                "Secuencias que no busqué inhalar\n" +
+                "\n" +
+                "Los marginados estamos aquí\n" +
+                "tan libres como toda honestidad,\n" +
+                "la droga pide y la noche nos declara su amabilidad.\n" +
+                "Los marginados estamos aquí\n" +
+                "pidiendo pista, buscando intentar.\n" +
+                "Lo gris es nuestro espejo\n" +
+                "por vehemencia a quien no está más.\n" +
+                "\n" +
+                "Distinto es acusar de \"vagos\"\n" +
+                "si no existe oportunidad.\n" +
+                "Distinta es la cena\n" +
+                "cuando ni hay pan\n" +
+                "\n" +
+                "En un cosmos de aflicciones\n" +
+                "la chispa del crimen muestra\n" +
+                "almas anhelando identidad.");
+        put("certeza", "Dicen que somos los traidores\n" +
                 "que deleitamos liberar.\n" +
                 "El dolor nos transforma. Te voy a contar:\n" +
                 "\n" +

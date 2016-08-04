@@ -185,7 +185,7 @@ public class DownloadMusicManager {
 
     private void showDownloadAllDialog(Context context, List<MediaMetadataCompat> songs, DialogInterface.OnClickListener listener) {
 
-        mSelectedItems = new ArrayList();
+        mSelectedItems = new ArrayList<>();
 
         CharSequence[] songNames = new CharSequence[songs.size()];
         boolean[] defaults = new boolean[songs.size()];

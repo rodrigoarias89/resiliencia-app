@@ -12,7 +12,7 @@ public class AnalyticsHelper {
 
     private static AnalyticsHelper instance;
 
-    private final static String SHARE_CATEGORY = "Compartir";;
+    private final static String SHARE_CATEGORY = "Compartir";
     private final static String DOWNLOAD_CATEGORY = "Descargar";
     private final static String PLAYBACK_CATEGORY = "Reproduccion";
 
