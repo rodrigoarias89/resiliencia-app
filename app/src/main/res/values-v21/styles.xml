@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-        <style name="ResilienciaAppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <style name="ResilienciaAppTheme" parent="Theme.AppCompat.DayNight.NoActionBar">
 
-                <item name="colorPrimary">#ffff5722</item>
-                <item name="colorPrimaryDark">#ffbf360c</item>
-                <item name="colorAccent">#ffff5722</item>
+                <item name="colorPrimary">#ffc32a2a</item>
+                <item name="colorPrimaryDark">#ff851d1d</item>
+                <item name="colorAccent">#ff12b6f4</item>
 
                 <item name="alertDialogTheme">@style/Theme.AppCompat.Dialog.Alert</item>
                 <item name="android:statusBarColor">@android:color/transparent</item>
