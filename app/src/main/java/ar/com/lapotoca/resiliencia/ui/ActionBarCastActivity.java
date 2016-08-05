@@ -99,6 +99,7 @@ public abstract class ActionBarCastActivity extends AppCompatActivity {
         mToolbar = (Toolbar) findViewById(R.id.main_toolbar);
         if (mToolbar != null) {
             mToolbar.inflateMenu(R.menu.main);
+            mToolbar.setTitle("");
             setSupportActionBar(mToolbar);
         }
     }
