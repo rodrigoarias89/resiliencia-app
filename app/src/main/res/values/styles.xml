@@ -21,6 +21,8 @@
         <item name="colorPrimaryDark">#ff851d1d</item>
         <item name="colorAccent">#ff12b6f4</item>
         <item name="alertDialogTheme">@style/Theme.AppCompat.Dialog.Alert</item>
+
+
     </style>
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Dark" />
