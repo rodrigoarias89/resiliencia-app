@@ -25,4 +25,13 @@
 
     <color name="play_list_button">#ff8d8989</color>
 
+    <!--Color back list-->
+    <color name="app_bg">#ff2d2d2d</color>
+    <color name="music_list_bg">#ff414040</color>
+
+    <color name="color_title_song">#FFFFFFFF</color>
+    <color name="color_subtitle_song">#FFFFFFFF</color>
+
+
+
 </resources>

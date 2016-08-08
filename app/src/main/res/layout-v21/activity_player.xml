@@ -107,7 +107,8 @@
             android:id="@+id/materialup.viewpager"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+            app:layout_behavior="@string/appbar_scrolling_view_behavior"
+            android:background="@color/app_bg" />
 
     </android.support.design.widget.CoordinatorLayout>
 

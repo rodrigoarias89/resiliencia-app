@@ -21,7 +21,9 @@
     android:layout_height="@dimen/media_item_height"
     android:focusable="true"
     android:clickable="true"
-    android:foreground="?attr/selectableItemBackground">
+    android:foreground="?attr/selectableItemBackground"
+    android:background="@color/music_list_bg"
+    >
     <!--android:foreground="?android:attr/selectableItemBackground"-->
     <ImageView
         android:id="@+id/play_eq"
@@ -52,7 +54,7 @@
             android:maxLines="1"
             android:ellipsize="end"
             android:textAppearance="?android:attr/textAppearanceMedium"
-            android:textColor="?android:attr/textColorPrimary"/>
+            android:textColor="@color/color_title_song" />
 
         <TextView
             android:id="@+id/description"
@@ -62,7 +64,7 @@
             android:maxLines="1"
             android:ellipsize="end"
             android:textAppearance="?android:attr/textAppearanceSmall"
-            android:textColor="?android:attr/textColorSecondary"/>
+            android:textColor="@color/color_subtitle_song"/>
 
     </LinearLayout>
 
