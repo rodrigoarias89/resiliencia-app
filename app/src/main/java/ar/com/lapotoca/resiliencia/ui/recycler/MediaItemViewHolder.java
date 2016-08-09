@@ -39,6 +39,9 @@ public class MediaItemViewHolder extends RecyclerView.ViewHolder implements View
         this.listener = listener;
         this.itemView.setOnClickListener(this);
         this.mDownloadView.setOnClickListener(this);
+
+//        mTitleView.setTypeface(FontUtils.getInstance().getBodonyTypeface());
+//        mTitleView.setTypeface(FontUtils.getInstance().getSardonyxTypeface());
     }
 
     public void setupView(Activity activity, MediaDescriptionCompat description, int state) {
