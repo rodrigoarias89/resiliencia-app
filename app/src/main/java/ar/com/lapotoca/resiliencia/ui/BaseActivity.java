@@ -93,9 +93,6 @@ public class BaseActivity extends ActionBarCastActivity implements MediaBrowserP
 
     protected void showPlaybackControls() {
         getFragmentManager().beginTransaction()
-                .setCustomAnimations(
-                        R.animator.slide_in_from_bottom, R.animator.slide_out_to_bottom,
-                        R.animator.slide_in_from_bottom, R.animator.slide_out_to_bottom)
                 .show(mControlsFragment)
                 .commit();
     }

@@ -119,7 +119,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:cardElevation="50dp"
-        android:layout_alignParentBottom="true">
+        android:layout_alignParentBottom="true"
+        android:background="@color/playback_bg">
 
         <fragment android:name="ar.com.lapotoca.resiliencia.ui.PlaybackControlsFragment"
             android:id="@+id/fragment_playback_controls"

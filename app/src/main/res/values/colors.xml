@@ -44,5 +44,11 @@
     <color name="bt_accent">#00b8d4</color>
 
 
+    <!--Playback controls-->
+    <color name="playback_bg">#ff2d2d2d</color>
+    <color name="playback_color_title_song">#FFFFFFFF</color>
+    <color name="playback_color_subtitle_song">#FFFFFFFF</color>
+
+
 
 </resources>
