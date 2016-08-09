@@ -1,20 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-        <style name="ResilienciaAppTheme" parent="Theme.AppCompat.DayNight.NoActionBar">
+    <style name="ResilienciaAppTheme" parent="Theme.Design.NoActionBar">
 
-                <item name="colorPrimary">@color/color_primary</item>
-                <item name="colorPrimaryDark">@color/color_primary_darker</item>
-                <item name="colorAccent">@color/bt_accent</item>
+        <item name="colorPrimary">@color/color_primary</item>
+        <!--status color bar-->
+        <item name="colorPrimaryDark">@color/color_primary_darker</item>
+        <item name="colorAccent">@color/bt_accent</item>
 
-                <item name="alertDialogTheme">@style/Theme.AppCompat.Dialog.Alert</item>
-                <item name="android:statusBarColor">@android:color/transparent</item>
-                <item name="android:windowDrawsSystemBarBackgrounds">true</item>
-                <item name="android:windowTranslucentStatus">true</item>
-                <item name="android:windowContentTransitions">true</item>
-        </style>
+        <item name="alertDialogTheme">@style/Theme.AppCompat.Dialog.Alert</item>
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:windowDrawsSystemBarBackgrounds">true</item>
+        <item name="android:windowTranslucentStatus">true</item>
+        <item name="android:windowContentTransitions">true</item>
+    </style>
 
-        <style name="SplashTheme" parent="Theme.AppCompat.NoActionBar">
-                <item name="android:windowBackground">@drawable/splash_bg</item>
-        </style>
+    <style name="SplashTheme" parent="Theme.AppCompat.NoActionBar">
+        <item name="android:windowBackground">@drawable/splash_bg</item>
+    </style>
 </resources>

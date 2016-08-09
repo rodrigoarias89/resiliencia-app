@@ -17,11 +17,10 @@
 <resources>
 
     <style name="ResilienciaAppTheme" parent="Theme.AppCompat.DayNight.NoActionBar">
-        <item name="colorPrimary">#ffc32a2a</item>
-        <item name="colorPrimaryDark">#ff851d1d</item>
-        <item name="colorAccent">#ff12b6f4</item>
+        <item name="colorPrimary">@color/color_primary</item>
+        <item name="colorPrimaryDark">@color/color_primary_darker</item>
+        <item name="colorAccent">@color/bt_accent</item>
         <item name="alertDialogTheme">@style/Theme.AppCompat.Dialog.Alert</item>
-
 
     </style>
 
