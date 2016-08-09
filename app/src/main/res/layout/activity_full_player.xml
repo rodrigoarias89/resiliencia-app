@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
 Copyright (C) 2014 The Android Open Source Project
 
 Licensed under the Apache License, Version 2.0 (the "License");
@@ -15,6 +14,7 @@ See the License for the specific language governing permissions and
 limitations under the License.
 -->
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/pageView"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -25,8 +25,9 @@ limitations under the License.
         android:id="@+id/background_image"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
+        android:contentDescription="@string/background_image_str"
         android:scaleType="centerCrop"
-        android:contentDescription="@string/background_image_str" />
+        tools:src="@drawable/disc_cover"/>
 
     <RelativeLayout
         android:layout_width="fill_parent"
@@ -40,49 +41,49 @@ limitations under the License.
             android:id="@+id/line1"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
             android:ellipsize="end"
             android:gravity="center_horizontal"
             android:maxLines="1"
             android:shadowColor="@android:color/black"
             android:shadowRadius="20"
             android:textAppearance="?android:attr/textAppearanceLarge"
-            android:textColor="@color/fullscreen_line_color"
-            android:layout_alignParentTop="true" />
+            android:textColor="@color/fullscreen_line_color" />
 
         <TextView
             android:id="@+id/line2"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
+            android:layout_below="@+id/line1"
             android:ellipsize="end"
             android:fontFamily="sans-serif-light"
             android:gravity="center_horizontal"
             android:maxLines="1"
-            android:textAppearance="?android:attr/textAppearanceMedium"
             android:shadowColor="@android:color/black"
             android:shadowRadius="20"
-            android:textColor="@color/fullscreen_secondary_line_color"
-            android:layout_below="@+id/line1" />
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textColor="@color/fullscreen_secondary_line_color" />
 
         <TextView
             android:id="@+id/line3"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
+            android:layout_below="@+id/line2"
             android:ellipsize="end"
             android:fontFamily="sans-serif-light"
             android:gravity="center_horizontal"
             android:maxLines="1"
-            android:textAppearance="?android:attr/textAppearanceMedium"
             android:shadowColor="@android:color/black"
             android:shadowRadius="20"
-            android:textColor="@color/fullscreen_secondary_line_color"
-            android:layout_below="@+id/line2" />
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textColor="@color/fullscreen_secondary_line_color" />
 
         <LinearLayout
             android:id="@+id/controllers"
-            android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
+            android:orientation="vertical"
             android:visibility="invisible">
 
             <RelativeLayout
@@ -93,8 +94,8 @@ limitations under the License.
                     android:id="@+id/startText"
                     android:layout_width="wrap_content"
                     android:layout_height="fill_parent"
-                    android:layout_marginStart="@dimen/text_view_margin"
                     android:layout_alignParentStart="true"
+                    android:layout_marginStart="@dimen/text_view_margin"
                     android:gravity="center_vertical"
                     android:maxLines="1"
                     android:textColor="@android:color/white" />
@@ -107,17 +108,17 @@ limitations under the License.
                     android:layout_gravity="center"
                     android:layout_marginLeft="5dp"
                     android:layout_marginRight="5dp"
-                    android:layout_toStartOf="@+id/endText"
-                    android:layout_toEndOf="@+id/startText" />
+                    android:layout_toEndOf="@+id/startText"
+                    android:layout_toStartOf="@+id/endText" />
 
                 <TextView
                     android:id="@+id/endText"
                     android:layout_width="wrap_content"
                     android:layout_height="fill_parent"
-                    android:layout_marginEnd="@dimen/end_text_margin"
                     android:layout_alignParentEnd="true"
-                    android:gravity="center_vertical"
                     android:layout_alignWithParentIfMissing="true"
+                    android:layout_marginEnd="@dimen/end_text_margin"
+                    android:gravity="center_vertical"
                     android:maxLines="1"
                     android:textColor="@android:color/white" />
 
@@ -133,8 +134,8 @@ limitations under the License.
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:background="?selectableItemBackgroundBorderless"
-                    android:src="@drawable/ic_skip_previous_white_48dp"
-                    android:contentDescription="@string/skip_prev"/>
+                    android:contentDescription="@string/skip_prev"
+                    android:src="@drawable/ic_skip_previous_white_48dp" />
 
                 <ImageView
                     android:id="@+id/play_pause"
@@ -142,8 +143,8 @@ limitations under the License.
                     android:layout_height="wrap_content"
                     android:layout_weight="2"
                     android:background="?selectableItemBackgroundBorderless"
-                    android:src="@drawable/uamp_ic_play_arrow_white_48dp"
-                    android:contentDescription="@string/play_pause"/>
+                    android:contentDescription="@string/play_pause"
+                    android:src="@drawable/uamp_ic_play_arrow_white_48dp" />
 
                 <ImageView
                     android:id="@+id/next"
@@ -151,24 +152,25 @@ limitations under the License.
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:background="?selectableItemBackgroundBorderless"
-                    android:src="@drawable/ic_skip_next_white_48dp"
-                    android:contentDescription="@string/skip_next"/>
+                    android:contentDescription="@string/skip_next"
+                    android:src="@drawable/ic_skip_next_white_48dp" />
 
             </LinearLayout>
 
         </LinearLayout>
 
         <TextView
+            android:id="@+id/lyrics"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/lyrics"
-            android:layout_below="@+id/line3"
             android:layout_above="@+id/controllers"
+            android:layout_below="@+id/line3"
             android:gravity="center_horizontal"
-            android:textColor="@color/fullscreen_line_color"
             android:scrollIndicators="right"
-            android:scrollbars = "vertical"/>
-
+            android:scrollbars="vertical"
+            android:textColor="@color/fullscreen_line_color"
+            tools:text="Lorem ipsum dolor sit amet, \nconsectetur adipiscing elit, sed eiusmod tempor incidunt ut labore et dolore magna aliqua.\n Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquid ex ea commodi consequat.\n Quis aute iure reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.\n Excepteur sint obcaecat cupiditat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."/>
+        <!--android:background="@drawable/fullscreen_lyrics_bg"-->
     </RelativeLayout>
 
     <ProgressBar
@@ -187,6 +189,6 @@ limitations under the License.
         android:layout_alignParentTop="true"
         android:background="@drawable/fullscreen_toolbar_bg_gradient"
         android:popupTheme="@style/ThemeOverlay.AppCompat.Light"
-        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"/>
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar" />
 
 </RelativeLayout>
