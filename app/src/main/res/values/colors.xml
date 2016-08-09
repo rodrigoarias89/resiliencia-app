@@ -15,8 +15,6 @@
   limitations under the License.
   -->
 <resources>
-    <color name="line_divider">#ff8d8989</color>
-    <color name="bt_accent">#00b8d4</color>
 
     <color name="error_message_background">#ffff1600</color>
 
@@ -31,6 +29,19 @@
 
     <color name="color_title_song">#FFFFFFFF</color>
     <color name="color_subtitle_song">#FFFFFFFF</color>
+
+    <color name="selected_tab_text">#00b8d4</color>
+    <color name="unselected_tab_text">#FFFFFFFF</color>
+    <color name="selected_tab_indicator">#00b8d4</color>
+    <color name="tab_bg">#ff414040</color>
+    <color name="line_divider">#ff8d8989</color>
+
+    <!--Toolbar-->
+    <!--<color name="color_primary">#ffc32a2a</color>-->
+    <!--<color name="color_primary_darker">#ff851d1d</color>-->
+    <color name="color_primary">#ff414040</color>
+    <color name="color_primary_darker">#ff2d2d2d</color>
+    <color name="bt_accent">#00b8d4</color>
 
 
 

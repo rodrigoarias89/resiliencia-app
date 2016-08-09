@@ -12,7 +12,6 @@ import ar.com.lapotoca.resiliencia.DownloadMusicManager;
 import ar.com.lapotoca.resiliencia.R;
 import ar.com.lapotoca.resiliencia.ui.custom.TabsAdapter;
 import ar.com.lapotoca.resiliencia.utils.AnalyticsHelper;
-import ar.com.lapotoca.resiliencia.utils.LogHelper;
 import ar.com.lapotoca.resiliencia.utils.NotificationHelper;
 import ar.com.lapotoca.resiliencia.utils.ShareHelper;
 
@@ -31,7 +30,6 @@ public class MusicPlayerActivity extends BaseActivity implements AppBarLayout.On
     private int mMaxScrollSize;
 
     private static final String ACTIVITY_NAME = MusicPlayerActivity.class.getSimpleName();
-    private static final String TAG = LogHelper.makeLogTag(MusicPlayerActivity.class);
     private static final String SAVED_MEDIA_ID = "ar.com.lapotoca.resiliencia.MEDIA_ID";
     public static final String FRAGMENT_TAG = "resiliencia_list_container";
 

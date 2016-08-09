@@ -13,10 +13,6 @@ import ar.com.lapotoca.resiliencia.model.MusicProvider;
  */
 public class QueueHelper {
 
-    private static final String TAG = LogHelper.makeLogTag(QueueHelper.class);
-
-    private static final int RANDOM_QUEUE_SIZE = 10;
-
     public static List<MediaSessionCompat.QueueItem> getPlayingQueue(String mediaId,
                                                                      MusicProvider musicProvider) {
 
@@ -24,20 +20,17 @@ public class QueueHelper {
         String[] hierarchy = MediaIDHelper.getHierarchy(mediaId);
 
         if (hierarchy.length != 2) {
-            LogHelper.e(TAG, "Could not build a playing queue for this mediaId: ", mediaId);
             return null;
         }
 
         String categoryType = hierarchy[0];
         String categoryValue = hierarchy[1];
-        LogHelper.d(TAG, "Creating playing queue for ", categoryType, ",  ", categoryValue);
 
         Iterable<MediaMetadataCompat> tracks = null;
         // This sample only supports genre and by_search category types.
         tracks = musicProvider.getMusicList();
 
         if (tracks == null) {
-            LogHelper.e(TAG, "Unrecognized category type: ", categoryType, " for media ", mediaId);
             return null;
         }
 

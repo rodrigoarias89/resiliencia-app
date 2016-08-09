@@ -96,8 +96,10 @@
                 android:id="@+id/materialup.tabs"
                 android:layout_width="fill_parent"
                 android:layout_height="?attr/actionBarSize"
-                app:tabSelectedTextColor="?android:attr/textColorPrimaryInverse"
-                app:tabIndicatorColor="?android:attr/textColorPrimaryInverse"
+                app:tabSelectedTextColor="@color/selected_tab_text"
+                app:tabIndicatorColor="@color/selected_tab_indicator"
+                app:tabTextColor="@color/unselected_tab_text"
+                app:tabBackground="@color/tab_bg"
                 app:tabIndicatorHeight="4dp"
                 />
         </android.support.design.widget.AppBarLayout>

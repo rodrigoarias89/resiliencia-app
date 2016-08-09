@@ -30,7 +30,6 @@ import ar.com.lapotoca.resiliencia.playback.Playback;
 import ar.com.lapotoca.resiliencia.playback.PlaybackManager;
 import ar.com.lapotoca.resiliencia.playback.QueueManager;
 import ar.com.lapotoca.resiliencia.ui.NowPlayingActivity;
-import ar.com.lapotoca.resiliencia.utils.LogHelper;
 import ar.com.lapotoca.resiliencia.utils.MediaIDHelper;
 
 /**
@@ -91,7 +90,7 @@ import ar.com.lapotoca.resiliencia.utils.MediaIDHelper;
 public class MusicService extends MediaBrowserServiceCompat implements
         PlaybackManager.PlaybackServiceCallback {
 
-    private static final String TAG = LogHelper.makeLogTag(MusicService.class);
+    private static final String TAG = MusicService.class.getName();
 
     // Extra on MediaSession that contains the Cast device name currently connected to
     public static final String EXTRA_CONNECTED_CAST = "ar.com.lapotoca.resiliencia.CAST_NAME";
@@ -140,7 +139,6 @@ public class MusicService extends MediaBrowserServiceCompat implements
 
         @Override
         public void onDisconnectionReason(int reason) {
-            LogHelper.d(TAG, "onDisconnectionReason");
             // This is our final chance to update the underlying stream position
             // In onDisconnected(), the underlying CastPlayback#mVideoCastConsumer
             // is disconnected and hence we update our local value of stream position
@@ -150,7 +148,6 @@ public class MusicService extends MediaBrowserServiceCompat implements
 
         @Override
         public void onDisconnected() {
-            LogHelper.d(TAG, "onDisconnected");
             mSessionExtras.remove(EXTRA_CONNECTED_CAST);
             mSession.setExtras(mSessionExtras);
             Playback playback = new LocalPlayback(MusicService.this, mMusicProvider);
@@ -166,7 +163,6 @@ public class MusicService extends MediaBrowserServiceCompat implements
     @Override
     public void onCreate() {
         super.onCreate();
-        LogHelper.d(TAG, "onCreate");
 
         mMusicProvider = MusicProvider.createInstance(this);
 
@@ -271,7 +267,6 @@ public class MusicService extends MediaBrowserServiceCompat implements
      */
     @Override
     public void onDestroy() {
-        LogHelper.d(TAG, "onDestroy");
         DownloadMusicManager.destroy();
         // Service is being killed, so make sure we release our resources
         mPlaybackManager.handleStopRequest(null);
@@ -284,8 +279,6 @@ public class MusicService extends MediaBrowserServiceCompat implements
     @Override
     public BrowserRoot onGetRoot(@NonNull String clientPackageName, int clientUid,
                                  Bundle rootHints) {
-        LogHelper.d(TAG, "OnGetRoot: clientPackageName=" + clientPackageName,
-                "; clientUid=" + clientUid + " ; rootHints=", rootHints);
         return new BrowserRoot(MediaIDHelper.MEDIA_ID_ROOT, null);
     }
 
@@ -362,10 +355,8 @@ public class MusicService extends MediaBrowserServiceCompat implements
             MusicService service = mWeakReference.get();
             if (service != null && service.mPlaybackManager.getPlayback() != null) {
                 if (service.mPlaybackManager.getPlayback().isPlaying()) {
-                    LogHelper.d(TAG, "Ignoring delayed stop since the media player is in use.");
                     return;
                 }
-                LogHelper.d(TAG, "Stopping service with delay handler.");
                 service.stopSelf();
             }
         }

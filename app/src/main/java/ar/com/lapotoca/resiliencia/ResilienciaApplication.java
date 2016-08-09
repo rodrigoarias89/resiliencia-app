@@ -11,6 +11,7 @@ import com.google.android.libraries.cast.companionlibrary.cast.VideoCastManager;
 
 import ar.com.lapotoca.resiliencia.ui.FullScreenPlayerActivity;
 import ar.com.lapotoca.resiliencia.utils.AnalyticsHelper;
+import ar.com.lapotoca.resiliencia.utils.FontUtils;
 
 public class ResilienciaApplication extends Application {
 
@@ -32,6 +33,7 @@ public class ResilienciaApplication extends Application {
     public void onCreate() {
         super.onCreate();
         AnalyticsHelper.createInstance(this);
+        FontUtils.init(this);
         FacebookSdk.sdkInitialize(getApplicationContext());
         String applicationId = getResources().getString(R.string.cast_application_id);
         VideoCastManager.initialize(

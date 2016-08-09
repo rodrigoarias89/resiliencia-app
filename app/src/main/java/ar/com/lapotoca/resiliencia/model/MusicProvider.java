@@ -16,7 +16,6 @@ import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 
-import ar.com.lapotoca.resiliencia.utils.LogHelper;
 import ar.com.lapotoca.resiliencia.utils.MediaIDHelper;
 
 /**
@@ -26,8 +25,6 @@ import ar.com.lapotoca.resiliencia.utils.MediaIDHelper;
 public class MusicProvider {
 
     private static MusicProvider instance;
-
-    private static final String TAG = LogHelper.makeLogTag(MusicProvider.class);
 
     private MusicProviderSource mSource;
 
@@ -133,7 +130,6 @@ public class MusicProvider {
      * for future reference, keying tracks by musicId and grouping by genre.
      */
     public void retrieveMediaAsync(final Callback callback) {
-        LogHelper.d(TAG, "retrieveMediaAsync called");
         if (mCurrentState == State.INITIALIZED) {
             if (callback != null) {
                 // Nothing to do, execute callback immediately
