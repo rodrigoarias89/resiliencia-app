@@ -49,6 +49,9 @@
     <color name="playback_color_title_song">#FFFFFFFF</color>
     <color name="playback_color_subtitle_song">#FFFFFFFF</color>
 
+    <!--Images-->
+    <color name="image_bg">#ff000000</color>
+
 
 
 </resources>
