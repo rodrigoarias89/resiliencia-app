@@ -95,8 +95,10 @@
                 android:id="@+id/materialup.tabs"
                 android:layout_width="fill_parent"
                 android:layout_height="?attr/actionBarSize"
-                app:tabSelectedTextColor="?android:attr/textColorPrimaryInverse"
-                app:tabIndicatorColor="?android:attr/textColorPrimaryInverse"
+                app:tabSelectedTextColor="@color/selected_tab_text"
+                app:tabIndicatorColor="@color/selected_tab_indicator"
+                app:tabTextColor="@color/unselected_tab_text"
+                app:tabBackground="@color/tab_bg"
                 app:tabIndicatorHeight="4dp"
                 />
         </android.support.design.widget.AppBarLayout>
@@ -106,22 +108,27 @@
             android:id="@+id/materialup.viewpager"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:background="@color/color_primary_darker"
             app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
     </android.support.design.widget.CoordinatorLayout>
 
-    <android.support.v7.widget.CardView
-        android:id="@+id/controls_container"
+    <fragment android:name="ar.com.lapotoca.resiliencia.ui.PlaybackControlsFragment"
+        android:id="@+id/fragment_playback_controls"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true">
+        android:layout_alignParentBottom="true"
+        tools:layout="@layout/fragment_playback_controls" />
 
-        <fragment android:name="ar.com.lapotoca.resiliencia.ui.PlaybackControlsFragment"
-            android:id="@+id/fragment_playback_controls"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            tools:layout="@layout/fragment_playback_controls" />
+    <!--<android.support.v7.widget.CardView-->
+        <!--android:id="@+id/controls_container"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_alignParentBottom="true"-->
+        <!--app:cardPreventCornerOverlap="true">-->
 
-    </android.support.v7.widget.CardView>
+        <!---->
+
+    <!--</android.support.v7.widget.CardView>-->
 
 </RelativeLayout>
