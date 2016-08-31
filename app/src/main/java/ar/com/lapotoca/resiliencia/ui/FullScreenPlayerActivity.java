@@ -303,7 +303,6 @@ public class FullScreenPlayerActivity extends ActionBarCastActivity {
             art = description.getIconBitmap();
         }
         if (art != null) {
-            // if we have the art cached or from the MediaDescription, use it:
             mBackgroundImage.setImageBitmap(art);
         } else {
             // otherwise, fetch a high res version and update:
@@ -326,7 +325,8 @@ public class FullScreenPlayerActivity extends ActionBarCastActivity {
         }
         mLine1.setText(description.getTitle());
         mLine2.setText(description.getSubtitle());
-        fetchImageAsync(description);
+        //por lo pronto vamos a usar la misma imagen local para todos
+//        fetchImageAsync(description);
 
         updateLyrics(description.getTitle().toString());
     }

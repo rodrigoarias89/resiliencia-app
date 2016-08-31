@@ -49,7 +49,7 @@
     <string name="facebook_title_share">Resiliencia - La Potoca</string>
     <string name="facebook_description_share_song">Escuchando %1$s</string>
     <string name="facebook_description_share_album">Escuchando a través de la App de Resiliencia.</string>
-    <string name="facebook_image_url_share">http://www.fordoogle.com.ar/lapotoca/album_art.jpg</string>
+    <string name="facebook_image_url_share">http://www.lapotocaok.com/app/images/album_art.jpg</string>
 
     <!--download-->
     <string name="downloading">Descargando canción</string>

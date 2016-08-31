@@ -25,10 +25,7 @@ public class RemoteJSONSource implements MusicProviderSource {
 
     private Context mContext;
 
-    protected static final String CATALOG_URL =
-            "http://storage.googleapis.com/automotive-media/music.json";
-
-    protected static final String HOST_URL = "http://www.fordoogle.com.ar/lapotoca/";
+    protected static final String HOST_URL = "http://www.lapotocaok.com/app/resources/";
 
     private static final String JSON_MUSIC = "music";
     private static final String JSON_TITLE = "title";

@@ -151,9 +151,10 @@ public class PlaybackControlsFragment extends Fragment {
                 break;
             case PlaybackStateCompat.STATE_PAUSED:
             case PlaybackStateCompat.STATE_STOPPED:
+                enablePlay = true;
+            case PlaybackStateCompat.STATE_PLAYING:
                 mImageView.setVisibility(View.VISIBLE);
                 progressBar.setVisibility(View.GONE);
-                enablePlay = true;
                 break;
             case PlaybackStateCompat.STATE_ERROR:
                 mImageView.setVisibility(View.VISIBLE);

@@ -16,7 +16,7 @@
   -->
 <resources>
 
-    <color name="error_message_background">#ffff1600</color>
+    <color name="error_message_background">#c31a24</color>
 
     <color name="fullscreen_secondary_line_color">#E5CCCCCC</color>
     <color name="fullscreen_line_color">#E5FFFFFF</color>
@@ -31,7 +31,7 @@
     <color name="color_subtitle_song">#FFFFFFFF</color>
 
     <color name="selected_tab_text">#00b8d4</color>
-    <color name="unselected_tab_text">#FFFFFFFF</color>
+    <color name="unselected_tab_text">#d7d1c0</color>
     <color name="selected_tab_indicator">#00b8d4</color>
     <color name="tab_bg">#ff414040</color>
     <color name="line_divider">#ff8d8989</color>
