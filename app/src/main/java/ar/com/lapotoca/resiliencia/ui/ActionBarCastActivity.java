@@ -12,7 +12,6 @@ import com.google.android.libraries.cast.companionlibrary.cast.callbacks.VideoCa
 
 import ar.com.lapotoca.resiliencia.DownloadMusicManager;
 import ar.com.lapotoca.resiliencia.R;
-import ar.com.lapotoca.resiliencia.utils.LogHelper;
 import ar.com.lapotoca.resiliencia.utils.ShareHelper;
 
 /**
@@ -21,7 +20,7 @@ import ar.com.lapotoca.resiliencia.utils.ShareHelper;
  */
 public abstract class ActionBarCastActivity extends AppCompatActivity {
 
-    private static final String TAG = LogHelper.makeLogTag(ActionBarCastActivity.class);
+    private static final String TAG = ActionBarCastActivity.class.getName();
 
     private VideoCastManager mCastManager;
     private Toolbar mToolbar;
@@ -30,12 +29,12 @@ public abstract class ActionBarCastActivity extends AppCompatActivity {
 
         @Override
         public void onFailed(int resourceId, int statusCode) {
-            LogHelper.d(TAG, "onFailed ", resourceId, " status ", statusCode);
+            //log?
         }
 
         @Override
         public void onConnectionSuspended(int cause) {
-            LogHelper.d(TAG, "onConnectionSuspended() was called with cause: ", cause);
+            //log?
         }
 
         @Override
@@ -52,7 +51,6 @@ public abstract class ActionBarCastActivity extends AppCompatActivity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        LogHelper.d(TAG, "Activity onCreate");
 
         // Ensure that Google Play Service is available.
         VideoCastManager.checkGooglePlayServices(this);
@@ -99,7 +97,6 @@ public abstract class ActionBarCastActivity extends AppCompatActivity {
         mToolbar = (Toolbar) findViewById(R.id.main_toolbar);
         if (mToolbar != null) {
             mToolbar.inflateMenu(R.menu.main);
-            //Sobreescribimos el titulo por otro TextView
             mToolbar.setTitle("");
             setSupportActionBar(mToolbar);
         }

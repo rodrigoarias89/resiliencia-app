@@ -33,7 +33,6 @@ import ar.com.lapotoca.resiliencia.R;
 import ar.com.lapotoca.resiliencia.ui.recycler.BrowseRecyclerAdapter;
 import ar.com.lapotoca.resiliencia.ui.recycler.MediaItemViewHolder;
 import ar.com.lapotoca.resiliencia.ui.recycler.SimpleDividerItemDecoration;
-import ar.com.lapotoca.resiliencia.utils.LogHelper;
 import ar.com.lapotoca.resiliencia.utils.MediaIDHelper;
 import ar.com.lapotoca.resiliencia.utils.NetworkHelper;
 
@@ -47,7 +46,7 @@ import ar.com.lapotoca.resiliencia.utils.NetworkHelper;
  */
 public class MediaBrowserFragment extends Fragment implements MediaItemViewHolder.OnMediaItemClickListener, PopupMenu.OnMenuItemClickListener {
 
-    private static final String TAG = LogHelper.makeLogTag(MediaBrowserFragment.class);
+    private static final String TAG = MediaBrowserFragment.class.getName();
 
     private static final String ARG_MEDIA_ID = "media_id";
 
@@ -92,15 +91,12 @@ public class MediaBrowserFragment extends Fragment implements MediaItemViewHolde
                     if (metadata == null) {
                         return;
                     }
-                    LogHelper.d(TAG, "Received metadata change to media ",
-                            metadata.getDescription().getMediaId());
                     mBrowserAdapter.notifyDataSetChanged();
                 }
 
                 @Override
                 public void onPlaybackStateChanged(@NonNull PlaybackStateCompat state) {
                     super.onPlaybackStateChanged(state);
-                    LogHelper.d(TAG, "Received state change: ", state);
                     switch (state.getState()) {
                         case PlaybackStateCompat.STATE_ERROR:
                         case PlaybackStateCompat.STATE_CONNECTING:
@@ -119,20 +115,17 @@ public class MediaBrowserFragment extends Fragment implements MediaItemViewHolde
                 public void onChildrenLoaded(@NonNull String parentId,
                                              @NonNull List<MediaBrowserCompat.MediaItem> children) {
                     try {
-                        LogHelper.d(TAG, "fragment onChildrenLoaded, parentId=" + parentId +
-                                "  count=" + children.size());
 
                         mBrowserAdapter = new BrowseRecyclerAdapter(children, mContext, MediaBrowserFragment.this);
                         recyclerView.setAdapter(mBrowserAdapter);
                         mBrowserAdapter.notifyDataSetChanged();
                     } catch (Throwable t) {
-                        LogHelper.e(TAG, "Error on childrenloaded", t);
+                        //log?
                     }
                 }
 
                 @Override
                 public void onError(@NonNull String id) {
-                    LogHelper.e(TAG, "browse fragment subscription onError, id=" + id);
                     Toast.makeText(getActivity(), R.string.error_loading_media, Toast.LENGTH_LONG).show();
                     checkForUserVisibleErrors(true);
                 }
@@ -182,9 +175,6 @@ public class MediaBrowserFragment extends Fragment implements MediaItemViewHolde
         // fetch browsing information to fill the listview:
         if (mMediaFragmentListener != null) {
             MediaBrowserCompat mediaBrowser = mMediaFragmentListener.getMediaBrowser();
-
-            LogHelper.d(TAG, "fragment.onStart, mediaId=", mMediaId,
-                    "  onConnected=" + mediaBrowser.isConnected());
 
             if (mediaBrowser.isConnected()) {
                 onConnected();

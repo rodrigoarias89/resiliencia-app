@@ -18,7 +18,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:padding="@dimen/playback_controls_padding">
+    android:padding="@dimen/playback_controls_padding"
+    android:background="@color/playback_bg">
 
     <ProgressBar
         android:layout_width="wrap_content"
@@ -48,23 +49,24 @@
         android:layout_centerVertical="true">
         <TextView
             android:id="@+id/title"
-            tools:text="The Best Music EVAH1111 THE BEST"
+            tools:text="Armando Lio"
             android:ellipsize="end"
             android:maxLines="1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:contentDescription="@string/currently_playing_song"
             android:textAppearance="?android:attr/textAppearanceMedium"
-            android:textColor="?android:attr/textColorPrimary"/>
+            android:textColor="@color/playback_color_title_song"/>
         <TextView
             android:id="@+id/artist"
-            tools:text="John Doe and Band"
+            tools:text="La Potoca"
             android:ellipsize="end"
             android:maxLines="1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:contentDescription="@string/currently_playing_artist"
-            android:textAppearance="?android:attr/textAppearanceSmall"/>
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:textColor="@color/playback_color_subtitle_song"/>
         <TextView
             android:id="@+id/extra_info"
             tools:text="casting to MyCast"
@@ -74,7 +76,9 @@
             android:layout_height="wrap_content"
             android:visibility="gone"
             android:contentDescription="@string/currently_playing_extra_info"
-            android:textAppearance="?android:attr/textAppearanceSmall"/>
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:textColor="@color/playback_color_subtitle_song"
+            />
     </LinearLayout>
     <ImageButton
         android:id="@+id/play_pause"

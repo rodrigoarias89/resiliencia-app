@@ -223,7 +223,7 @@ public class LyricsHelper {
                 "\n" +
                 "Ay, amor querido no te vayas nunca,\n" +
                 "quiero verte una vez más.");
-        put("aunconfieso...", "De olvidar me olvidé,\n" +
+        put("aunconfieso", "De olvidar me olvidé,\n" +
                 "me hice fiel a mis lamentos.\n" +
                 "Para anclar en la piel\n" +
                 "mi rechazo a perdernos.\n" +

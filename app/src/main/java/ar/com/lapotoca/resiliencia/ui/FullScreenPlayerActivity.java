@@ -33,7 +33,6 @@ import ar.com.lapotoca.resiliencia.AlbumArtCache;
 import ar.com.lapotoca.resiliencia.MusicService;
 import ar.com.lapotoca.resiliencia.R;
 import ar.com.lapotoca.resiliencia.utils.AnalyticsHelper;
-import ar.com.lapotoca.resiliencia.utils.LogHelper;
 import ar.com.lapotoca.resiliencia.utils.LyricsHelper;
 
 import static android.view.View.INVISIBLE;
@@ -46,7 +45,7 @@ import static android.view.View.VISIBLE;
 public class FullScreenPlayerActivity extends ActionBarCastActivity {
 
     private static final String ACTIVITY_NAME = FullScreenPlayerActivity.class.getSimpleName();
-    private static final String TAG = LogHelper.makeLogTag(FullScreenPlayerActivity.class);
+    private static final String TAG = FullScreenPlayerActivity.class.getName();
     private static final long PROGRESS_UPDATE_INTERNAL = 1000;
     private static final long PROGRESS_UPDATE_INITIAL_INTERVAL = 100;
 
@@ -86,7 +85,6 @@ public class FullScreenPlayerActivity extends ActionBarCastActivity {
     private final MediaControllerCompat.Callback mCallback = new MediaControllerCompat.Callback() {
         @Override
         public void onPlaybackStateChanged(@NonNull PlaybackStateCompat state) {
-            LogHelper.d(TAG, "onPlaybackstate changed", state);
             updatePlaybackState(state);
         }
 
@@ -103,11 +101,10 @@ public class FullScreenPlayerActivity extends ActionBarCastActivity {
             new MediaBrowserCompat.ConnectionCallback() {
                 @Override
                 public void onConnected() {
-                    LogHelper.d(TAG, "onConnected");
                     try {
                         connectToSession(mMediaBrowser.getSessionToken());
                     } catch (RemoteException e) {
-                        LogHelper.e(TAG, e, "could not connect media controller");
+                        //log?
                     }
                 }
             };
@@ -176,7 +173,7 @@ public class FullScreenPlayerActivity extends ActionBarCastActivity {
                             scheduleSeekbarUpdate();
                             break;
                         default:
-                            LogHelper.d(TAG, "onClick with state ", state.getState());
+                            //log?
                     }
                 }
             }
@@ -306,7 +303,6 @@ public class FullScreenPlayerActivity extends ActionBarCastActivity {
             art = description.getIconBitmap();
         }
         if (art != null) {
-            // if we have the art cached or from the MediaDescription, use it:
             mBackgroundImage.setImageBitmap(art);
         } else {
             // otherwise, fetch a high res version and update:
@@ -327,10 +323,10 @@ public class FullScreenPlayerActivity extends ActionBarCastActivity {
         if (description == null) {
             return;
         }
-        LogHelper.d(TAG, "updateMediaDescription called ");
         mLine1.setText(description.getTitle());
         mLine2.setText(description.getSubtitle());
-        fetchImageAsync(description);
+        //por lo pronto vamos a usar la misma imagen local para todos
+//        fetchImageAsync(description);
 
         updateLyrics(description.getTitle().toString());
     }
@@ -351,7 +347,6 @@ public class FullScreenPlayerActivity extends ActionBarCastActivity {
         if (metadata == null) {
             return;
         }
-        LogHelper.d(TAG, "updateDuration called ");
         int duration = (int) metadata.getLong(MediaMetadataCompat.METADATA_KEY_DURATION);
         mSeekbar.setMax(duration);
         mEnd.setText(DateUtils.formatElapsedTime(duration/1000));
@@ -399,7 +394,7 @@ public class FullScreenPlayerActivity extends ActionBarCastActivity {
                 stopSeekbarUpdate();
                 break;
             default:
-                LogHelper.d(TAG, "Unhandled state ", state.getState());
+                //log?
         }
 
         mSkipNext.setVisibility((state.getActions() & PlaybackStateCompat.ACTION_SKIP_TO_NEXT) == 0

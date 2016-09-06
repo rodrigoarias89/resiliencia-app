@@ -16,7 +16,6 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 import ar.com.lapotoca.resiliencia.DownloadMusicManager;
-import ar.com.lapotoca.resiliencia.utils.LogHelper;
 
 /**
  * Utility class to get a list of MusicTrack's based on a server-side JSON
@@ -24,14 +23,9 @@ import ar.com.lapotoca.resiliencia.utils.LogHelper;
  */
 public class RemoteJSONSource implements MusicProviderSource {
 
-    private static final String TAG = LogHelper.makeLogTag(RemoteJSONSource.class);
-
     private Context mContext;
 
-    protected static final String CATALOG_URL =
-            "http://storage.googleapis.com/automotive-media/music.json";
-
-    protected static final String HOST_URL = "http://www.fordoogle.com.ar/lapotoca/";
+    protected static final String HOST_URL = "http://www.lapotocaok.com/app/resources/";
 
     private static final String JSON_MUSIC = "music";
     private static final String JSON_TITLE = "title";
@@ -65,7 +59,6 @@ public class RemoteJSONSource implements MusicProviderSource {
             }
             return tracks.iterator();
         } catch (JSONException e) {
-            LogHelper.e(TAG, e, "Could not retrieve music list");
             throw new RuntimeException("Could not retrieve music list", e);
         }
     }
@@ -83,8 +76,6 @@ public class RemoteJSONSource implements MusicProviderSource {
         int trackNumber = json.getInt(JSON_TRACK_NUMBER);
         int totalTrackCount = json.getInt(JSON_TOTAL_TRACK_COUNT);
         int duration = json.getInt(JSON_DURATION) * 1000; // ms
-
-        LogHelper.d(TAG, "Found music track: ", json);
 
         SharedPreferences prefs = mContext.getSharedPreferences(DownloadMusicManager.PREFERENCES_NAME, 0);
         String localURL = prefs.getString(title, null);

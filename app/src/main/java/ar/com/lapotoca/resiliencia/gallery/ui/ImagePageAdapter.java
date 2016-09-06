@@ -30,15 +30,14 @@ public class ImagePageAdapter extends RecyclerView.Adapter<ImagePageAdapter.Imag
 
         View itemView = LayoutInflater.from(viewGroup.getContext())
                 .inflate(R.layout.list_image_card, viewGroup, false);
+        final ImagePageVH imagePageVH = new ImagePageVH(itemView);
         itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                final Intent intent = new Intent(mContext, ImageDetailActivity.class);
-                intent.putExtra(ImageDetailActivity.EXTRA_IMAGE, i);
-                mContext.startActivity(intent);
+                imagePageVH.startImageActivity();
             }
         });
-        return new ImagePageVH(itemView);
+        return imagePageVH;
     }
 
     @Override
@@ -65,6 +64,12 @@ public class ImagePageAdapter extends RecyclerView.Adapter<ImagePageAdapter.Imag
         public void loadImage(int i) {
             id = i;
             mImageFetcher.loadImage(Images.imageThumb[i].getUrl(), Images.imageThumb[i].isLocal(), mImageView);
+        }
+
+        public void startImageActivity() {
+            final Intent intent = new Intent(mContext, ImageDetailActivity.class);
+            intent.putExtra(ImageDetailActivity.EXTRA_IMAGE, id);
+            mContext.startActivity(intent);
         }
     }
 }
