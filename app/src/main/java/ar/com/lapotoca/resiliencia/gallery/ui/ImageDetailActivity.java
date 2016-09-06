@@ -222,10 +222,12 @@ public class ImageDetailActivity extends ActionBarCastActivity {
 
                     MediaScannerConnection.scanFile(context, paths, null, null);
                     NotificationHelper.showNotification(context, context.getString(R.string.download_image_succesfull));
+                    AnalyticsHelper.getInstance().sendDownloadImage(fileName);
 
 
                 } catch (Exception e) {
                     NotificationHelper.showNotification(context, context.getString(R.string.download_no_permissions));
+                    AnalyticsHelper.getInstance().sendImageDownloadFailed(e.getMessage());
                 }
 
                 return true;

@@ -48,8 +48,8 @@
     <string name="facebook_url_share">https://es-la.facebook.com/lapotocaoficial</string>
     <string name="facebook_title_share">Resiliencia - La Potoca</string>
     <string name="facebook_description_share_song">Escuchando %1$s</string>
-    <string name="facebook_description_share_album">Escuchando a través de la App de Resiliencia.</string>
-    <string name="facebook_image_url_share">http://www.lapotocaok.com/app/images/album_art.jpg</string>
+    <string name="facebook_description_share_album">Escuchando el nuevo disco de La Potoca, Resiliencia.</string>
+    <string name="facebook_image_url_share">http://www.lapotocaok.com/app/images/album_art.png</string>
 
     <!--download-->
     <string name="downloading">Descargando canción</string>

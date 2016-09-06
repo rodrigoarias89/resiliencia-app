@@ -20,6 +20,8 @@ public class AnalyticsHelper {
     private final static String SHARE_SONG_ACTION = "Compartir Cancion";
     private final static String SHARE_IMAGE_ACTION = "Compartir Imagen";
     private final static String DOWNLOAD_SONG_ACTION = "Descargar Cancion";
+    private final static String DOWNLOAD_IMAGE_ACTION = "Descargar Imagen";
+    private final static String DOWNLOAD_IMAGE_ERROR = "Error Imagen";
     private final static String PLAYBACK_PLAY_ACTION = "Reproducir";
     private final static String PLAYBACK_ERROR = "Error";
 
@@ -120,11 +122,27 @@ public class AnalyticsHelper {
                 .build());
     }
 
+    public void sendImageDownloadFailed(String exceptionMessage) {
+        mTracker.send(new HitBuilders.EventBuilder()
+                .setCategory(DOWNLOAD_CATEGORY)
+                .setAction(DOWNLOAD_IMAGE_ERROR)
+                .setLabel(exceptionMessage)
+                .build());
+    }
+
     public void sendPlaybackError(String exceptionMessage) {
         mTracker.send(new HitBuilders.EventBuilder()
                 .setCategory(PLAYBACK_CATEGORY)
                 .setAction(PLAYBACK_ERROR)
                 .setLabel(exceptionMessage)
+                .build());
+    }
+
+    public void sendDownloadImage(String imageName) {
+        mTracker.send(new HitBuilders.EventBuilder()
+                .setCategory(DOWNLOAD_CATEGORY)
+                .setAction(DOWNLOAD_IMAGE_ACTION)
+                .setLabel(imageName)
                 .build());
     }
 
