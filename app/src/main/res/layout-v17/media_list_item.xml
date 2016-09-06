@@ -23,7 +23,7 @@
     android:clickable="true"
     android:foreground="?attr/selectableItemBackground"
     android:background="@color/music_list_bg"
-    android:paddingRight="20dp">
+    >
     <!--android:foreground="?android:attr/selectableItemBackground"-->
     <ImageView
         android:id="@+id/play_eq"
@@ -32,10 +32,10 @@
         android:layout_alignParentStart="true"
         android:layout_centerVertical="true"
         android:layout_marginStart="@dimen/media_item_icon_margin_start"
+        android:tintMode="src_in"
         android:tint="@color/play_list_button"
         android:contentDescription="@string/play_item"
-        android:src="@drawable/ic_play_arrow_black_36dp"
-        android:layout_alignParentLeft="true" />
+        android:src="@drawable/ic_play_arrow_black_36dp"/>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -44,8 +44,7 @@
         android:layout_marginStart="@dimen/media_item_text_margin_start"
         android:layout_centerVertical="true"
         android:orientation="vertical"
-        android:layout_toLeftOf="@+id/song_menu_btn"
-        android:layout_toRightOf="@+id/play_eq">
+        android:layout_toLeftOf="@+id/song_menu_btn">
 
         <TextView
             android:id="@+id/title"
@@ -78,7 +77,6 @@
         android:layout_alignTop="@+id/play_eq"
         android:layout_alignBottom="@+id/play_eq"
         android:layout_marginEnd="@dimen/media_item_icon_margin_start"
-        android:tint="@color/play_list_button"
-        android:layout_alignParentRight="true" />
+        android:tint="@color/play_list_button" />
 
 </RelativeLayout>

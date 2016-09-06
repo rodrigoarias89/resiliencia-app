@@ -98,7 +98,8 @@ limitations under the License.
                     android:layout_marginStart="@dimen/text_view_margin"
                     android:gravity="center_vertical"
                     android:maxLines="1"
-                    android:textColor="@android:color/white" />
+                    android:textColor="@android:color/white"
+                    android:layout_alignParentLeft="true" />
 
                 <SeekBar
                     android:id="@+id/seekBar1"
@@ -109,18 +110,21 @@ limitations under the License.
                     android:layout_marginLeft="5dp"
                     android:layout_marginRight="5dp"
                     android:layout_toEndOf="@+id/startText"
-                    android:layout_toStartOf="@+id/endText" />
+                    android:layout_toStartOf="@+id/endText"
+                    android:layout_toRightOf="@+id/startText"
+                    android:layout_toLeftOf="@+id/endText" />
 
                 <TextView
                     android:id="@+id/endText"
                     android:layout_width="wrap_content"
                     android:layout_height="fill_parent"
                     android:layout_alignParentEnd="true"
-                    android:layout_alignWithParentIfMissing="true"
+                    android:layout_alignWithParentIfMissing="false"
                     android:layout_marginEnd="@dimen/end_text_margin"
                     android:gravity="center_vertical"
                     android:maxLines="1"
-                    android:textColor="@android:color/white" />
+                    android:textColor="@android:color/white"
+                    android:layout_alignParentRight="true" />
 
             </RelativeLayout>
 
