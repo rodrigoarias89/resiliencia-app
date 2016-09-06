@@ -21,6 +21,7 @@ public class AnalyticsHelper {
     private final static String SHARE_IMAGE_ACTION = "Compartir Imagen";
     private final static String DOWNLOAD_SONG_ACTION = "Descargar Cancion";
     private final static String PLAYBACK_PLAY_ACTION = "Reproducir";
+    private final static String PLAYBACK_ERROR = "Error";
 
     private final static String SHARE_APP_SUCCESS = "Completado";
     private final static String SHARE_APP_CANCEL = "Cancelado";
@@ -115,6 +116,14 @@ public class AnalyticsHelper {
         mTracker.send(new HitBuilders.EventBuilder()
                 .setCategory(SHARE_CATEGORY)
                 .setAction(SHARE_IMAGE_ERROR)
+                .setLabel(exceptionMessage)
+                .build());
+    }
+
+    public void sendPlaybackError(String exceptionMessage) {
+        mTracker.send(new HitBuilders.EventBuilder()
+                .setCategory(PLAYBACK_CATEGORY)
+                .setAction(PLAYBACK_ERROR)
                 .setLabel(exceptionMessage)
                 .build());
     }

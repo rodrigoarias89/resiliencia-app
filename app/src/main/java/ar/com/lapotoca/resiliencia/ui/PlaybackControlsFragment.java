@@ -16,10 +16,10 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import ar.com.lapotoca.resiliencia.MusicService;
 import ar.com.lapotoca.resiliencia.R;
+import ar.com.lapotoca.resiliencia.utils.AnalyticsHelper;
 
 /**
  * A class that shows the Media Queue to the user.
@@ -159,7 +159,7 @@ public class PlaybackControlsFragment extends Fragment {
             case PlaybackStateCompat.STATE_ERROR:
                 mImageView.setVisibility(View.VISIBLE);
                 progressBar.setVisibility(View.GONE);
-                Toast.makeText(getActivity(), state.getErrorMessage(), Toast.LENGTH_LONG).show();
+                AnalyticsHelper.getInstance().sendPlaybackError(state.getErrorMessage().toString());
                 break;
             default:
                 mImageView.setVisibility(View.VISIBLE);
