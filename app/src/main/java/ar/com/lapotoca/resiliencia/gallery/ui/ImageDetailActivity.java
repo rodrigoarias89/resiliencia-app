@@ -16,10 +16,13 @@
 
 package ar.com.lapotoca.resiliencia.gallery.ui;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.res.AssetManager;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
+import android.media.MediaScannerConnection;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
@@ -37,6 +40,7 @@ import android.widget.ImageView;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 
 import ar.com.lapotoca.resiliencia.R;
 import ar.com.lapotoca.resiliencia.gallery.provider.AssetProvider;
@@ -46,6 +50,7 @@ import ar.com.lapotoca.resiliencia.gallery.util.ImageCache;
 import ar.com.lapotoca.resiliencia.gallery.util.ImageFetcher;
 import ar.com.lapotoca.resiliencia.ui.ActionBarCastActivity;
 import ar.com.lapotoca.resiliencia.utils.AnalyticsHelper;
+import ar.com.lapotoca.resiliencia.utils.NotificationHelper;
 
 public class ImageDetailActivity extends ActionBarCastActivity {
 
@@ -53,6 +58,7 @@ public class ImageDetailActivity extends ActionBarCastActivity {
 
     private static final String IMAGE_CACHE_DIR = "images";
     public static final String EXTRA_IMAGE = "extra_image";
+    private static final int BUFFER_LENGHT = 1024;
 
     private ImagePagerAdapter mAdapter;
     private ImageFetcher mImageFetcher;
@@ -141,7 +147,6 @@ public class ImageDetailActivity extends ActionBarCastActivity {
             public boolean onMenuItemClick(MenuItem item) {
                 try {
 
-                    mPager.getCurrentItem();
                     ImageHolder img = Images.image[mPager.getCurrentItem()];
                     if (img == null) {
                         return false;
@@ -176,6 +181,57 @@ public class ImageDetailActivity extends ActionBarCastActivity {
                 }
             }
         });
+
+        MenuItem downloadItem = menu.findItem(R.id.download_asset);
+        downloadItem.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+
+                Context context = ImageDetailActivity.this;
+
+                String appDirectoryName = context.getString(R.string.app_name);
+                File imageRoot = new File(Environment.getExternalStoragePublicDirectory(
+                        Environment.DIRECTORY_PICTURES), appDirectoryName);
+
+                ImageHolder img = Images.image[mPager.getCurrentItem()];
+                if (img == null) {
+                    return false;
+                }
+
+                AssetManager assetManager = context.getAssets();
+                try {
+                    InputStream is = assetManager.open(img.getUrl());
+                    String fileName = img.getUrl().split("/")[1];
+
+                    imageRoot.mkdirs();
+                    File image = new File(imageRoot, fileName);
+
+                    byte[] buffer = new byte[BUFFER_LENGHT];
+                    FileOutputStream fos = new FileOutputStream(image);
+                    int read = 0;
+
+                    while ((read = is.read(buffer, 0, 1024)) >= 0) {
+                        fos.write(buffer, 0, read);
+                    }
+
+                    fos.flush();
+                    fos.close();
+                    is.close();
+
+                    String [] paths = {image.getAbsolutePath()};
+
+                    MediaScannerConnection.scanFile(context, paths, null, null);
+                    NotificationHelper.showNotification(context, context.getString(R.string.download_image_succesfull));
+
+
+                } catch (Exception e) {
+                    NotificationHelper.showNotification(context, context.getString(R.string.download_no_permissions));
+                }
+
+                return true;
+            }
+        });
+
         return true;
     }
 

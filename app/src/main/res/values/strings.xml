@@ -62,6 +62,7 @@
     <string name="download_all_empty">Ya descargaste todas las canciones</string>
     <string name="download_all_no_song_selected">No seleccionaste ninguna canción.</string>
     <string name="download_all_msg">Descargando %1$s canciones</string>
+    <string name="download_image_succesfull">Imagen descargada</string>
 
     <string name="open_content_drawer">Abre el menu</string>
     <string name="close_content_drawer">Cierra el menu</string>
