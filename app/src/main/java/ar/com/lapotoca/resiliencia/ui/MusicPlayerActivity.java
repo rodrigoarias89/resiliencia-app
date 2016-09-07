@@ -142,6 +142,9 @@ public class MusicPlayerActivity extends BaseActivity implements AppBarLayout.On
         if (mMaxScrollSize == 0)
             mMaxScrollSize = appBarLayout.getTotalScrollRange();
 
+        if(mMaxScrollSize == 0)
+            return;
+
         int percentage = (Math.abs(offset)) * 100 / mMaxScrollSize;
 
         if (percentage >= PERCENTAGE_TO_ANIMATE_AVATAR && mIsAvatarShown) {
