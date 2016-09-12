@@ -26,11 +26,16 @@ public class ShareHelper {
     }
 
     public void shareContentOnFacebook(Activity activity, MediaBrowserCompat.MediaItem item) {
-        String title = activity.getString(R.string.facebook_title_share);
         String songName = "" + item.getDescription().getTitle();
-        String description = String.format(activity.getString(R.string.facebook_description_share_song), songName);
+        this.shareContentOnFacebook(activity, songName);
+    }
+
+    public void shareContentOnFacebook(Activity activity, String songName) {
+        String title = String.format(activity.getString(R.string.facebook_title_song_share), songName);
+        String description = activity.getString(R.string.facebook_description_share_song);
         String url = activity.getString(R.string.facebook_url_share);
-        shareContentOnFacebook(activity, title, description, url, item.getDescription().getIconUri());
+        Uri uriImage = Uri.parse(activity.getString(R.string.facebook_image_url_share));
+        shareContentOnFacebook(activity, title, description, url, uriImage);
 
         AnalyticsHelper.getInstance().sendSongShareEvent(songName);
     }

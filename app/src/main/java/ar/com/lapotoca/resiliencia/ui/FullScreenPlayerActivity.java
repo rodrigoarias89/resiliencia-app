@@ -18,6 +18,7 @@ import android.support.v4.media.session.MediaSessionCompat;
 import android.support.v4.media.session.PlaybackStateCompat;
 import android.text.format.DateUtils;
 import android.text.method.ScrollingMovementMethod;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
@@ -34,6 +35,7 @@ import ar.com.lapotoca.resiliencia.MusicService;
 import ar.com.lapotoca.resiliencia.R;
 import ar.com.lapotoca.resiliencia.utils.AnalyticsHelper;
 import ar.com.lapotoca.resiliencia.utils.LyricsHelper;
+import ar.com.lapotoca.resiliencia.utils.ShareHelper;
 
 import static android.view.View.INVISIBLE;
 import static android.view.View.VISIBLE;
@@ -68,6 +70,7 @@ public class FullScreenPlayerActivity extends ActionBarCastActivity {
     private String mCurrentArtUrl;
     private final Handler mHandler = new Handler();
     private MediaBrowserCompat mMediaBrowser;
+    private String currentSongName;
 
     private final Runnable mUpdateProgressTask = new Runnable() {
         @Override
@@ -323,6 +326,7 @@ public class FullScreenPlayerActivity extends ActionBarCastActivity {
         if (description == null) {
             return;
         }
+        currentSongName = description.getTitle().toString();
         mLine1.setText(description.getTitle());
         mLine2.setText(description.getSubtitle());
         //por lo pronto vamos a usar la misma imagen local para todos
@@ -418,5 +422,21 @@ public class FullScreenPlayerActivity extends ActionBarCastActivity {
             currentPosition += (int) timeDelta * mLastPlaybackState.getPlaybackSpeed();
         }
         mSeekbar.setProgress((int) currentPosition);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle item selection
+        switch (item.getItemId()) {
+            case R.id.action_settings_compartir:
+                if(currentSongName != null && !currentSongName.isEmpty()) {
+                    ShareHelper.getInstance().shareContentOnFacebook(this, currentSongName);
+                } else {
+                    ShareHelper.getInstance().shareContentOnFacebook(this);
+                }
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 }
