@@ -10,307 +10,238 @@ import java.util.Map;
 public class LyricsHelper {
 
     public final static Map<String, String> mapLyrics = new HashMap<String, String>() {{
-        put("quenoimportenada", "Ni en mayo Frances me juego que hubo tanto fuego\n" +
-                "(su silueta aun en mi cama).\n" +
-                "Ni en mayo Francés me juego que hubo tanto fuego\n" +
-                "(Su silueta aún en mi cama).\n" +
-                "Suplicando lluvia que sacié mi cara tenue\n" +
-                "o narcosis matinal.\n" +
+        put("quenoimportenada", "El clima está en guerra con el mundo actual.\n" +
+                "Los niños mueren y al petróleo le rezas.\n" +
+                "La extracción pasó a ser algo \"natural\".\n" +
+                "Beber cianuro y a los pueblos Qom zarpar.\n" +
                 "\n" +
-                "Con el alma ya vencida\n" +
-                "y los ojos marchitados,\n" +
-                "me reinvento en sueños.\n" +
+                "En la escuela no hay cupo para progresar.\n" +
+                "Los 21 millones son por comentar.\n" +
+                "No hay negocio si invertís al Garraham.\n" +
+                "La hipocresía en globos vende la ciudad.\n" +
                 "\n" +
-                "Comenzaste con finura a buscar mis besos\n" +
-                "sin preguntas ni charlar.\n" +
-                "Un estilo muy seguro de decir te quiero\n" +
-                "del que no quiero escapar.\n" +
+                "No me mires de perfil,\n" +
+                "que en tu silencio\n" +
+                "se esconde la usura de este gobierno infiel.\n" +
+                "Tu miedo es su comodín,\n" +
+                "que no importe nada.\n" +
+                "Unámonos en un grito de rebelión.\n" +
                 "\n" +
-                "Conquistaste mi vacío.\n" +
-                "Vos creaste y derrumbaste\n" +
-                "el guión perfecto.\n" +
+                "El cáncer de la \"progresión\" transgénica.\n" +
+                "La pachamama llora y escupe del mar.\n" +
+                "La explotación, el hambre, el paco, el poxiran,\n" +
+                "son el efecto de la ambición del mal.\n" +
                 "\n" +
-                "Ya no tengo un corazón que me pueda soportar\n" +
-                "los momentos donde el frío abraza mi cuerpo.\n" +
-                "El reloj marcó las tres\n" +
-                "nada puede suceder,\n" +
-                "salvo que tu boca sane todos mis lamentos.\n" +
+                "No me mires de perfil\n" +
+                "que en tu silencio\n" +
+                "se esconde la usura de este sistema infiel.\n" +
+                "Tu miedo es su comodín,\n" +
+                "que no importe nada.\n" +
+                "Unámonos en un grito de rebelión.\n");
+        put("armandolio", "Eludió a la hormona maligna. \n" +
+                "Heredó esa zurda de Dios. \n" +
+                "Le agradezco, abuela, la siembra divina de toque, gamberra y sudor. \n" +
+                "Vómito en la cancha al periodismo. \n" +
+                "Pelé se arrodilla ante dos.\n" +
+                "De Gandolfi a Boateng sin cadera. \n" +
+                "El Che se sonríe; Hay revolución.\n" +
                 "\n" +
-                "Del archivo no resisto ni de tu recuerdo.\n" +
-                "Reencontré a mis lágrimas.\n" +
-                "Cinco viajes , mil noches inmersos sin sosiego\n" +
-                "a un oasis pasional.");
-        put("armandolio", "Después de estancarme en un pozo ciego.\n" +
-                "Después que me defrauden. Harto del fraudulento.\n" +
+                "Y vas a ver, lo que es amar, en ese encuentro inmaculado. \n" +
+                "Dos hombres y la redonda besándose desesperados. \n" +
+                "Deja jugar…\n" +
                 "\n" +
-                "Cambiaron mis ojos ya no creo en cuentos.\n" +
-                "La Viveza Criolla nuestro peor ejemplo.\n" +
+                "Fue el romance más puro del mundo, \n" +
+                "la pelota y el diez, Maradó. \n" +
+                "A un pueblo sufrido regó de alegría y estafó al pirata ladrón. \n" +
+                "Se plantó ante lo establecido. \n" +
+                "¿Viste alguna vez algo mejor? \n" +
+                "Le pelota nunca la manchaste dame otra zurda y que vuelva el Diego!\n" +
                 "\n" +
-                "Romper lazos con la egolatría y reír sin miedo.\n" +
-                "A un pueblo ignorante lo domina el silencio.\n" +
+                "Y vas a ver lo que es amar en ese encuentro inmaculado. \n" +
+                "Dos hombres y la redonda besándose desesperados. \n" +
+                "Y vos que estás ahí abombado, sin ganar nada y comparando, deja de hablar que están jugando.\n");
+        put("riodejaneiro", "Ya agotó el tiempo de descuento,\n" +
+                "hemos llegado al final\n" +
+                "Vos me dijiste \"paremos, lo siento\"\n" +
+                "yo me bebía en el bar.\n" +
                 "\n" +
-                "Yo no soy un pendejo.\n" +
-                "Yo no escribo leyes.\n" +
-                "¡A cantar sin filtros!\n" +
-                "¡Es hora de despertar!\n" +
+                "Las madrugadas se hicieron refugio,\n" +
+                "la angustia mi amistad\n" +
+                "Me hacía falta escuchar Calamaro\n" +
+                "sobre tu falda en la cama.\n" +
                 "\n" +
-                "La libertad es educar\n" +
-                "con libros que caminan\n" +
-                "El resignar es suicidar.\n" +
-                "La tele estupidiza.\n" +
+                "Cae la noche,\n" +
+                "voy a salir a reinar la ciudad\n" +
+                "a encontrar alguien\n" +
+                "que resucite mis ganas de andar.\n" +
                 "\n" +
-                "Antes que nos liguen otra soga al cuello\n" +
-                "que el poseer no te induzca, a ser su esclavo moderno\n" +
+                "Quedó su ropa en mi dormitorio,\n" +
+                "Aún su espíritu está,\n" +
+                "Le rezaría a todos los demonios\n" +
+                "así al infierno se va.\n" +
                 "\n" +
-                "Pensá por vos mismo y no repitas lo que no creas cierto.\n" +
-                "Los consejos de un viejo no siempre abren los cielos\n" +
+                "Te liberaste y dejaste en mi cuerpo\n" +
+                "un nudo existencial,\n" +
+                "qué me amarra, me acosa y me pega,\n" +
+                "hasta dejarme knockout.\n");
+        put("decaravana", "Descabellado, loco y solo me camino la ciudad\n" +
+                "buscando gente piola que no quiera dormir nunca más.\n" +
+                "Me cansé de sacar del medio, otra roja y llueve mal.\n" +
+                "Se va la vida y no pienso estar de reparto por acá!\n" +
                 "\n" +
-                "Yo no soy un pendejo.\n" +
-                "Yo no escribo leyes.\n" +
-                "¡A cantar sin filtros!\n" +
-                "¡Es hora de despertar!\n" +
+                "Si ya no estas, hoy seré el mismo que fui ayer,\n" +
+                "Si ya no estas, hoy puedo ser….\n" +
                 "\n" +
-                "La libertad es educar\n" +
-                "con libros que caminan.\n" +
-                "El resignar es suicidar.\n" +
-                "La tele estupidiza\n" +
+                "Llega la banda, hay brindis, todo se alborota a un lindo mal.\n" +
+                "Cuando juntamos almas siento que capaz puedo volar.\n" +
+                "Maquillo un poco mis problemas, froto manos al pensar\n" +
+                "¡qué rico es celebrar la nada cuando el viento tira atrás!\n" +
                 "\n" +
-                "Y no me vengan con el verso del sistema\n" +
-                "esto es América y nos sobra la miseria.\n" +
-                "Qué paradoja que hay\n" +
-                "Justicia, honestidad\n" +
-                "Secuestradas están!");
-        put("riodejaneiro", "Medios complotados a un circo exquisito.\n" +
-                "Tus tres celus y en Congo la muerte ahí va...\n" +
-                "Ellos dicen fabricar el parche que va aliviar\n" +
-                "el agujero existencial, el nuevo sol.\n" +
+                "Si ya no estas, hoy seré el mismo que fui ayer,\n" +
+                "Si ya no estas, hoy puedo ser….\n" +
                 "\n" +
-                "Te gestionan a tu dios como el dinero\n" +
-                "más imponen a quien hay que ir a rezar.\n" +
-                "Vos creíste y comprás, los seguís sin patalear\n" +
-                "¿No pensaste, por qué nunca te llenas?\n" +
+                "Arriesgar, decidir y no callarme jamás \n" +
+                "son mis lemas desde siempre \n" +
+                "aunque cueste mucho más.\n");
+        put("resilientes", "Vas masticando sueños, vas combatiendo infiernos \n" +
+                "y no sabés por donde andas.\n" +
+                "Los garrones existen, y hay que saber parirlos, para poder después remar. \n" +
                 "\n" +
-                "Ni en el éxtasis de medianoche\n" +
-                "ni en la estúpida moda de hoy\n" +
-                "vas encontrar jamás\n" +
-                "la razón que llenará\n" +
-                "como en el nacer de tu amor...no no no\n" +
+                "¿y qué me estás diciendo? ¿qué me baje de un sueño?\n" +
+                "Mi raza lucha hasta el final. \n" +
+                "Cobardes pecadores que anestesian deseos resignado su libertad. \n" +
                 "\n" +
-                "Revelate y sacudí tu pensamiento.\n" +
-                "Esto agota y ni una gota va a quedar.\n" +
-                "Su ambición de posesión\n" +
-                "es gemelo al dolor y al vació\n" +
-                "que maneja su facción.\n" +
+                "Vas caminando cielos, al dolor resistiendo y tu objetivo ahí está. \n" +
+                "La frustración nos pega, esta es la vida misma y hay huevos para levantar.\n" +
                 "\n" +
-                "¡Ellos mandan porque hay alguien que obedece!\n" +
-                "A tu oro no me lo puedo morfar.\n" +
-                "¿Querés ser campeón mundial?\n" +
-                "derroca el lucro mental\n" +
-                "dale pan a la verdad, casa y canción.");
-        put("decaravana", "Dame alguna alternativa,\n" +
-                "dame alguna chance en V.\n" +
-                "Dame un mundo de ilusiones aunque incite al daño.\n" +
-                "Conjuguemos el placer.\n" +
+                "Si alguna vez me salí del sendero (qué es otra parte de mi ser)\n" +
+                "Puedo fingir aún lo que te estoy diciendo, y eso me cueste morir.\n" +
                 "\n" +
-                "Dame tu soledad\n" +
-                "¡dame tu libertad!\n" +
+                "¿Qué mierda estás diciendo? ¿Qué me baje de un sueño?\n" +
+                "Mi raza lucha hasta el final. \n" +
+                "Cobardes pecadores que anestesian deseos resignado su libertad.\n");
+        put("jardinesdeavellaneda", "Busco en las piedras la perfecta para vos.\n" +
+                "La rabiosa, brava, la que sabe del valor.\n" +
+                "Vuela alto y lejos como dientes de león,\n" +
+                "pero llega al hueso, al hueso y corazón.\n" +
                 "\n" +
-                "Dame un manantial de sueños,\n" +
-                "dame tu anhelo también,\n" +
-                "Dame toda tu incoherencia aunque envenene al tiempo.\n" +
-                "Redimí lo que seré.\n" +
-                "Dame tu soledad\n" +
-                "¡dame tu libertad!\n" +
+                "Linda es la patada al hormiguero y a correr\n" +
+                "de un tropel amigo que ha perdido a que temer;\n" +
+                "greda, palos, ciegas moscas se echan a volar \n" +
+                "y esa abeja reina que se muere por matar.\n" +
                 "\n" +
-                "Dame la astucia cuando brillás.\n" +
-                "Dame una lluvia de placer.\n" +
-                "Dame tu sexo enajenado.\n" +
-                "Dame un peldaño de poder.\n" +
+                "No hay batallas vanas cuando lo veo sangrar,\n" +
+                "esa herida duele y no la quiero ver cerrar.\n" +
+                "Fábricas de fuego imposibles de apagar.\n" +
+                "Hoy su grito es mío y no me importa nada más.\n" +
                 "\n" +
-                "Son horas Tétricas en donde la nostalgia es Compañía,\n" +
-                "el sol está nublado, dos almas se disipan .\n" +
+                "Las libélulas de acero y de papel,\n" +
+                "asechan perversas la tormenta con su hiel\n" +
+                "y esta turba sigue devorando junto al sol\n" +
+                "el testigo amigo del desgarro de mi voz.\n");
+        put("campeonesdeesquina", "Chamuyaron que \"gloria\"\n" +
+                "era un cheque en blanco,\n" +
+                "que al \"campeón\" lo encontramos\n" +
+                "en la tele, en los bancos.\n" +
                 "\n" +
-                "El imán de tu rechazo\n" +
-                "cansa y enamora, ¿ves?\n" +
-                "Un tire y afloje de pensar maniobras\n" +
-                "para estar y no perder.\n" +
+                "Mis campeones de esquina\n" +
+                "no manejan un mango\n" +
+                "y lo poco que tienen \n" +
+                "se lo dan al de al lado.\n" +
                 "\n" +
-                "Dame tu soledad\n" +
-                "dame tu libertad!");
-        put("resilientes", "Explotando contra la almohada \n" +
-                "no hay caricia que preste calma.\n" +
-                "Gobernantes y policías\n" +
-                "dan la mano y venden asfixia.\n" +
+                "Cambian tu día oscuro\n" +
+                "con su oído, algún trago\n" +
+                "Al dolor lo doblegan\n" +
+                "Ellos nacen del barro.\n" +
                 "\n" +
-                "Gente vana con un proyecto\n" +
-                "Generar y agotar dinero.\n" +
-                "Ni preguntes por la embestida\n" +
-                "que el planeta planea algún día.\n" +
+                "No hay más letargos\n" +
+                "(A los ojos te hablo)\n" +
+                "No hay careta que seduzca\n" +
+                "a un corazón cantando.\n" +
                 "\n" +
-                "Y no, no pienso en la infracción\n" +
-                "de hacer ojo común\n" +
-                "el ver pibes con hambre.\n" +
+                "Chamuyaron que \"gloria\"\n" +
+                "es al buitre mamarle,\n" +
+                "que al \"campeón\" lo encontramos\n" +
+                "negociando y de traje.\n" +
                 "\n" +
-                "Pero te tengo aquí\n" +
-                "con tu hombro para un sí,\n" +
-                "la magia es creer\n" +
-                "que no veo sólo sed,\n" +
-                "OK.\n" +
-                "De a dos hay luz en casa.\n" +
+                "Mis campeones de esquina\n" +
+                "le torean a la muerte, \n" +
+                "callejean sus derechos\n" +
+                "con memoria entre dientes.\n" +
                 "\n" +
-                "El tiempo no pasó\n" +
-                "el mísero es el rey,\n" +
-                "pingüinos y guasones\n" +
-                "dueños de esta juerga\n" +
-                "OK.\n" +
-                "De a dos hay luz en casa.\n" +
+                "No hay más letargos\n" +
+                "(A los ojos te hablo).\n" +
+                "No hay careta que seduzca\n" +
+                "a un corazón cantando.\n" +
                 "\n" +
-                "En un laberinto lleno de pretextos fríos\n" +
-                "voy a celebrar con tu cuerpo y el mío.");
-        put("jardinesdeavellaneda", "Pedir más sería palpar la ambición\n" +
-                "(Siempre caigo en excesos).\n" +
-                "Catarata impulsiva con sabor\n" +
-                "de un célebre encuentro.\n" +
+                "Si me quedo solo \n" +
+                "por decir las cosas que voy sintiendo\n" +
+                "yo a este mundo,\n" +
+                "no le pertenezco.\n");
+        put("aunconfieso", "Ya mis cuentos no encantaban, \n" +
+                "pasaste a escribir vos.\n" +
+                "Caminamos despacito buscando un…qué se yo.\n" +
+                "Aún confieso que la noche se hace larga. \n" +
+                "Hoy charló sólo e inventando que el vino es para dos... \n" +
                 "\n" +
-                "Aún recuerdo mi asalto a tu armazón\n" +
-                "sin rehenes y con versos.\n" +
-                "Y esperando el arribo de tu no\n" +
-                "del cielo cayó un beso.\n" +
+                "Y la Cruz la llevo porque estas cada mañana en mi vida. \n" +
+                "Yo no soy el tipo que se fue y tampoco tu alegría. \n" +
                 "\n" +
-                "Probablemente crea que todo es la ilusión\n" +
-                "de que tu piel es combo con la luna,\n" +
-                "y sin embargo sienta que ya no hay más dolor\n" +
-                "con tu presencia cerca de mis lunas.\n" +
+                "Y confieso que me cuesta contarte como soy. \n" +
+                "El silencio y mis miedos clavaron mis manos. \n" +
+                "No es barato estar de oferta cuando tú gran pasión\n" +
+                " se ha vendido y se aleja en la feria del amor. \n" +
                 "\n" +
-                "Amores clandestinos.\n" +
+                "Y la Cruz la llevo porque estas cada mañana en mi vida. \n" +
+                "Yo no soy el tipo que se fue y tampoco tu alegría. \n" +
                 "\n" +
-                "Encontrar felicidad en este ruin\n" +
-                "es utopía tonta,\n" +
-                "pero un poco de esa sensación sentí\n" +
-                "cuando bailaste loca.\n" +
+                "Confieso que busco el reflejo de tu alma en el rostro de otra y tiendo a arruinar. \n" +
+                "Y eso se da porque mi cuerpo es adicto a tu piel que perfuma a mi soledad.\n" +
+                "Y estoy aquí repleto de bronca y con ganas de abrazarte hasta enloquecer.\n");
+        put("beatlesvinoyreir", "Recordé cuando dijiste\n" +
+                "“amate para amar”.\n" +
+                "Sencillez, Beatles, vino y reír\n" +
+                "tu forma de enseñar.\n" +
+                "La bondad fue tan grande eras afano acá. \n" +
                 "\n" +
-                "No creer en lo casual me hace pensar\n" +
-                "y enroscarme en tu magia.\n" +
-                "¡Una historia tan romántica de dos\n" +
-                "que salva la distancia!");
-        put("campeonesdeesquina", "Y así fue, se quebró nuestro dique\n" +
-                "que sostenía ficción.\n" +
-                "Dos guerreros maltratados\n" +
-                "limando a la obsesión.\n" +
+                "Voy peleándole a la vida junto a vos, aunque ya no estás, \n" +
+                "y me enfoco en repetir todo tu amor desde la verdad.\n" +
                 "\n" +
-                "El peor de los jueces metido\n" +
-                "cumpliendo su gran misión.\n" +
-                "Derretir los sentimientos,\n" +
-                "lo apodan: El tiempo.\n" +
+                "Me decís que desde el sofá \n" +
+                "todo se ve normal, \n" +
+                "pero el brillo vive en arriesgar\n" +
+                "una y mil veces más.\n" +
                 "\n" +
-                "Solo una condición es lo que pido:\n" +
-                "No exijamos olvidar.\n" +
+                "Voy peleándole a la vida junto a vos, aunque ya no estás, \n" +
+                "y me enfoco en repetir todo tu amor desde la verdad.\n" +
                 "\n" +
-                "Cada cual en su mesa y el tinto\n" +
-                "que quede a medio tomar.\n" +
-                "¡Qué loco que seas extraño!\n" +
-                "En mis entrañas estás.\n" +
+                "Volando ahí estás, con vos el sol juega.\n" +
+                "Volando ahí estás, con vos el sol juega.\n");
+        put("certeza", "Que bien que estás\n" +
+                "delineada en el sofá!\n" +
+                "Bob Marley suena y vos cantas.\n" +
                 "\n" +
-                "Y un mensaje etílico a.m\n" +
-                "buscando tu vanidad.\n" +
-                "Un furgón de ansiedades\n" +
-                "sin respuestas en vía.\n" +
+                "Labios sedientos, \n" +
+                "un vino tinto va a ayudar\n" +
+                "y por tu cuerpo voy a entrar.\n" +
                 "\n" +
-                "Solo una condición es lo que pido:\n" +
-                "No exijamos olvidar.\n" +
-                "Ese miedo a perderte\n" +
-                "y a esa extraña soledad.\n" +
+                "Pero gritas sin consuelo\n" +
+                "para exprimir la pasión.\n" +
+                "Mañana no existen dueños,\n" +
+                "la certeza es que esta noche yo manejo tu corazón.\n" +
                 "\n" +
-                "Ay, amor querido no te vayas nunca,\n" +
-                "quiero verte una vez más.");
-        put("aunconfieso", "De olvidar me olvidé,\n" +
-                "me hice fiel a mis lamentos.\n" +
-                "Para anclar en la piel\n" +
-                "mi rechazo a perdernos.\n" +
+                "Los ojos rojos\n" +
+                "y a mi oído susurras:\n" +
+                "“Hoy no me pienso enamorar”\n" +
                 "\n" +
-                "Muchos consejos que son sanos\n" +
-                "son insanos para mí,\n" +
-                "voy a arruinarme en su sentir.\n" +
+                "Estamos perdidos,\n" +
+                "pero me siento vivo acá,\n" +
+                "y entre tus piernas levitar.\n" +
                 "\n" +
-                "Cuando el amor es compatible\n" +
-                "imposible es compartir\n" +
-                "mirar a la ilusión partir.\n" +
-                "\n" +
-                "Encontré, en su ser\n" +
-                "un refugio a mi abismo.\n" +
-                "Fue bordar mi babel,\n" +
-                "ver el alma en equilibrio.\n" +
-                "\n" +
-                "Muchos consejos que son sanos\n" +
-                "son insanos para mí,\n" +
-                "voy a arruinarme en su sentir.\n" +
-                "Cuando el amor es compatible\n" +
-                "imposible es compartir\n" +
-                "mirar a la ilusión partir.");
-        put("beatlesvinoyreir", "Dicen que somos los traidores\n" +
-                "que deleitamos liberar.\n" +
-                "El dolor nos transforma. Te voy a contar:\n" +
-                "\n" +
-                "Hijos, siervos de depresiones,\n" +
-                "con la avidez de emancipar\n" +
-                "a un mundo embrujado de frialdad.\n" +
-                "\n" +
-                "Hartos de amo, patrón y jefe\n" +
-                "De descifrar sólo sobras.\n" +
-                "(La inocencia ha golpeado feos uppercuts)\n" +
-                "\n" +
-                "Nacen secuelas desde un suelo\n" +
-                "que alguna vez brotó: Esperar.\n" +
-                "Secuencias que no busqué inhalar\n" +
-                "\n" +
-                "Los marginados estamos aquí\n" +
-                "tan libres como toda honestidad,\n" +
-                "la droga pide y la noche nos declara su amabilidad.\n" +
-                "Los marginados estamos aquí\n" +
-                "pidiendo pista, buscando intentar.\n" +
-                "Lo gris es nuestro espejo\n" +
-                "por vehemencia a quien no está más.\n" +
-                "\n" +
-                "Distinto es acusar de \"vagos\"\n" +
-                "si no existe oportunidad.\n" +
-                "Distinta es la cena\n" +
-                "cuando ni hay pan\n" +
-                "\n" +
-                "En un cosmos de aflicciones\n" +
-                "la chispa del crimen muestra\n" +
-                "almas anhelando identidad.");
-        put("certeza", "Dicen que somos los traidores\n" +
-                "que deleitamos liberar.\n" +
-                "El dolor nos transforma. Te voy a contar:\n" +
-                "\n" +
-                "Hijos, siervos de depresiones,\n" +
-                "con la avidez de emancipar\n" +
-                "a un mundo embrujado de frialdad.\n" +
-                "\n" +
-                "Hartos de amo, patrón y jefe\n" +
-                "De descifrar sólo sobras.\n" +
-                "(La inocencia ha golpeado feos uppercuts)\n" +
-                "\n" +
-                "Nacen secuelas desde un suelo\n" +
-                "que alguna vez brotó: Esperar.\n" +
-                "Secuencias que no busqué inhalar\n" +
-                "\n" +
-                "Los marginados estamos aquí\n" +
-                "tan libres como toda honestidad,\n" +
-                "la droga pide y la noche nos declara su amabilidad.\n" +
-                "Los marginados estamos aquí\n" +
-                "pidiendo pista, buscando intentar.\n" +
-                "Lo gris es nuestro espejo\n" +
-                "por vehemencia a quien no está más.\n" +
-                "\n" +
-                "Distinto es acusar de \"vagos\"\n" +
-                "si no existe oportunidad.\n" +
-                "Distinta es la cena\n" +
-                "cuando ni hay pan\n" +
-                "\n" +
-                "En un cosmos de aflicciones\n" +
-                "la chispa del crimen muestra\n" +
-                "almas anhelando identidad.");
+                "Pero gritas sin consuelo\n" +
+                "para exprimir la pasión.\n" +
+                "Mañana no existen dueños,\n" +
+                "la certeza es que esta noche yo manejo tu corazón.\n");
 
 
     }};
