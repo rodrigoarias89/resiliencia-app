@@ -22,17 +22,17 @@ package ar.com.lapotoca.resiliencia.gallery.provider;
 public class Images {
 
     public final static ImageHolder[] image = new ImageHolder[] {
-            new ImageHolder(true, "images/disc_cover.jpg"),
-            new ImageHolder(true, "images/potoca_shield.png"),
-            new ImageHolder(true, "images/images.jpg"),
-            new ImageHolder(true, "images/logo_3.png"),
+            new ImageHolder(true, "images/logo.png"),
+            new ImageHolder(true, "images/contratapa.png"),
+            new ImageHolder(true, "images/poster.png"),
+            new ImageHolder(true, "images/tapa.png"),
     };
 
     public final static ImageHolder[] imageThumb = new ImageHolder[] {
-            new ImageHolder(true, "images_tumblr/disc_cover.jpg"),
-            new ImageHolder(true, "images_tumblr/potoca_shield.png"),
-            new ImageHolder(true, "images_tumblr/images.jpeg"),
-            new ImageHolder(true, "images_tumblr/logo_3.png"),
+            new ImageHolder(true, "images_tumblr/logo.png"),
+            new ImageHolder(true, "images_tumblr/contratapa.png"),
+            new ImageHolder(true, "images_tumblr/poster.png"),
+            new ImageHolder(true, "images_tumblr/tapa.png"),
 
     };
 }
