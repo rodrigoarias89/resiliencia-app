@@ -3,6 +3,7 @@ package ar.com.lapotoca.resiliencia.gallery.ui;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -46,6 +47,10 @@ public class ImageListFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.image_page_fragment, container, false);
         mRecyclerView = (RecyclerView) rootView.findViewById(R.id.my_recycler_view);
+
+        RecyclerView.LayoutManager lm = new GridLayoutManager(this.getContext(), 2);
+        mRecyclerView.setLayoutManager(lm);
+
         return rootView;
     }
 
