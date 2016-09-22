@@ -1,21 +1,26 @@
 package ar.com.lapotoca.resiliencia.ui;
 
-import android.app.Fragment;
+import android.app.Activity;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.net.ConnectivityManager;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.media.MediaBrowserCompat;
 import android.support.v4.media.MediaMetadataCompat;
 import android.support.v4.media.session.MediaControllerCompat;
 import android.support.v4.media.session.PlaybackStateCompat;
+import android.support.v7.widget.PopupMenu;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
@@ -23,25 +28,25 @@ import android.widget.Toast;
 
 import java.util.List;
 
+import ar.com.lapotoca.resiliencia.DownloadMusicManager;
 import ar.com.lapotoca.resiliencia.R;
 import ar.com.lapotoca.resiliencia.ui.recycler.BrowseRecyclerAdapter;
 import ar.com.lapotoca.resiliencia.ui.recycler.MediaItemViewHolder;
 import ar.com.lapotoca.resiliencia.ui.recycler.SimpleDividerItemDecoration;
-import ar.com.lapotoca.resiliencia.utils.LogHelper;
 import ar.com.lapotoca.resiliencia.utils.MediaIDHelper;
 import ar.com.lapotoca.resiliencia.utils.NetworkHelper;
 
 /**
  * A Fragment that lists all the various browsable queues available
  * from a {@link android.service.media.MediaBrowserService}.
- * <p>
+ * <p/>
  * It uses a {@link MediaBrowserCompat} to connect to the {@link ar.com.lapotoca.resiliencia.MusicService}.
  * Once connected, the fragment subscribes to get all the children.
  * All {@link MediaBrowserCompat.MediaItem}'s that can be browsed are shown in a ListView.
  */
-public class MediaBrowserFragment extends Fragment implements MediaItemViewHolder.OnMediaItemClickListener {
+public class MediaBrowserFragment extends Fragment implements MediaItemViewHolder.OnMediaItemClickListener, PopupMenu.OnMenuItemClickListener {
 
-    private static final String TAG = LogHelper.makeLogTag(MediaBrowserFragment.class);
+    private static final String TAG = MediaBrowserFragment.class.getName();
 
     private static final String ARG_MEDIA_ID = "media_id";
 
@@ -53,6 +58,9 @@ public class MediaBrowserFragment extends Fragment implements MediaItemViewHolde
     private MediaFragmentListener mMediaFragmentListener;
     private View mErrorView;
     private TextView mErrorMessage;
+
+    private int selectedItem;
+
     private final BroadcastReceiver mConnectivityChangeReceiver = new BroadcastReceiver() {
         private boolean oldOnline = false;
 
@@ -83,16 +91,20 @@ public class MediaBrowserFragment extends Fragment implements MediaItemViewHolde
                     if (metadata == null) {
                         return;
                     }
-                    LogHelper.d(TAG, "Received metadata change to media ",
-                            metadata.getDescription().getMediaId());
                     mBrowserAdapter.notifyDataSetChanged();
                 }
 
                 @Override
                 public void onPlaybackStateChanged(@NonNull PlaybackStateCompat state) {
                     super.onPlaybackStateChanged(state);
-                    LogHelper.d(TAG, "Received state change: ", state);
-                    checkForUserVisibleErrors(false);
+                    switch (state.getState()) {
+                        case PlaybackStateCompat.STATE_ERROR:
+                        case PlaybackStateCompat.STATE_CONNECTING:
+                        case PlaybackStateCompat.STATE_NONE:
+                            checkForUserVisibleErrors(false);
+                        default:
+                            break;
+                    }
                     mBrowserAdapter.notifyDataSetChanged();
                 }
             };
@@ -103,38 +115,43 @@ public class MediaBrowserFragment extends Fragment implements MediaItemViewHolde
                 public void onChildrenLoaded(@NonNull String parentId,
                                              @NonNull List<MediaBrowserCompat.MediaItem> children) {
                     try {
-                        LogHelper.d(TAG, "fragment onChildrenLoaded, parentId=" + parentId +
-                                "  count=" + children.size());
 
                         mBrowserAdapter = new BrowseRecyclerAdapter(children, mContext, MediaBrowserFragment.this);
                         recyclerView.setAdapter(mBrowserAdapter);
                         mBrowserAdapter.notifyDataSetChanged();
                     } catch (Throwable t) {
-                        LogHelper.e(TAG, "Error on childrenloaded", t);
+                        //log?
                     }
                 }
 
                 @Override
                 public void onError(@NonNull String id) {
-                    LogHelper.e(TAG, "browse fragment subscription onError, id=" + id);
                     Toast.makeText(getActivity(), R.string.error_loading_media, Toast.LENGTH_LONG).show();
                     checkForUserVisibleErrors(true);
                 }
             };
 
+    public static Fragment newInstance() {
+        return new MediaBrowserFragment();
+    }
+
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        // If used on an activity that doesn't implement MediaFragmentListener, it
-        // will throw an exception as expected:
         mMediaFragmentListener = (MediaFragmentListener) context;
+    }
+
+    @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
+            mMediaFragmentListener = (MediaFragmentListener) activity;
+        }
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        LogHelper.d(TAG, "fragment.onCreateView");
-
         View rootView = inflater.inflate(R.layout.fragment_list, container, false);
 
         mErrorView = rootView.findViewById(R.id.playback_error);
@@ -145,6 +162,9 @@ public class MediaBrowserFragment extends Fragment implements MediaItemViewHolde
         recyclerView.addItemDecoration(new SimpleDividerItemDecoration(mContext));
         recyclerView.setAdapter(mBrowserAdapter);
 
+        //restart selectedItem
+        selectedItem = -1;
+
         return rootView;
     }
 
@@ -153,13 +173,12 @@ public class MediaBrowserFragment extends Fragment implements MediaItemViewHolde
         super.onStart();
 
         // fetch browsing information to fill the listview:
-        MediaBrowserCompat mediaBrowser = mMediaFragmentListener.getMediaBrowser();
+        if (mMediaFragmentListener != null) {
+            MediaBrowserCompat mediaBrowser = mMediaFragmentListener.getMediaBrowser();
 
-        LogHelper.d(TAG, "fragment.onStart, mediaId=", mMediaId,
-                "  onConnected=" + mediaBrowser.isConnected());
-
-        if (mediaBrowser.isConnected()) {
-            onConnected();
+            if (mediaBrowser.isConnected()) {
+                onConnected();
+            }
         }
 
         // Registers BroadcastReceiver to track network connection changes.
@@ -237,9 +256,13 @@ public class MediaBrowserFragment extends Fragment implements MediaItemViewHolde
     }
 
     private void checkForUserVisibleErrors(boolean forceError) {
+        checkForUserVisibleErrors(forceError, false);
+    }
+
+    private void checkForUserVisibleErrors(boolean forceError, boolean isLocal) {
         boolean showError = forceError;
         // If offline, message is about the lack of connectivity:
-        if (!NetworkHelper.isOnline(getActivity())) {
+        if (!isLocal && !NetworkHelper.isOnline(getActivity())) {
             mErrorMessage.setText(R.string.error_no_connection);
             showError = true;
         } else {
@@ -260,9 +283,6 @@ public class MediaBrowserFragment extends Fragment implements MediaItemViewHolde
             }
         }
         mErrorView.setVisibility(showError ? View.VISIBLE : View.GONE);
-        LogHelper.d(TAG, "checkForUserVisibleErrors. forceError=", forceError,
-                " showError=", showError,
-                " isOnline=", NetworkHelper.isOnline(getActivity()));
     }
 
     private void updateTitle() {
@@ -283,24 +303,58 @@ public class MediaBrowserFragment extends Fragment implements MediaItemViewHolde
 
     @Override
     public void onMediaItemClicked(int position) {
-        Log.i(TAG, "item clicked: "+position);
-        checkForUserVisibleErrors(false);
+        Log.i(TAG, "item clicked: " + position);
         MediaBrowserCompat.MediaItem item = mBrowserAdapter.getItem(position);
+        boolean isLocal = DownloadMusicManager.getInstance().isLocal(item);
+        checkForUserVisibleErrors(false, isLocal);
         mMediaFragmentListener.onMediaItemSelected(item);
     }
 
-    @Override
-    public void onMediaItemDownloadClicked(int position) {
-        Log.i(TAG, "item clicked for download: "+position);
-        MediaBrowserCompat.MediaItem item = mBrowserAdapter.getItem(position);
-        mMediaFragmentListener.onMediaItemDownloadSelected(item);
+    public void onMediaItemSettingsClicked(View view, int position) {
+        selectedItem = position;
+        PopupMenu popup = new PopupMenu(this.getActivity(), view);
+        popup.setOnMenuItemClickListener(this);
+        MenuInflater inflater = popup.getMenuInflater();
+        inflater.inflate(R.menu.song_menu, popup.getMenu());
 
+        MediaBrowserCompat.MediaItem item = mBrowserAdapter.getItem(position);
+        DownloadMusicManager downloadMusicManager = DownloadMusicManager.getInstance();
+        if (downloadMusicManager != null) {
+            if (DownloadMusicManager.getInstance().isLocal(item)) {
+                popup.getMenu().findItem(R.id.action_settings_descargar).setEnabled(false);
+            }
+        }
+
+        popup.show();
+    }
+
+    public boolean onMenuItemClick(MenuItem item) {
+        if (selectedItem < 0) {
+            return false;
+        }
+
+        MediaBrowserCompat.MediaItem mediaItem = mBrowserAdapter.getItem(selectedItem);
+        selectedItem = -1;
+
+        switch (item.getItemId()) {
+            case R.id.action_settings_descargar:
+                mMediaFragmentListener.onMediaItemDownloadSelected(mediaItem);
+                return true;
+            case R.id.action_settings_compartir:
+                mMediaFragmentListener.onMediaItemShared(mediaItem);
+                return true;
+            default:
+                return false;
+        }
     }
 
     public interface MediaFragmentListener extends MediaBrowserProvider {
+
         void onMediaItemSelected(MediaBrowserCompat.MediaItem item);
 
         void onMediaItemDownloadSelected(MediaBrowserCompat.MediaItem item);
+
+        void onMediaItemShared(MediaBrowserCompat.MediaItem item);
 
         void setToolbarTitle(CharSequence title);
     }

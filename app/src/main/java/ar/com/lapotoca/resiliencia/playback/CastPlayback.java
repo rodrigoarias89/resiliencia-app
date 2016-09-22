@@ -20,7 +20,6 @@ import org.json.JSONObject;
 
 import ar.com.lapotoca.resiliencia.model.MusicProvider;
 import ar.com.lapotoca.resiliencia.model.MusicProviderSource;
-import ar.com.lapotoca.resiliencia.utils.LogHelper;
 import ar.com.lapotoca.resiliencia.utils.MediaIDHelper;
 
 import static android.support.v4.media.session.MediaSessionCompat.QueueItem;
@@ -30,7 +29,7 @@ import static android.support.v4.media.session.MediaSessionCompat.QueueItem;
  */
 public class CastPlayback implements Playback {
 
-    private static final String TAG = LogHelper.makeLogTag(CastPlayback.class);
+    private static final String TAG = CastPlayback.class.getName();
 
     private static final String MIME_TYPE_AUDIO_MPEG = "audio/mpeg";
     private static final String ITEM_ID = "itemId";
@@ -40,13 +39,11 @@ public class CastPlayback implements Playback {
 
         @Override
         public void onRemoteMediaPlayerMetadataUpdated() {
-            LogHelper.d(TAG, "onRemoteMediaPlayerMetadataUpdated");
             setMetadataFromRemote();
         }
 
         @Override
         public void onRemoteMediaPlayerStatusUpdated() {
-            LogHelper.d(TAG, "onRemoteMediaPlayerStatusUpdated");
             updatePlaybackState();
         }
     };
@@ -89,7 +86,7 @@ public class CastPlayback implements Playback {
         try {
             return (int) VideoCastManager.getInstance().getCurrentMediaPosition();
         } catch (TransientNetworkDisconnectionException | NoConnectionException e) {
-            LogHelper.e(TAG, e, "Exception getting media position");
+            //log?
         }
         return -1;
     }
@@ -114,7 +111,6 @@ public class CastPlayback implements Playback {
             }
         } catch (TransientNetworkDisconnectionException | NoConnectionException
                 | JSONException | IllegalArgumentException e) {
-            LogHelper.e(TAG, "Exception loading media ", e, null);
             if (mCallback != null) {
                 mCallback.onError(e.getMessage());
             }
@@ -133,7 +129,6 @@ public class CastPlayback implements Playback {
             }
         } catch (JSONException | CastException | TransientNetworkDisconnectionException
                 | NoConnectionException | IllegalArgumentException e) {
-            LogHelper.e(TAG, e, "Exception pausing cast playback");
             if (mCallback != null) {
                 mCallback.onError(e.getMessage());
             }
@@ -158,7 +153,6 @@ public class CastPlayback implements Playback {
             }
         } catch (TransientNetworkDisconnectionException | NoConnectionException |
                 JSONException | IllegalArgumentException e) {
-            LogHelper.e(TAG, e, "Exception pausing cast playback");
             if (mCallback != null) {
                 mCallback.onError(e.getMessage());
             }
@@ -191,7 +185,7 @@ public class CastPlayback implements Playback {
             return VideoCastManager.getInstance().isConnected() &&
                     VideoCastManager.getInstance().isRemoteMediaPlaying();
         } catch (TransientNetworkDisconnectionException | NoConnectionException e) {
-            LogHelper.e(TAG, e, "Exception calling isRemoteMoviePlaying");
+            //log?
         }
         return false;
     }
@@ -249,8 +243,10 @@ public class CastPlayback implements Playback {
         // when the cast dialog is clicked.
         mediaMetadata.addImage(image);
 
+        String source = track.getString(MusicProviderSource.CUSTOM_METADATA_TRACK_REMOTE);
+
         //noinspection ResourceType
-        return new MediaInfo.Builder(track.getString(MusicProviderSource.CUSTOM_METADATA_TRACK_SOURCE))
+        return new MediaInfo.Builder(source)
                 .setContentType(MIME_TYPE_AUDIO_MPEG)
                 .setStreamType(MediaInfo.STREAM_TYPE_BUFFERED)
                 .setMetadata(mediaMetadata)
@@ -281,7 +277,7 @@ public class CastPlayback implements Playback {
                 }
             }
         } catch (TransientNetworkDisconnectionException | NoConnectionException | JSONException e) {
-            LogHelper.e(TAG, e, "Exception processing update metadata");
+            //log?
         }
 
     }
@@ -289,8 +285,6 @@ public class CastPlayback implements Playback {
     private void updatePlaybackState() {
         int status = VideoCastManager.getInstance().getPlaybackStatus();
         int idleReason = VideoCastManager.getInstance().getIdleReason();
-
-        LogHelper.d(TAG, "onRemoteMediaPlayerStatusUpdated ", status);
 
         // Convert the remote playback states to media playback states.
         switch (status) {
@@ -322,7 +316,6 @@ public class CastPlayback implements Playback {
                 }
                 break;
             default: // case unknown
-                LogHelper.d(TAG, "State default : ", status);
                 break;
         }
     }

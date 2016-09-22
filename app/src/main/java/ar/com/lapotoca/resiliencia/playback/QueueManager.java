@@ -14,7 +14,6 @@ import java.util.List;
 import ar.com.lapotoca.resiliencia.AlbumArtCache;
 import ar.com.lapotoca.resiliencia.R;
 import ar.com.lapotoca.resiliencia.model.MusicProvider;
-import ar.com.lapotoca.resiliencia.utils.LogHelper;
 import ar.com.lapotoca.resiliencia.utils.MediaIDHelper;
 import ar.com.lapotoca.resiliencia.utils.QueueHelper;
 
@@ -24,7 +23,7 @@ import ar.com.lapotoca.resiliencia.utils.QueueHelper;
  * given MusicProvider to provide the actual media metadata.
  */
 public class QueueManager {
-    private static final String TAG = LogHelper.makeLogTag(QueueManager.class);
+    private static final String TAG = QueueManager.class.getName();
 
     private MusicProvider mMusicProvider;
     private MetadataUpdateListener mListener;
@@ -88,21 +87,13 @@ public class QueueManager {
             index %= mPlayingQueue.size();
         }
         if (!QueueHelper.isIndexPlayable(index, mPlayingQueue)) {
-            LogHelper.e(TAG, "Cannot increment queue index by ", amount,
-                    ". Current=", mCurrentIndex, " queue length=", mPlayingQueue.size());
             return false;
         }
         mCurrentIndex = index;
         return true;
     }
 
-    public void setRandomQueue() {
-        setCurrentQueue(mResources.getString(R.string.random_queue_title),
-                QueueHelper.getRandomQueue(mMusicProvider));
-    }
-
     public void setQueueFromMusic(String mediaId) {
-        LogHelper.d(TAG, "setQueueFromMusic", mediaId);
 
         // The mediaId used here is not the unique musicId. This one comes from the
         // MediaBrowser, and is actually a "hierarchy-aware mediaID": a concatenation of

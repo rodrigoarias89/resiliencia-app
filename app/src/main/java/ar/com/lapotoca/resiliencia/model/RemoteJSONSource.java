@@ -16,7 +16,6 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 import ar.com.lapotoca.resiliencia.DownloadMusicManager;
-import ar.com.lapotoca.resiliencia.utils.LogHelper;
 
 /**
  * Utility class to get a list of MusicTrack's based on a server-side JSON
@@ -24,14 +23,9 @@ import ar.com.lapotoca.resiliencia.utils.LogHelper;
  */
 public class RemoteJSONSource implements MusicProviderSource {
 
-    private static final String TAG = LogHelper.makeLogTag(RemoteJSONSource.class);
-
     private Context mContext;
 
-    protected static final String CATALOG_URL =
-            "http://storage.googleapis.com/automotive-media/music.json";
-
-    protected static final String HOST_URL = "http://www.fordoogle.com.ar/lapotoca/";
+    protected static final String HOST_URL = "http://www.lapotocaok.com/app/resources/";
 
     private static final String JSON_MUSIC = "music";
     private static final String JSON_TITLE = "title";
@@ -65,7 +59,6 @@ public class RemoteJSONSource implements MusicProviderSource {
             }
             return tracks.iterator();
         } catch (JSONException e) {
-            LogHelper.e(TAG, e, "Could not retrieve music list");
             throw new RuntimeException("Could not retrieve music list", e);
         }
     }
@@ -77,13 +70,12 @@ public class RemoteJSONSource implements MusicProviderSource {
         String artist = json.getString(JSON_ARTIST);
         String genre = json.getString(JSON_GENRE);
         String source = json.getString(JSON_SOURCE);
+        String remoteSource = json.getString(JSON_SOURCE);
         String iconUrl = json.getString(JSON_IMAGE);
         long isLocal = 0;
         int trackNumber = json.getInt(JSON_TRACK_NUMBER);
         int totalTrackCount = json.getInt(JSON_TOTAL_TRACK_COUNT);
         int duration = json.getInt(JSON_DURATION) * 1000; // ms
-
-        LogHelper.d(TAG, "Found music track: ", json);
 
         SharedPreferences prefs = mContext.getSharedPreferences(DownloadMusicManager.PREFERENCES_NAME, 0);
         String localURL = prefs.getString(title, null);
@@ -96,11 +88,10 @@ public class RemoteJSONSource implements MusicProviderSource {
             source = localURL;
             isLocal = 1;
         } else {
-            // Media is stored relative to JSON file
-            if (!source.startsWith("http")) {
-                source = basePath + source;
-            }
+            source = basePath + source;
         }
+
+        remoteSource = basePath + remoteSource;
 
 
         if (!iconUrl.startsWith("http")) {
@@ -113,6 +104,7 @@ public class RemoteJSONSource implements MusicProviderSource {
         return new MediaMetadataCompat.Builder()
                 .putString(MediaMetadataCompat.METADATA_KEY_MEDIA_ID, id)
                 .putString(MusicProviderSource.CUSTOM_METADATA_TRACK_SOURCE, source)
+                .putString(MusicProviderSource.CUSTOM_METADATA_TRACK_REMOTE, remoteSource)
                 .putString(MediaMetadataCompat.METADATA_KEY_ALBUM, album)
                 .putString(MediaMetadataCompat.METADATA_KEY_ARTIST, artist)
                 .putLong(MediaMetadataCompat.METADATA_KEY_DURATION, duration)

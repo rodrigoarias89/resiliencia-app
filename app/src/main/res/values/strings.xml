@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
   Copyright (C) 2014 The Android Open Source Project
 
   Licensed under the Apache License, Version 2.0 (the "License");
@@ -17,12 +16,9 @@
 <resources>
 
     <string name="app_name">Resiliencia</string>
-    <string name="favorite">Favorito</string>
+    <string name="band_name">La Potoca</string>
     <string name="error_no_metadata">No se puede obtener información.</string>
-    <string name="browse_genres">Géneros</string>
-    <string name="browse_genre_subtitle">Canciones por género</string>
     <string name="browse_musics_by_genre_subtitle">%1$s canciones</string>
-    <string name="random_queue_title">Random</string>
     <string name="error_no_connection">No se pudo conectar al servidor. Por favor, verifique su conexión de internet.</string>
     <string name="error_loading_media">Error cargando canción</string>
     <string name="casting_to_device">Transmitiendo a %1$s</string>
@@ -34,20 +30,66 @@
     <string name="skip_next">Siguiente</string>
     <string name="skip_prev">Anterior</string>
 
-    <string name="home_title">Home</string>
-    <string name="action_listen">Escuchar</string>
-    <string name="drawer_allmusic_title">Toda la musica</string>
-    <string name="drawer_playlists_title">Playlists</string>
-    <string name="now_playing">Ahora suena</string>
+    <string name="tab_allmusic_title">Canciones</string>
+    <string name="tab_art_title">Arte</string>
     <string name="background_image_str">Background image for album art</string>
     <string name="loading">Cargando…</string>
     <string name="media_route_menu_title">Reproducir en…</string>
-    <string name="downloading">Descargando canción</string>
-    <string name="download_msg">Comenzó la descarga de %1$s</string>
-    <string name="no_permissions">Debe dar permisos a la app</string>
+    <string name="download_all_item">Descargar todas</string>
+    <string name="download_item">Descargar</string>
+    <string name="share_item">Compartir</string>
 
     <!-- Use the default receiver. To customize a styled media receiver, you can use
          the css and images under <project-root>/docs/cast_styled_receiver -->
     <string name="cast_application_id">CC1AD845</string>
+    <string name="facebook_app_id">1748521092070093</string>
+
+    <!--sharing-->
+    <string name="facebook_url_share">https://play.google.com/store/apps/details?id=ar.com.lapotoca.resiliencia</string>
+    <!--<string name="facebook_url_share">https://es-la.facebook.com/lapotocaoficial</string>-->
+    <string name="facebook_title_share">Resiliencia - La Potoca</string>
+    <string name="facebook_title_song_share">%1$s - La Potoca</string>
+    <!--<string name="facebook_description_share_song">Escuchando %1$s</string>-->
+    <string name="facebook_description_share_song">Escuchando Resiliencia a través de la app. Descargala ahora en Google Play.</string>
+    <string name="facebook_description_share_album">Escuchando Resiliencia a través de la app. Descargala ahora en Google Play.</string>
+    <string name="facebook_image_url_share">http://www.lapotocaok.com/app/images/album_art.jpg</string>
+
+    <!--download-->
+    <string name="downloading">Descargando canción</string>
+    <string name="download_msg">Comenzó la descarga de %1$s</string>
+    <string name="download_no_permissions">Debe dar permisos a la app</string>
+    <string name="download_all_alert_title">Descargar todas</string>
+    <string name="download_all_alert_description">Descargará todas las canciones al dispositivo. ¿Desea continuar? </string>
+    <string name="download_all_alert_ok">Aceptar</string>
+    <string name="download_all_alert_cancel">Cancelar</string>
+    <string name="download_all_empty">Ya descargaste todas las canciones</string>
+    <string name="download_all_no_song_selected">No seleccionaste ninguna canción.</string>
+    <string name="download_all_msg">Descargando %1$s canciones</string>
+    <string name="download_image_succesfull">Imagen descargada</string>
+
+    <string name="open_content_drawer">Abre el menu</string>
+    <string name="close_content_drawer">Cierra el menu</string>
+
+    <string name="menu_share">Compartir</string>
+
+    <!--Links-->
+    <string name="link_facebook">https://www.facebook.com/lapotocaok/?fref=ts</string>
+    <string name="link_twitter">https://twitter.com/lapotocaok</string>
+    <string name="link_instagram">https://www.instagram.com/potocaok/</string>
+    <string name="link_spotify">https://open.spotify.com/artist/0bFz60mbGBaIloOnlk33Eu</string>
+    <string name="link_chrome">http://www.lapotocaok.com</string>
+    <string name="link_youtube">https://www.youtube.com/user/LaPotocaOficial/</string>
+    <!--Content Description-->
+    <string name="link_facebook_desc">Link a faceboook</string>
+    <string name="link_twitter_desc">Link a twitter</string>
+    <string name="link_instagram_desc">Link a instagram</string>
+    <string name="link_spotify_desc">Link a spotify</string>
+    <string name="link_chrome_desc">Link a chrome</string>
+    <string name="link_youtube_desc">Link a youtube</string>
+
+    <!--Analytics-->
+    <string name="analytics_tracker">UA-81565123-1</string>
+
+
 
 </resources>

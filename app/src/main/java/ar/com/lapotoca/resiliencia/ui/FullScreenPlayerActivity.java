@@ -17,6 +17,8 @@ import android.support.v4.media.session.MediaControllerCompat;
 import android.support.v4.media.session.MediaSessionCompat;
 import android.support.v4.media.session.PlaybackStateCompat;
 import android.text.format.DateUtils;
+import android.text.method.ScrollingMovementMethod;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
@@ -31,7 +33,9 @@ import java.util.concurrent.TimeUnit;
 import ar.com.lapotoca.resiliencia.AlbumArtCache;
 import ar.com.lapotoca.resiliencia.MusicService;
 import ar.com.lapotoca.resiliencia.R;
-import ar.com.lapotoca.resiliencia.utils.LogHelper;
+import ar.com.lapotoca.resiliencia.utils.AnalyticsHelper;
+import ar.com.lapotoca.resiliencia.utils.LyricsHelper;
+import ar.com.lapotoca.resiliencia.utils.ShareHelper;
 
 import static android.view.View.INVISIBLE;
 import static android.view.View.VISIBLE;
@@ -41,7 +45,9 @@ import static android.view.View.VISIBLE;
  * depicting the album art. The activity also has controls to seek/pause/play the audio.
  */
 public class FullScreenPlayerActivity extends ActionBarCastActivity {
-    private static final String TAG = LogHelper.makeLogTag(FullScreenPlayerActivity.class);
+
+    private static final String ACTIVITY_NAME = FullScreenPlayerActivity.class.getSimpleName();
+    private static final String TAG = FullScreenPlayerActivity.class.getName();
     private static final long PROGRESS_UPDATE_INTERNAL = 1000;
     private static final long PROGRESS_UPDATE_INITIAL_INTERVAL = 100;
 
@@ -54,6 +60,7 @@ public class FullScreenPlayerActivity extends ActionBarCastActivity {
     private TextView mLine1;
     private TextView mLine2;
     private TextView mLine3;
+    private TextView mLyrics;
     private ProgressBar mLoading;
     private View mControllers;
     private Drawable mPauseDrawable;
@@ -63,6 +70,7 @@ public class FullScreenPlayerActivity extends ActionBarCastActivity {
     private String mCurrentArtUrl;
     private final Handler mHandler = new Handler();
     private MediaBrowserCompat mMediaBrowser;
+    private String currentSongName;
 
     private final Runnable mUpdateProgressTask = new Runnable() {
         @Override
@@ -80,7 +88,6 @@ public class FullScreenPlayerActivity extends ActionBarCastActivity {
     private final MediaControllerCompat.Callback mCallback = new MediaControllerCompat.Callback() {
         @Override
         public void onPlaybackStateChanged(@NonNull PlaybackStateCompat state) {
-            LogHelper.d(TAG, "onPlaybackstate changed", state);
             updatePlaybackState(state);
         }
 
@@ -97,11 +104,10 @@ public class FullScreenPlayerActivity extends ActionBarCastActivity {
             new MediaBrowserCompat.ConnectionCallback() {
                 @Override
                 public void onConnected() {
-                    LogHelper.d(TAG, "onConnected");
                     try {
                         connectToSession(mMediaBrowser.getSessionToken());
                     } catch (RemoteException e) {
-                        LogHelper.e(TAG, e, "could not connect media controller");
+                        //log?
                     }
                 }
             };
@@ -109,6 +115,7 @@ public class FullScreenPlayerActivity extends ActionBarCastActivity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_full_player);
         initializeToolbar();
         if (getSupportActionBar() != null) {
@@ -130,6 +137,7 @@ public class FullScreenPlayerActivity extends ActionBarCastActivity {
         mLine3 = (TextView) findViewById(R.id.line3);
         mLoading = (ProgressBar) findViewById(R.id.progressBar1);
         mControllers = findViewById(R.id.controllers);
+        mLyrics = (TextView) findViewById(R.id.lyrics);
 
         mSkipNext.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -168,7 +176,7 @@ public class FullScreenPlayerActivity extends ActionBarCastActivity {
                             scheduleSeekbarUpdate();
                             break;
                         default:
-                            LogHelper.d(TAG, "onClick with state ", state.getState());
+                            //log?
                     }
                 }
             }
@@ -199,6 +207,12 @@ public class FullScreenPlayerActivity extends ActionBarCastActivity {
 
         mMediaBrowser = new MediaBrowserCompat(this,
                 new ComponentName(this, MusicService.class), mConnectionCallback, null);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        AnalyticsHelper.getInstance().sendScreen(ACTIVITY_NAME);
     }
 
     private void connectToSession(MediaSessionCompat.Token token) throws RemoteException {
@@ -292,7 +306,6 @@ public class FullScreenPlayerActivity extends ActionBarCastActivity {
             art = description.getIconBitmap();
         }
         if (art != null) {
-            // if we have the art cached or from the MediaDescription, use it:
             mBackgroundImage.setImageBitmap(art);
         } else {
             // otherwise, fetch a high res version and update:
@@ -313,17 +326,31 @@ public class FullScreenPlayerActivity extends ActionBarCastActivity {
         if (description == null) {
             return;
         }
-        LogHelper.d(TAG, "updateMediaDescription called ");
+        currentSongName = description.getTitle().toString();
         mLine1.setText(description.getTitle());
         mLine2.setText(description.getSubtitle());
-        fetchImageAsync(description);
+        //por lo pronto vamos a usar la misma imagen local para todos
+//        fetchImageAsync(description);
+
+        updateLyrics(description.getTitle().toString());
+    }
+
+    private void updateLyrics(String songName) {
+        if(mLyrics != null) {
+            String lyrics = LyricsHelper.getLyrics(songName);
+            if(lyrics != null && !lyrics.isEmpty()) {
+                mLyrics.setMovementMethod(new ScrollingMovementMethod());
+                mLyrics.setText(lyrics);
+            } else {
+                mLyrics.setText("");
+            }
+        }
     }
 
     private void updateDuration(MediaMetadataCompat metadata) {
         if (metadata == null) {
             return;
         }
-        LogHelper.d(TAG, "updateDuration called ");
         int duration = (int) metadata.getLong(MediaMetadataCompat.METADATA_KEY_DURATION);
         mSeekbar.setMax(duration);
         mEnd.setText(DateUtils.formatElapsedTime(duration/1000));
@@ -371,7 +398,7 @@ public class FullScreenPlayerActivity extends ActionBarCastActivity {
                 stopSeekbarUpdate();
                 break;
             default:
-                LogHelper.d(TAG, "Unhandled state ", state.getState());
+                //log?
         }
 
         mSkipNext.setVisibility((state.getActions() & PlaybackStateCompat.ACTION_SKIP_TO_NEXT) == 0
@@ -395,5 +422,21 @@ public class FullScreenPlayerActivity extends ActionBarCastActivity {
             currentPosition += (int) timeDelta * mLastPlaybackState.getPlaybackSpeed();
         }
         mSeekbar.setProgress((int) currentPosition);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle item selection
+        switch (item.getItemId()) {
+            case R.id.action_settings_compartir:
+                if(currentSongName != null && !currentSongName.isEmpty()) {
+                    ShareHelper.getInstance().shareContentOnFacebook(this, currentSongName);
+                } else {
+                    ShareHelper.getInstance().shareContentOnFacebook(this);
+                }
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 }

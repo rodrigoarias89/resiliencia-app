@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Copyright (C) 2014 The Android Open Source Project
+
+  Licensed under the Apache License, Version 2.0 (the "License");
+  you may not use this file except in compliance with the License.
+  You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+  -->
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/media_item_height"
+    android:focusable="true"
+    android:clickable="true"
+    android:foreground="?attr/selectableItemBackground"
+    android:background="@color/music_list_bg"
+    >
+    <!--android:foreground="?android:attr/selectableItemBackground"-->
+    <ImageView
+        android:id="@+id/play_eq"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_centerVertical="true"
+        android:layout_marginStart="@dimen/media_item_icon_margin_start"
+        android:tintMode="src_in"
+        android:tint="@color/play_list_button"
+        android:contentDescription="@string/play_item"
+        android:src="@drawable/ic_play_arrow_black_36dp"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="@dimen/media_item_text_margin_start"
+        android:layout_centerVertical="true"
+        android:orientation="vertical"
+        android:layout_toLeftOf="@+id/song_menu_btn">
+
+        <TextView
+            android:id="@+id/title"
+            tools:text="Armando Lio"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:maxLines="1"
+            android:ellipsize="end"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textColor="@color/color_title_song" />
+
+        <TextView
+            android:id="@+id/description"
+            tools:text="04:22"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:maxLines="1"
+            android:ellipsize="end"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:textColor="@color/color_subtitle_song"/>
+
+    </LinearLayout>
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/song_menu_btn"
+        app:srcCompat="@drawable/abc_ic_menu_overflow_material"
+        android:layout_alignParentEnd="true"
+        android:layout_alignTop="@+id/play_eq"
+        android:layout_alignBottom="@+id/play_eq"
+        android:layout_marginEnd="@dimen/media_item_icon_margin_start"
+        android:tint="@color/play_list_button" />
+
+</RelativeLayout>

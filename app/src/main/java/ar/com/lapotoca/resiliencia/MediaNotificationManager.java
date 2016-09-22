@@ -20,7 +20,6 @@ import android.support.v4.media.session.PlaybackStateCompat;
 import android.support.v7.app.NotificationCompat;
 
 import ar.com.lapotoca.resiliencia.ui.MusicPlayerActivity;
-import ar.com.lapotoca.resiliencia.utils.LogHelper;
 import ar.com.lapotoca.resiliencia.utils.ResourceHelper;
 
 /**
@@ -29,16 +28,16 @@ import ar.com.lapotoca.resiliencia.utils.ResourceHelper;
  * won't be killed during playback.
  */
 public class MediaNotificationManager extends BroadcastReceiver {
-    private static final String TAG = LogHelper.makeLogTag(MediaNotificationManager.class);
+    private static final String TAG = MediaNotificationManager.class.getName();
 
     private static final int NOTIFICATION_ID = 412;
     private static final int REQUEST_CODE = 100;
 
-    public static final String ACTION_PAUSE = "com.example.android.uamp.pause";
-    public static final String ACTION_PLAY = "com.example.android.uamp.play";
-    public static final String ACTION_PREV = "com.example.android.uamp.prev";
-    public static final String ACTION_NEXT = "com.example.android.uamp.next";
-    public static final String ACTION_STOP_CASTING = "com.example.android.uamp.stop_cast";
+    public static final String ACTION_PAUSE = "ar.com.lapotoca.resiliencia.pause";
+    public static final String ACTION_PLAY = "ar.com.lapotoca.resiliencia.play";
+    public static final String ACTION_PREV = "ar.com.lapotoca.resiliencia.prev";
+    public static final String ACTION_NEXT = "ar.com.lapotoca.resiliencia.next";
+    public static final String ACTION_STOP_CASTING = "ar.com.lapotoca.resiliencia.stop_cast";
 
     private final MusicService mService;
     private MediaSessionCompat.Token mSessionToken;
@@ -137,7 +136,6 @@ public class MediaNotificationManager extends BroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {
         final String action = intent.getAction();
-        LogHelper.d(TAG, "Received intent with action " + action);
         switch (action) {
             case ACTION_PAUSE:
                 mTransportControls.pause();
@@ -158,7 +156,7 @@ public class MediaNotificationManager extends BroadcastReceiver {
                 mService.startService(i);
                 break;
             default:
-                LogHelper.w(TAG, "Unknown intent ignored. Action=", action);
+                //nothing
         }
     }
 
@@ -200,7 +198,6 @@ public class MediaNotificationManager extends BroadcastReceiver {
         @Override
         public void onPlaybackStateChanged(@NonNull PlaybackStateCompat state) {
             mPlaybackState = state;
-            LogHelper.d(TAG, "Received new playback state", state);
             if (state.getState() == PlaybackStateCompat.STATE_STOPPED ||
                     state.getState() == PlaybackStateCompat.STATE_NONE) {
                 stopNotification();
@@ -215,7 +212,6 @@ public class MediaNotificationManager extends BroadcastReceiver {
         @Override
         public void onMetadataChanged(MediaMetadataCompat metadata) {
             mMetadata = metadata;
-            LogHelper.d(TAG, "Received new metadata ", metadata);
             Notification notification = createNotification();
             if (notification != null) {
                 mNotificationManager.notify(NOTIFICATION_ID, notification);
@@ -225,17 +221,15 @@ public class MediaNotificationManager extends BroadcastReceiver {
         @Override
         public void onSessionDestroyed() {
             super.onSessionDestroyed();
-            LogHelper.d(TAG, "Session was destroyed, resetting to the new session token");
             try {
                 updateSessionToken();
             } catch (RemoteException e) {
-                LogHelper.e(TAG, e, "could not connect media controller");
+                //log?
             }
         }
     };
 
     private Notification createNotification() {
-        LogHelper.d(TAG, "updateNotificationMetadata. mMetadata=" + mMetadata);
         if (mMetadata == null || mPlaybackState == null) {
             return null;
         }
@@ -315,7 +309,6 @@ public class MediaNotificationManager extends BroadcastReceiver {
     }
 
     private void addPlayPauseAction(NotificationCompat.Builder builder) {
-        LogHelper.d(TAG, "updatePlayPauseAction");
         String label;
         int icon;
         PendingIntent intent;
@@ -332,22 +325,17 @@ public class MediaNotificationManager extends BroadcastReceiver {
     }
 
     private void setNotificationPlaybackState(NotificationCompat.Builder builder) {
-        LogHelper.d(TAG, "updateNotificationPlaybackState. mPlaybackState=" + mPlaybackState);
         if (mPlaybackState == null || !mStarted) {
-            LogHelper.d(TAG, "updateNotificationPlaybackState. cancelling notification!");
             mService.stopForeground(true);
             return;
         }
         if (mPlaybackState.getState() == PlaybackStateCompat.STATE_PLAYING
                 && mPlaybackState.getPosition() >= 0) {
-            LogHelper.d(TAG, "updateNotificationPlaybackState. updating playback position to ",
-                    (System.currentTimeMillis() - mPlaybackState.getPosition()) / 1000, " seconds");
             builder
                     .setWhen(System.currentTimeMillis() - mPlaybackState.getPosition())
                     .setShowWhen(true)
                     .setUsesChronometer(true);
         } else {
-            LogHelper.d(TAG, "updateNotificationPlaybackState. hiding playback position");
             builder
                     .setWhen(0)
                     .setShowWhen(false)
@@ -366,7 +354,6 @@ public class MediaNotificationManager extends BroadcastReceiver {
                 if (mMetadata != null && mMetadata.getDescription().getIconUri() != null &&
                         mMetadata.getDescription().getIconUri().toString().equals(artUrl)) {
                     // If the media is still the same, update the notification:
-                    LogHelper.d(TAG, "fetchBitmapFromURLAsync: set bitmap to ", artUrl);
                     builder.setLargeIcon(bitmap);
                     mNotificationManager.notify(NOTIFICATION_ID, builder.build());
                 }
