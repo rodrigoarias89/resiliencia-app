@@ -139,7 +139,10 @@ public class LyricsHelper {
                 "asechan perversas la tormenta con su hiel\n" +
                 "y esta turba sigue devorando junto al sol\n" +
                 "el testigo amigo del desgarro de mi voz.\n");
-        put("campeonesdeesquina", "Chamuyaron que \"gloria\"\n" +
+        put("campeonesdeesquina", "No hay más letargos,\n" +
+                "a los ojos te hablo.\n" +
+                "\n" +
+                "Chamuyaron que \"gloria\"\n" +
                 "era un cheque en blanco,\n" +
                 "que al \"campeón\" lo encontramos\n" +
                 "en la tele, en los bancos.\n" +
@@ -221,8 +224,8 @@ public class LyricsHelper {
                 "delineada en el sofá!\n" +
                 "Bob Marley suena y vos cantas.\n" +
                 "\n" +
-                "Labios sedientos, \n" +
-                "un vino tinto va a ayudar\n" +
+                "Los labios sedientos, \n" +
+                "y un vino tinto va a ayudar\n" +
                 "y por tu cuerpo voy a entrar.\n" +
                 "\n" +
                 "Pero gritas sin consuelo\n" +
